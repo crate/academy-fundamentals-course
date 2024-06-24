@@ -1,3 +1,11 @@
+# Apple Files
+.DS_Store
+
+# Temp files etc
+*.bak
+*.swp
+*.tmp
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
