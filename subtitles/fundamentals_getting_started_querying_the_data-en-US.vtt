@@ -1,0 +1,264 @@
+﻿WEBVTT
+
+00:00:04.120 --> 00:00:07.495
+Now you've created your own
+CrateDB cluster and loaded the
+
+00:00:07.495 --> 00:00:10.926
+course data. It's time to run
+some simple SQL queries and
+
+00:00:10.926 --> 00:00:13.120
+play around with the data on
+your own.
+
+00:00:14.760 --> 00:00:19.185
+Here in the CrateDB Cloud
+Console I've got a query that
+
+00:00:19.185 --> 00:00:24.000
+I'll paste in and this is going
+to query the three_eleven_calls table.
+
+00:00:24.000 --> 00:00:27.800
+So that table of reports from
+citizens about issues with
+
+00:00:27.800 --> 00:00:32.066
+infrastructure in the city and
+what we're going to do is ask it
+
+00:00:32.066 --> 00:00:36.466
+to summarise the number of calls
+where the type features the word
+
+00:00:36.466 --> 00:00:38.000
+pothole by day of week.
+
+00:00:38.920 --> 00:00:43.316
+In this table, the day of week
+is in the createddayofweek
+
+00:00:43.316 --> 00:00:47.640
+field and the weekdays start
+with Sunday, which is day one.
+
+00:00:48.800 --> 00:00:53.429
+I'll run the query here and we
+can see that the most potholes
+
+00:00:53.429 --> 00:00:57.909
+1440 are reported on Tuesdays
+and the least are reported on
+
+00:00:57.909 --> 00:01:02.240
+days one and seven, Saturday and
+Sunday over the weekend.
+
+00:01:02.600 --> 00:01:05.390
+Which I guess makes sense as
+people aren't travelling so much
+
+00:01:05.390 --> 00:01:07.640
+on the weekend because they're
+not going to work.
+
+00:01:09.840 --> 00:01:14.154
+Next, let's try a query that
+uses our taxis and taxi rides
+
+00:01:14.154 --> 00:01:14.520
+data.
+
+00:01:15.240 --> 00:01:19.267
+I want to know which taxi
+operated the taxi ride or the
+
+00:01:19.267 --> 00:01:22.000
+trip that had the highest total
+cost.
+
+00:01:22.600 --> 00:01:27.241
+So here I'm selecting some
+fields from the taxis table and
+
+00:01:27.241 --> 00:01:32.276
+I want the vehicleid from the
+taxis table to match the vehicleid
+
+00:01:32.276 --> 00:01:36.997
+from the taxi_rides table
+where the totalcost field has
+
+00:01:36.997 --> 00:01:41.560
+the highest value and for this
+we use CrateDB's max_by.
+
+00:01:42.000 --> 00:01:46.579
+This returns the value of its
+first parameter, so vehicleid
+
+00:01:46.579 --> 00:01:51.159
+at the point at which the 2nd
+parameter, totalcost, was the
+
+00:01:51.159 --> 00:01:51.760
+highest.
+
+00:01:52.720 --> 00:01:57.789
+When I run this query, we'll see
+that Vehicle 2417 performed the
+
+00:01:57.789 --> 00:02:02.546
+trip with the highest overall
+total cost, and it was a white
+
+00:02:02.546 --> 00:02:03.559
+Toyota Camry.
+
+00:02:05.640 --> 00:02:09.640
+Finally, let's try a query that
+uses our community_areas table.
+
+00:02:10.040 --> 00:02:14.005
+Recall that in the 
+community_areas table, we have details of
+
+00:02:14.005 --> 00:02:17.580
+each of the 77 neighbourhoods
+that make up the city of
+
+00:02:17.580 --> 00:02:21.025
+Chicago, including their
+boundaries, population, and
+
+00:02:21.025 --> 00:02:22.520
+historical information.
+
+00:02:23.320 --> 00:02:26.240
+There's two airports in Chicago,
+O'Hare and Midway.
+
+00:02:26.720 --> 00:02:30.198
+Imagine that an airline needs to
+move an aircraft from one of
+
+00:02:30.198 --> 00:02:33.621
+these airports to another, and
+it follows a path as shown on
+
+00:02:33.621 --> 00:02:34.800
+the map to the right.
+
+00:02:35.320 --> 00:02:40.116
+What we're going to do now is
+paste a query into the console
+
+00:02:40.116 --> 00:02:44.127
+here and ask CrateDB which
+community areas with a
+
+00:02:44.127 --> 00:02:48.452
+population of more than 30,000
+people does this flight
+
+00:02:48.452 --> 00:02:49.160
+pass over?
+
+00:02:50.000 --> 00:02:54.935
+So here I'm selecting the name
+and then the population which is
+
+00:02:54.935 --> 00:02:58.560
+inside an object in the
+community_areas table.
+
+00:02:58.560 --> 00:03:02.800
+So we're using details
+population to access that.
+
+00:03:03.840 --> 00:03:09.001
+And then what I want to do is
+match records whose boundaries
+
+00:03:09.001 --> 00:03:13.570
+field which is a Geo Polygon of
+the boundaries of the
+
+00:03:13.570 --> 00:03:17.040
+neighbourhood intersect with the
+flight.
+
+00:03:17.160 --> 00:03:21.126
+And the flight here is
+represented by a line string in
+
+00:03:21.126 --> 00:03:25.525
+Well Known Text format and that
+contains all of the lat long
+
+00:03:25.525 --> 00:03:27.040
+points of the flight.
+
+00:03:28.240 --> 00:03:32.046
+And then finally, we want
+population to be greater than
+
+00:03:32.046 --> 00:03:35.852
+30,000 and I've asked CrateDB to
+order the results set by
+
+00:03:35.852 --> 00:03:36.600
+population.
+
+00:03:37.040 --> 00:03:40.819
+So what we're going to get when
+we run this query is the
+
+00:03:40.819 --> 00:03:44.665
+neighbourhoods or community
+areas that this flight passes
+
+00:03:44.665 --> 00:03:48.710
+over that have more than 30,000
+people ordered by population
+
+00:03:48.710 --> 00:03:49.440
+descending.
+
+00:03:49.440 --> 00:03:53.520
+So the community with the
+greatest population first.
+
+00:03:53.880 --> 00:03:58.676
+Let's run the query now and we
+can see that Uptown is an area
+
+00:03:58.676 --> 00:04:00.920
+that this flight passes over.
+
+00:04:00.920 --> 00:04:04.718
+It has the highest population
+and down here Greater Grand
+
+00:04:04.718 --> 00:04:08.254
+Crossing has the lowest
+population of those with more
+
+00:04:08.254 --> 00:04:09.040
+than 30,000.
+
+00:04:09.720 --> 00:04:13.443
+I would encourage you to go and
+play with the data set yourself
+
+00:04:13.443 --> 00:04:16.760
+and refer to the CrateDB
+documentation whilst doing so.
+
+00:04:17.280 --> 00:04:21.624
+It's good to get familiar with
+this data, run some queries and
+
+00:04:21.624 --> 00:04:23.280
+explore it for yourself.

@@ -1,0 +1,396 @@
+WEBVTT
+
+e3eb63cf-9b0c-4d82-a43e-3724c92fb349-0
+00:00:03.000 --> 00:00:06.824
+Hello and welcome to the CrateDB
+Fundamentals course here at
+
+e3eb63cf-9b0c-4d82-a43e-3724c92fb349-1
+00:00:06.824 --> 00:00:08.120
+the CrateDB Academy.
+
+fcf8b1fc-f3d0-46b7-83d6-b24cf1d2af91-0
+00:00:08.480 --> 00:00:11.740
+My name is Simon Prickett, I
+work in Developer Relations, and
+
+fcf8b1fc-f3d0-46b7-83d6-b24cf1d2af91-1
+00:00:11.740 --> 00:00:14.160
+I'll be your guide and tutor for
+this course.
+
+e53303c6-8bb5-49b6-9d0f-9ff663a521fa-0
+00:00:16.120 --> 00:00:18.640
+Let's begin by looking at the
+course structure.
+
+f72bfc0c-3489-4f53-a16a-d10e06ff0858-0
+00:00:19.480 --> 00:00:21.480
+First of all, this is the
+welcome module.
+
+6f3fa08a-f1cf-444f-8420-0427dbeb72d3-0
+00:00:21.520 --> 00:00:25.267
+I'll show you how the course is
+laid out, how it's assessed, and
+
+6f3fa08a-f1cf-444f-8420-0427dbeb72d3-1
+00:00:25.267 --> 00:00:27.920
+how you can earn a certificate
+of completion.
+
+3091a6ca-f5ed-4c54-9f6a-6df59a9f2474-0
+00:00:30.040 --> 00:00:32.480
+We'll dive straight in and get
+you up and running.
+
+5989ed19-645b-4fb2-8088-58fef5f5f69e-0
+00:00:32.480 --> 00:00:36.158
+So we'll look at what CrateDB
+actually is and then we'll
+
+5989ed19-645b-4fb2-8088-58fef5f5f69e-1
+00:00:36.158 --> 00:00:37.680
+switch to hands on mode.
+
+e27d2d04-56f7-4884-ab8c-1f4b1ccf2c00-0
+00:00:37.760 --> 00:00:41.600
+You'll get control of a CrateDB
+cluster, create one in the cloud
+
+e27d2d04-56f7-4884-ab8c-1f4b1ccf2c00-1
+00:00:41.600 --> 00:00:45.440
+or locally using Docker and load
+some sample data for the course.
+
+eb28a348-8c24-437b-81af-a529b9f63944-0
+00:00:47.000 --> 00:00:50.240
+We'll then move on to look at
+why should we use CrateDB?
+
+b88061e8-2671-4737-9591-710d8f7da147-0
+00:00:50.480 --> 00:00:52.000
+What are the benefits of it?
+
+e68841c7-3caa-40da-aa7b-0a2cd167b67b-0
+00:00:52.080 --> 00:00:54.720
+What are the benefits of a multi
+model database?
+
+412fe44b-0573-4dc5-b0c4-df7ef1982a8f-0
+00:00:55.400 --> 00:00:58.542
+And we'll look at some use cases
+from customers that are already
+
+412fe44b-0573-4dc5-b0c4-df7ef1982a8f-1
+00:00:58.542 --> 00:00:59.800
+having success with Crate.
+
+0ef4cf60-2630-4fb6-b57c-138ab78f3ddf-0
+00:01:01.440 --> 00:01:04.524
+Data modelling is really
+important, so we'll spend some
+
+0ef4cf60-2630-4fb6-b57c-138ab78f3ddf-1
+00:01:04.524 --> 00:01:05.240
+time on this.
+
+00d935f2-e043-485b-bcf7-d61b727d8781-0
+00:01:05.520 --> 00:01:09.398
+After a brief overview of the
+available data types, we'll dig
+
+00d935f2-e043-485b-bcf7-d61b727d8781-1
+00:01:09.398 --> 00:01:11.400
+deep into time series and documents.
+
+c959a4bb-12d9-43f5-a9a6-613610e3bbaa-0
+00:01:11.840 --> 00:01:15.023
+We'll look at some vector
+similarity search, and we'll
+
+c959a4bb-12d9-43f5-a9a6-613610e3bbaa-1
+00:01:15.023 --> 00:01:16.760
+also focus on geospatial data.
+
+82c37c81-79e9-4a41-8490-418a16d09320-0
+00:01:18.440 --> 00:01:22.088
+Once we've seen what we can do
+with data in CrateDB, we'll see
+
+82c37c81-79e9-4a41-8490-418a16d09320-1
+00:01:22.088 --> 00:01:25.623
+how we can get large amounts of
+it into the database and work
+
+82c37c81-79e9-4a41-8490-418a16d09320-2
+00:01:25.623 --> 00:01:26.080
+with it
+
+550601f5-bbbf-4919-b5a6-8a08811ccf9f-0
+00:01:26.080 --> 00:01:30.074
+once it's there. You'll learn
+how to do SQL queries across
+
+550601f5-bbbf-4919-b5a6-8a08811ccf9f-1
+00:01:30.074 --> 00:01:33.682
+different types of data,
+aggregations, and use CrateDB's
+
+550601f5-bbbf-4919-b5a6-8a08811ccf9f-2
+00:01:33.682 --> 00:01:35.680
+Lucene full text search engine.
+
+38805519-9b03-4328-b387-bb7ea4817546-0
+00:01:36.200 --> 00:01:40.003
+When building applications that
+use CrateDB, it's important to
+
+38805519-9b03-4328-b387-bb7ea4817546-1
+00:01:40.003 --> 00:01:43.628
+have an understanding of the
+different client interfaces and
+
+38805519-9b03-4328-b387-bb7ea4817546-2
+00:01:43.628 --> 00:01:47.194
+drivers available for popular
+programming languages such as
+
+38805519-9b03-4328-b387-bb7ea4817546-3
+00:01:47.194 --> 00:01:48.680
+Java, Python, or Node.js.
+
+5c7b7aff-af2e-45c1-8d6b-71dd93421650-0
+00:01:49.320 --> 00:01:53.645
+It's also important to see where
+CrateDB fits into a tools and
+
+5c7b7aff-af2e-45c1-8d6b-71dd93421650-1
+00:01:53.645 --> 00:01:55.200
+integrations ecosystem.
+
+0abcd3e2-8330-4973-9e47-ba304e7448db-0
+00:01:55.960 --> 00:01:58.980
+If you're going to have success
+with CrateDB, you'll want to
+
+0abcd3e2-8330-4973-9e47-ba304e7448db-1
+00:01:58.980 --> 00:02:00.880
+understand how to operate it at
+scale.
+
+069114e2-4c7b-4561-a591-1292f8dcd797-0
+00:02:01.360 --> 00:02:05.204
+In this module, you'll see what
+CrateDB's architecture looks
+
+069114e2-4c7b-4561-a591-1292f8dcd797-1
+00:02:05.204 --> 00:02:08.924
+like, how it can scale, the
+different deployment models, and
+
+069114e2-4c7b-4561-a591-1292f8dcd797-2
+00:02:08.924 --> 00:02:12.520
+receive some tips for monitoring
+and tuning the database.
+
+ff7d05b8-47a4-4554-8f76-9464b6ba540c-0
+00:02:14.360 --> 00:02:17.795
+Finally, we'll look at some
+security concerns, how to secure
+
+ff7d05b8-47a4-4554-8f76-9464b6ba540c-1
+00:02:17.795 --> 00:02:19.880
+and manage a database in
+production.
+
+fdadf7c1-fab7-4eac-951c-381481e119c5-0
+00:02:22.080 --> 00:02:25.459
+Our course is based around some
+example data from the city of
+
+fdadf7c1-fab7-4eac-951c-381481e119c5-1
+00:02:25.459 --> 00:02:27.040
+Chicago in the United States.
+
+f0e8183d-3dbf-4c8e-ad36-891bbbbc828c-0
+00:02:27.640 --> 00:02:31.224
+We have data sets for taxis, so
+the vehicles that operate
+
+f0e8183d-3dbf-4c8e-ad36-891bbbbc828c-1
+00:02:31.224 --> 00:02:34.622
+various taxi rides and services
+in the city, the rides
+
+f0e8183d-3dbf-4c8e-ad36-891bbbbc828c-2
+00:02:34.622 --> 00:02:37.960
+themselves, so which vehicle
+went where at what time.
+
+bad59ccd-0a36-4797-8d38-71eb3a00fc71-0
+00:02:38.440 --> 00:02:42.272
+We have some Geo data about the
+different neighbourhoods that
+
+bad59ccd-0a36-4797-8d38-71eb3a00fc71-1
+00:02:42.272 --> 00:02:46.229
+make up the city of Chicago and
+we have a large data set of 311
+
+bad59ccd-0a36-4797-8d38-71eb3a00fc71-2
+00:02:46.229 --> 00:02:46.600
+calls.
+
+25bacfa4-21dc-4c4e-90ff-afb6b7ba3a7f-0
+00:02:46.600 --> 00:02:49.865
+These are non-emergency calls
+for things like there's a
+
+25bacfa4-21dc-4c4e-90ff-afb6b7ba3a7f-1
+00:02:49.865 --> 00:02:53.480
+pothole in the road, or there's
+an animal barking, or there's
+
+25bacfa4-21dc-4c4e-90ff-afb6b7ba3a7f-2
+00:02:53.480 --> 00:02:54.880
+too much aircraft noise.
+
+90009da0-b981-49bd-b344-0e346657d3bd-0
+00:02:55.360 --> 00:02:58.816
+We'll see how we can use CrateDB
+to combine all of these
+
+90009da0-b981-49bd-b344-0e346657d3bd-1
+00:02:58.816 --> 00:03:01.320
+different data sources into rich
+queries.
+
+4e5bc5e9-91ee-4159-8dd7-67540daefb3b-0
+00:03:04.160 --> 00:03:06.360
+Your course is assessed in two
+ways.
+
+a1d9ef81-2b3b-4fe7-ab20-966d9da33fe7-0
+00:03:07.200 --> 00:03:09.120
+Throughout the course, there are
+quizzes.
+
+fe41b3ed-85fc-4437-872a-6511331590fa-0
+00:03:09.280 --> 00:03:11.320
+These are multiple choice
+questions.
+
+a0f35885-cc83-403b-aa46-95ec87c40b96-0
+00:03:11.600 --> 00:03:14.083
+They're not graded, and they're
+there to check your
+
+a0f35885-cc83-403b-aa46-95ec87c40b96-1
+00:03:14.083 --> 00:03:16.520
+understanding of the module
+you've just completed.
+
+6359b5b7-e3ab-4779-9083-e14c09684031-0
+00:03:17.120 --> 00:03:19.520
+You can attempt them as many
+times as you like.
+
+84aecc97-de5d-44ab-97dc-a4f718b7a9cd-0
+00:03:20.680 --> 00:03:23.200
+At the end of the course is your
+final exam.
+
+ec64e73a-6595-4675-95f6-f0719fdce701-0
+00:03:23.400 --> 00:03:27.432
+The final exam consists of a
+number of questions that are in
+
+ec64e73a-6595-4675-95f6-f0719fdce701-1
+00:03:27.432 --> 00:03:31.531
+the same multiple choice format
+as the quizzes, but this time
+
+ec64e73a-6595-4675-95f6-f0719fdce701-2
+00:03:31.531 --> 00:03:32.920
+they're graded. Again,
+
+e0caec9d-c49d-451b-b7bb-2b93d854fb18-0
+00:03:32.920 --> 00:03:36.407
+you can take them as many times
+as you like, and you're free to
+
+e0caec9d-c49d-451b-b7bb-2b93d854fb18-1
+00:03:36.407 --> 00:03:39.895
+reference external materials as
+well as the course content when
+
+e0caec9d-c49d-451b-b7bb-2b93d854fb18-2
+00:03:39.895 --> 00:03:40.439
+answering.
+
+138dcdcc-ec26-4aca-85a3-4463d581e56d-0
+00:03:42.280 --> 00:03:46.394
+If you score 75% or higher on
+your final exam, you can earn a
+
+138dcdcc-ec26-4aca-85a3-4463d581e56d-1
+00:03:46.394 --> 00:03:48.120
+certificate of completion.
+
+655d4b24-1369-4300-8246-0d214aec63fd-0
+00:03:48.640 --> 00:03:51.522
+This can be added to your
+LinkedIn profile to demonstrate
+
+655d4b24-1369-4300-8246-0d214aec63fd-1
+00:03:51.522 --> 00:03:53.560
+to the world your knowledge of
+CrateDB.
+
+38f79176-2dec-4cdb-bd6a-29d9768cce78-0
+00:03:56.160 --> 00:04:00.526
+If you need help or want to talk
+to us about CrateDB, then we
+
+38f79176-2dec-4cdb-bd6a-29d9768cce78-1
+00:04:00.526 --> 00:04:03.715
+encourage you to join our online
+community at
+
+38f79176-2dec-4cdb-bd6a-29d9768cce78-2
+00:04:03.715 --> 00:04:05.240
+community.cratedb.com.
+
+8497594f-b8fc-418e-9b84-8b864b3b8801-0
+00:04:05.680 --> 00:04:08.752
+There's a section for the
+Academy to ask questions about
+
+8497594f-b8fc-418e-9b84-8b864b3b8801-1
+00:04:08.752 --> 00:04:11.824
+these courses, but there are
+also other sections for all
+
+8497594f-b8fc-418e-9b84-8b864b3b8801-2
+00:04:11.824 --> 00:04:13.279
+things to do with CrateDB.
+
+27feb646-e3ba-4f8d-ab8e-2167605b3f30-0
+00:04:13.320 --> 00:04:16.501
+So whether your question is to
+do with SQL or a particular
+
+27feb646-e3ba-4f8d-ab8e-2167605b3f30-1
+00:04:16.501 --> 00:04:19.836
+programming language or you just
+want to share a project or some
+
+27feb646-e3ba-4f8d-ab8e-2167605b3f30-2
+00:04:19.836 --> 00:04:22.914
+success that you've had using
+CrateDB, we'd love to hear from
+
+27feb646-e3ba-4f8d-ab8e-2167605b3f30-3
+00:04:22.914 --> 00:04:23.119
+you.

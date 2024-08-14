@@ -1,0 +1,552 @@
+WEBVTT
+
+5d561ca9-aac6-4f61-a421-b5e8c1401d4c-0
+00:00:04.160 --> 00:00:07.480
+There are several ways to bulk
+load data into CrateDB.
+
+d7512163-eb5b-4690-98fe-39261d3ce4da-0
+00:00:07.960 --> 00:00:10.923
+In this video I will walk you
+through the different options
+
+d7512163-eb5b-4690-98fe-39261d3ce4da-1
+00:00:10.923 --> 00:00:13.986
+and will look at a few ways to
+create records with the INSERT
+
+d7512163-eb5b-4690-98fe-39261d3ce4da-2
+00:00:13.986 --> 00:00:14.480
+statement.
+
+51f222f1-4192-4f73-af4e-075c531bbc7d-0
+00:00:14.480 --> 00:00:18.583
+We will also briefly consider
+the options available for bulk
+
+51f222f1-4192-4f73-af4e-075c531bbc7d-1
+00:00:18.583 --> 00:00:20.400
+data export from CrateDB.
+
+e2e246e1-ee45-4a0f-95ee-d7fb93e04514-0
+00:00:22.360 --> 00:00:26.052
+CrateDB accepts bulk data
+imports from a variety of
+
+e2e246e1-ee45-4a0f-95ee-d7fb93e04514-1
+00:00:26.052 --> 00:00:26.600
+sources.
+
+088d2696-40af-4787-80ab-9fe605a927ca-0
+00:00:27.080 --> 00:00:31.409
+You can use a local file, import
+data from a URL, or connect to
+
+088d2696-40af-4787-80ab-9fe605a927ca-1
+00:00:31.409 --> 00:00:35.400
+the popular Amazon S3 or Azure
+Storage Container Services.
+
+c8afe8c6-ed46-4780-84d2-a246e76f4ddc-0
+00:00:36.400 --> 00:00:39.654
+Let's explore these, beginning
+with the CrateDB Cloud
+
+c8afe8c6-ed46-4780-84d2-a246e76f4ddc-1
+00:00:39.654 --> 00:00:42.560
+interface, then with the COPY
+FROM SQL statement.
+
+10a3775e-7070-4b33-b674-e3a809693912-0
+00:00:44.040 --> 00:00:47.677
+Finally, we'll learn how to
+populate a table in CrateDB by
+
+10a3775e-7070-4b33-b674-e3a809693912-1
+00:00:47.677 --> 00:00:50.600
+selectively copying data from an
+existing table.
+
+273b003f-9f91-4914-89f2-5343877e6598-0
+00:00:53.600 --> 00:00:56.840
+Before importing data, we first
+need to create a table.
+
+f2d9af97-9f1b-4b6f-9a27-39fb83c59e03-0
+00:00:57.400 --> 00:01:02.240
+This SQL statement creates a
+table told details of Chicago's
+
+f2d9af97-9f1b-4b6f-9a27-39fb83c59e03-1
+00:01:02.240 --> 00:01:06.764
+taxi fleet, and this file
+contains the fleet data in CSV
+
+f2d9af97-9f1b-4b6f-9a27-39fb83c59e03-2
+00:01:06.764 --> 00:01:07.320
+format.
+
+a94876fe-f835-47ac-9fa6-37bcd9673bc8-0
+00:01:08.840 --> 00:01:12.920
+Moving to the Import tab, we can
+see our import options.
+
+58a21ced-86e1-4f3b-8dbe-ad7295296454-0
+00:01:13.320 --> 00:01:16.119
+We're going to import from a
+file, but let's first look at
+
+58a21ced-86e1-4f3b-8dbe-ad7295296454-1
+00:01:16.119 --> 00:01:18.160
+some of the other options
+available to us.
+
+b3d0f0b8-d53f-4bcc-9a7d-25a19d3d204b-0
+00:01:19.040 --> 00:01:24.558
+We can choose a URL or an S3
+bucket, or we can import from
+
+b3d0f0b8-d53f-4bcc-9a7d-25a19d3d204b-1
+00:01:24.558 --> 00:01:25.120
+Azure.
+
+f695ad99-9704-46b8-86ed-237ae7b059bc-0
+00:01:25.360 --> 00:01:28.885
+In the case of Azure and S3, we
+can provide the appropriate
+
+f695ad99-9704-46b8-86ed-237ae7b059bc-1
+00:01:28.885 --> 00:01:30.120
+secrets as necessary.
+
+c783e5b9-999d-46d7-bd7f-1dcc2ee8487f-0
+00:01:31.160 --> 00:01:35.095
+Returning to the File tab, I'm
+going to drag and drop the file
+
+c783e5b9-999d-46d7-bd7f-1dcc2ee8487f-1
+00:01:35.095 --> 00:01:38.843
+onto this area and you'll see
+that CrateDB's interface has
+
+c783e5b9-999d-46d7-bd7f-1dcc2ee8487f-2
+00:01:38.843 --> 00:01:40.280
+inferred the file type.
+
+ac117196-408f-4df8-8e04-7d69976973c7-0
+00:01:41.080 --> 00:01:44.391
+We can select other supported
+file types, and we can also
+
+ac117196-408f-4df8-8e04-7d69976973c7-1
+00:01:44.391 --> 00:01:47.360
+choose whether or not the file
+is Gzip compressed.
+
+64af6d27-19a0-498e-a45e-36f4ee16621d-0
+00:01:48.440 --> 00:01:52.320
+Next, we need to provide a table
+name to import the data into.
+
+7423e2f5-5c62-4b11-a8b7-a60da8158d3b-0
+00:01:53.200 --> 00:01:55.280
+In our case it's taxis.
+
+c8d5b276-d1f0-461b-a56d-22cee37e8f08-0
+00:01:56.440 --> 00:01:57.360
+We're all ready to go.
+
+10c97c33-03c6-47f9-9001-7ce386046386-0
+00:01:57.520 --> 00:02:02.723
+So we'll click the import button
+here and the import job has started.
+
+10c97c33-03c6-47f9-9001-7ce386046386-1
+00:02:02.723 --> 00:02:05.880
+Now we can see it
+succeeded.
+
+27126827-b83f-4789-8f3e-64873ed0ef84-0
+00:02:06.440 --> 00:02:10.082
+Let's move to the console and
+change this query for one that
+
+27126827-b83f-4789-8f3e-64873ed0ef84-1
+00:02:10.082 --> 00:02:13.665
+selects a few records in the
+table to demonstrate that they
+
+27126827-b83f-4789-8f3e-64873ed0ef84-2
+00:02:13.665 --> 00:02:14.920
+were in fact created.
+
+cf57ce79-f2d4-4d57-aeff-b4e7ea0798ea-0
+00:02:15.920 --> 00:02:19.960
+So SELECT * FROM taxis LIMIT
+10.
+
+d50d551d-49e8-404f-a22a-4223eb055329-0
+00:02:21.320 --> 00:02:24.943
+When we execute this, we can see
+that we got the first 10 taxis
+
+d50d551d-49e8-404f-a22a-4223eb055329-1
+00:02:24.943 --> 00:02:27.320
+back and the data was in fact
+imported.
+
+203db21a-deae-475f-93fb-1645e85f0477-0
+00:02:30.480 --> 00:02:34.310
+The COPY FROM statement is
+another way to import data into
+
+203db21a-deae-475f-93fb-1645e85f0477-1
+00:02:34.310 --> 00:02:34.960
+CrateDB.
+
+453dd0cb-9348-4ba4-9871-2ee544053b40-0
+00:02:35.680 --> 00:02:39.193
+This method supports the file
+types and locations that we saw
+
+453dd0cb-9348-4ba4-9871-2ee544053b40-1
+00:02:39.193 --> 00:02:41.120
+when importing a file
+previously.
+
+041049bb-bab2-49b4-847a-07b18bfc52c9-0
+00:02:42.120 --> 00:02:46.777
+Let's use copy from to populate
+our Chicago 311 calls table
+
+041049bb-bab2-49b4-847a-07b18bfc52c9-1
+00:02:46.777 --> 00:02:48.640
+using a Gzip JSON file.
+
+2c337389-4fa3-4249-921b-f3260a01afad-0
+00:02:48.680 --> 00:02:51.160
+It's a GitHub URL as the data
+source.
+
+b964a62d-acfd-467d-a701-2992043ddfaa-0
+00:02:52.560 --> 00:02:58.632
+First, I need to create the 311
+calls table with this statement here.
+
+b964a62d-acfd-467d-a701-2992043ddfaa-1
+00:02:58.632 --> 00:03:00.560
+Then, run COPY FROM.
+
+fc3be908-277b-4320-a985-a9f28f01e705-0
+00:03:00.560 --> 00:03:07.028
+What we see here is that
+I'm copying from a GitHub URL
+
+fc3be908-277b-4320-a985-a9f28f01e705-1
+00:03:07.028 --> 00:03:11.880
+and specifying that the
+compression is Gzip.
+
+306ea112-3a17-41fe-b91f-535693f9229e-0
+00:03:12.120 --> 00:03:18.111
+I'm asking CrateDB to return a
+summary of the results, so let's
+
+306ea112-3a17-41fe-b91f-535693f9229e-1
+00:03:18.111 --> 00:03:22.720
+execute that. And here we see the
+results summary.
+
+9f8822a4-e54f-4bba-8ac9-f5c31ee6e95b-0
+00:03:23.320 --> 00:03:28.360
+We've successfully imported
+174,000 and 92 records.
+
+f69dde4b-fcba-4187-bda1-a2b8d48b9762-0
+00:03:29.000 --> 00:03:31.720
+Let's look at these by running a
+simple SELECT query.
+
+16b138d3-62fb-4fc7-8e91-16eee94d0615-0
+00:03:33.760 --> 00:03:39.760
+SELECT * FROM three_eleven_calls
+LIMIT 10.
+
+e0b784a7-c99c-486e-834c-3ca2516119ac-0
+00:03:40.880 --> 00:03:45.713
+Let's run that query, and you'll
+see that we have the data in the
+
+e0b784a7-c99c-486e-834c-3ca2516119ac-1
+00:03:45.713 --> 00:03:46.160
+table.
+
+eca2c8c8-d084-4557-acee-11a7b710e08a-0
+00:03:49.360 --> 00:03:53.235
+Tables in CrateDB can be
+populated with data from other
+
+eca2c8c8-d084-4557-acee-11a7b710e08a-1
+00:03:53.235 --> 00:03:53.720
+tables.
+
+b1f0e935-b2de-4146-9945-efd58a1fd177-0
+00:03:54.240 --> 00:03:57.981
+Let's use our taxis table as the
+data source to create a new
+
+b1f0e935-b2de-4146-9945-efd58a1fd177-1
+00:03:57.981 --> 00:04:00.680
+table containing a subset of the
+taxi data.
+
+60dc5403-d6fc-4b42-aa09-af483a56f392-0
+00:04:01.680 --> 00:04:05.213
+First, I'll create a second table
+with the same schema as the
+
+60dc5403-d6fc-4b42-aa09-af483a56f392-1
+00:04:05.213 --> 00:04:05.920
+taxis table.
+
+d778b017-b552-42b3-b083-c025a3509045-0
+00:04:08.000 --> 00:04:12.413
+Now, let's populate that by
+selecting only the records from
+
+d778b017-b552-42b3-b083-c025a3509045-1
+00:04:12.413 --> 00:04:16.677
+the taxis table where the
+vehicle make is Toyota and the
+
+d778b017-b552-42b3-b083-c025a3509045-2
+00:04:16.677 --> 00:04:17.800
+model is Camry.
+
+4b7e467b-51bb-48b2-be7a-be94be2190de-0
+00:04:19.640 --> 00:04:24.212
+This query populated the new
+table with 1098 records, and we
+
+4b7e467b-51bb-48b2-be7a-be94be2190de-1
+00:04:24.212 --> 00:04:28.710
+can see that they're all Toyota
+Camrys with a simple SELECT
+
+4b7e467b-51bb-48b2-be7a-be94be2190de-2
+00:04:28.710 --> 00:04:29.160
+query.
+
+9c4c72be-3a84-416e-a022-291a3385386c-0
+00:04:37.080 --> 00:04:41.925
+As expected, we have 1098 rows,
+each of which contains data for
+
+9c4c72be-3a84-416e-a022-291a3385386c-1
+00:04:41.925 --> 00:04:43.440
+a Toyota Camry taxi.
+
+3608fb2b-9aef-4eee-9a5e-9c2004971968-0
+00:04:46.400 --> 00:04:50.051
+New rows can of course be
+inserted into tables with the
+
+3608fb2b-9aef-4eee-9a5e-9c2004971968-1
+00:04:50.051 --> 00:04:51.160
+INSERT statement.
+
+686eaec2-b5fd-4ca2-bf3d-dd6770759e3b-0
+00:04:51.840 --> 00:04:53.720
+I'll show you three different
+methods.
+
+b033e646-3fd7-47a2-bce7-871959fc7322-0
+00:04:54.440 --> 00:04:57.280
+First, there's a simple INSERT
+for a single row.
+
+1859c761-64f7-4c80-b8a3-4e81f37f0347-0
+00:04:57.640 --> 00:05:00.360
+We're adding a new taxi to the
+Taxis table.
+
+fb2d0a8f-9e7a-42cd-abe9-4da5438c747a-0
+00:05:04.400 --> 00:05:08.249
+Here's an INSERT statement that
+uses the UNNEST function to
+
+fb2d0a8f-9e7a-42cd-abe9-4da5438c747a-1
+00:05:08.249 --> 00:05:10.080
+insert multiple rows at once.
+
+91aec32d-f800-4d25-bf16-f1e7878d2164-0
+00:05:10.840 --> 00:05:13.200
+UNNEST produces rows from
+arrays.
+
+e202097c-9fa1-4617-94d8-28c8138df011-0
+00:05:14.000 --> 00:05:19.514
+This statement inserts rows for
+a black 2024 Ford Explorer and a
+
+e202097c-9fa1-4617-94d8-28c8138df011-1
+00:05:19.514 --> 00:05:21.720
+yellow 2022 Toyota Sienna.
+
+74057ffa-6341-4430-bbe8-c667e5f12c37-0
+00:05:22.400 --> 00:05:27.000
+Let's run it now, and then let's
+select the resulting rows.
+
+9e1dc0f8-e8f4-430c-9c64-36120eeff7e4-0
+00:05:27.000 --> 00:05:36.360
+So SELECT * FROM taxis WHERE
+vehicleid is greater than 7000.
+
+0c3cad52-c1ca-404b-9fe1-69ebf691d515-0
+00:05:38.320 --> 00:05:41.240
+And we can see here that we've
+inserted those two rows.
+
+89ab41d5-cd58-4fcc-ad91-98fee42dec6d-0
+00:05:42.520 --> 00:05:45.851
+This method offers dramatic
+performance improvements over
+
+89ab41d5-cd58-4fcc-ad91-98fee42dec6d-1
+00:05:45.851 --> 00:05:49.067
+the corresponding number of
+individual inserts, and the
+
+89ab41d5-cd58-4fcc-ad91-98fee42dec6d-2
+00:05:49.067 --> 00:05:52.513
+query only needs to be passed
+and planned once and requires
+
+89ab41d5-cd58-4fcc-ad91-98fee42dec6d-3
+00:05:52.513 --> 00:05:53.720
+less network traffic.
+
+7c3caf56-5ce6-4a64-a603-68f1afd52a23-0
+00:05:57.360 --> 00:06:01.891
+Finally, multiple rows can also
+be inserted with multiple value
+
+7c3caf56-5ce6-4a64-a603-68f1afd52a23-1
+00:06:01.891 --> 00:06:06.422
+expressions like so. This method
+is generally slower than using
+
+7c3caf56-5ce6-4a64-a603-68f1afd52a23-2
+00:06:06.422 --> 00:06:09.680
+UNNEST, as parsing the SQL is
+more expensive.
+
+69c96d30-5e6a-4a3d-ba7e-4edb2ea461c8-0
+00:06:10.200 --> 00:06:13.081
+However, this query is more
+readable than the UNNEST
+
+69c96d30-5e6a-4a3d-ba7e-4edb2ea461c8-1
+00:06:13.081 --> 00:06:13.680
+equivalent.
+
+a9c929e8-ef19-4119-85ab-ee83a9c8fca8-0
+00:06:16.200 --> 00:06:20.187
+Sometimes you'll want to export
+data from CrateDB back to a file.
+
+a9c929e8-ef19-4119-85ab-ee83a9c8fca8-1
+00:06:20.187 --> 00:06:24.436
+Using the export option in
+CrateDB Cloud, I'll export the
+
+a9c929e8-ef19-4119-85ab-ee83a9c8fca8-2
+00:06:24.436 --> 00:06:27.640
+Toyota Camry taxi table that we
+created earlier.
+
+c341c185-2890-4fa6-b92c-8a8e4b51274f-0
+00:06:28.600 --> 00:06:32.451
+We input the table name here,
+and let's choose JSON from the
+
+c341c185-2890-4fa6-b92c-8a8e4b51274f-1
+00:06:32.451 --> 00:06:33.880
+available formats here.
+
+299059d5-793a-4783-8883-31ea37f5b8d9-0
+00:06:34.840 --> 00:06:38.205
+There's no need to compress the
+file, as there aren't too many
+
+299059d5-793a-4783-8883-31ea37f5b8d9-1
+00:06:38.205 --> 00:06:39.400
+records in this table.
+
+209f087f-0d13-4865-8a09-265dc824e98e-0
+00:06:40.480 --> 00:06:43.200
+Pressing export starts the job
+in the cloud.
+
+469b3a22-91bd-4592-985a-db771b13d903-0
+00:06:45.880 --> 00:06:49.427
+Once the export has finished, we
+can download the file from the
+
+469b3a22-91bd-4592-985a-db771b13d903-1
+00:06:49.427 --> 00:06:49.760
+cloud.
+
+ec3808bd-6d2a-43a1-8097-d0d8f7fdac57-0
+00:06:51.280 --> 00:06:54.240
+Here's our data in JSON lines
+format.
+
+ea480202-f2cc-409f-bda9-6e64a7e1942e-0
+00:06:55.360 --> 00:06:58.734
+If you're running CrateDB
+locally, including with Docker,
+
+ea480202-f2cc-409f-bda9-6e64a7e1942e-1
+00:06:58.734 --> 00:07:01.934
+you should check out the
+documentation for the COPY TO
+
+ea480202-f2cc-409f-bda9-6e64a7e1942e-2
+00:07:01.934 --> 00:07:02.400
+command.
+
+65846de8-b6b3-448c-a165-af9008df6414-0
+00:07:03.080 --> 00:07:06.626
+This allows you to export data
+from a locally running CrateDB
+
+65846de8-b6b3-448c-a165-af9008df6414-1
+00:07:06.626 --> 00:07:08.800
+cluster to files on your file
+system.
+
+76ae5c94-4319-44f3-8714-052005fc776a-0
+00:07:10.560 --> 00:07:14.123
+In this video, we covered the
+various ways of importing data
+
+76ae5c94-4319-44f3-8714-052005fc776a-1
+00:07:14.123 --> 00:07:15.000
+into CrateDB.
+
+105a44d5-9175-4c32-a56b-9819412cf50a-0
+00:07:15.520 --> 00:07:18.840
+We also touched on the different
+ways that records can be added
+
+105a44d5-9175-4c32-a56b-9819412cf50a-1
+00:07:18.840 --> 00:07:20.760
+to tables with the INSERT
+statement.
+
+1f14aa5e-572c-4c1b-9ba4-cdb492f24aac-0
+00:07:21.480 --> 00:07:24.880
+And we finished by learning how
+to export data from CrateDB.

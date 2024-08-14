@@ -1,0 +1,328 @@
+WEBVTT
+
+8eb15941-c2d1-4780-9a8f-7b7829007767-0
+00:00:03.720 --> 00:00:07.453
+Now it's time to create your
+first table and insert some data
+
+8eb15941-c2d1-4780-9a8f-7b7829007767-1
+00:00:07.453 --> 00:00:09.080
+into your CrateDB cluster.
+
+ae19ab68-21eb-4490-a840-0cbdadb495b5-0
+00:00:09.520 --> 00:00:12.480
+Let's get started.
+
+5eb94fca-8a8c-4f96-b63d-1aa3f8501603-0
+00:00:12.480 --> 00:00:16.321
+Here I'm using the Cloud Console, so
+with my cloud database, I've
+
+5eb94fca-8a8c-4f96-b63d-1aa3f8501603-1
+00:00:16.321 --> 00:00:18.840
+selected console over here on
+the left.
+
+1c4c373f-48d3-4dec-95fa-d9b330e3cdab-0
+00:00:19.400 --> 00:00:22.452
+And this is an interface that
+allows us to enter SQL
+
+1c4c373f-48d3-4dec-95fa-d9b330e3cdab-1
+00:00:22.452 --> 00:00:24.360
+commands similar to the Crash
+CLI.
+
+0da45635-4583-4f1c-8728-822f9fb0db4e-0
+00:00:24.680 --> 00:00:27.867
+We could also do these commands
+in the Crash CLI, but I wanted
+
+0da45635-4583-4f1c-8728-822f9fb0db4e-1
+00:00:27.867 --> 00:00:29.840
+to show you the console in this
+video.
+
+8eb5b0d0-cdd7-4d10-aee4-5ab92ec9bac4-0
+00:00:31.240 --> 00:00:35.041
+If you're working with Docker,
+you'll see a slightly different
+
+8eb5b0d0-cdd7-4d10-aee4-5ab92ec9bac4-1
+00:00:35.041 --> 00:00:39.023
+interface, so you'll go to local
+host port 4200, and you'll click
+
+8eb5b0d0-cdd7-4d10-aee4-5ab92ec9bac4-2
+00:00:39.023 --> 00:00:41.920
+on this symbol over here, which
+is the console.
+
+03283371-53fa-4c7c-aab3-193ec12fdf67-0
+00:00:42.520 --> 00:00:44.360
+From here, the process is
+identical.
+
+7d11eb15-4b9b-49dd-a66a-e4a6efae17b1-0
+00:00:44.400 --> 00:00:47.340
+You just enter the SQL
+commands that I'm going to show
+
+7d11eb15-4b9b-49dd-a66a-e4a6efae17b1-1
+00:00:47.340 --> 00:00:48.000
+in the cloud.
+
+ac689827-e613-4299-bf8d-7d89b8374d62-0
+00:00:49.880 --> 00:00:53.200
+So first thing we need to do is
+create a table.
+
+55effceb-51f3-4e72-b0b6-b5c7bb764dc2-0
+00:00:53.720 --> 00:00:56.928
+I've got some SQL in the
+clipboard, so I'm going to go
+
+55effceb-51f3-4e72-b0b6-b5c7bb764dc2-1
+00:00:56.928 --> 00:00:58.920
+ahead and paste that and we'll
+see.
+
+0734ad80-3cf8-4511-8b83-4f3503613286-0
+00:00:58.920 --> 00:01:01.280
+We're creating a table here
+called taxis.
+
+a2b18f97-a87e-40b5-8e65-22eeb6f8d856-0
+00:01:01.400 --> 00:01:05.592
+It has some fields that describe
+vehicles that are taxis in the
+
+a2b18f97-a87e-40b5-8e65-22eeb6f8d856-1
+00:01:05.592 --> 00:01:06.640
+city of Chicago.
+
+7ff20b9b-c8b8-425f-8da9-f601f1d0174e-0
+00:01:06.640 --> 00:01:10.245
+We're going to give them an id, a
+status field, make model and
+
+7ff20b9b-c8b8-425f-8da9-f601f1d0174e-1
+00:01:10.245 --> 00:01:13.850
+model years, some information
+about the vehicle itself, what
+
+7ff20b9b-c8b8-425f-8da9-f601f1d0174e-2
+00:01:13.850 --> 00:01:17.278
+colour it is, what fuel it
+takes, whether it's wheelchair
+
+7ff20b9b-c8b8-425f-8da9-f601f1d0174e-3
+00:01:17.278 --> 00:01:18.519
+accessible, etc.
+
+eb0c8d06-8d54-46cf-98f4-c1dd4a6baa5f-0
+00:01:19.440 --> 00:01:23.179
+If I press execute here, that
+will go ahead and create the
+
+eb0c8d06-8d54-46cf-98f4-c1dd4a6baa5f-1
+00:01:23.179 --> 00:01:23.560
+table.
+
+22c7d9f7-ea0e-473b-aa0b-bb8320e9cb00-0
+00:01:23.560 --> 00:01:27.425
+We can see what's happened, and
+here in the doc schema we now
+
+22c7d9f7-ea0e-473b-aa0b-bb8320e9cb00-1
+00:01:27.425 --> 00:01:30.480
+have a table called taxis and we
+can look at it.
+
+098c655e-e617-482e-9ed3-d9fb75e7a31f-0
+00:01:30.480 --> 00:01:35.692
+So what we need to do next is go
+ahead and load up some data into
+
+098c655e-e617-482e-9ed3-d9fb75e7a31f-1
+00:01:35.692 --> 00:01:39.720
+our table because there's
+currently nothing there.
+
+80c134d2-8899-4523-9cfd-05946814119c-0
+00:01:40.480 --> 00:01:44.574
+One of the ways that CrateDB
+allows us to load data is by
+
+80c134d2-8899-4523-9cfd-05946814119c-1
+00:01:44.574 --> 00:01:46.240
+copying it in from URLs.
+
+97a3131e-a459-4481-9251-f843955c86a6-0
+00:01:46.920 --> 00:01:51.320
+So we've got a URL that
+represents a CSV file that
+
+97a3131e-a459-4481-9251-f843955c86a6-1
+00:01:51.320 --> 00:01:56.600
+contains data for our Chicago
+Taxi data set, and we can see
+
+97a3131e-a459-4481-9251-f843955c86a6-2
+00:01:56.600 --> 00:01:57.480
+that here.
+
+e392c2fb-2f5e-48f2-9a50-e58fa73fd639-0
+00:01:58.080 --> 00:02:00.000
+The link for this will be in
+your workbook.
+
+fdea14c8-871d-436e-a1f1-2ff3db6690f4-0
+00:02:00.880 --> 00:02:05.761
+What I need to do is copy this
+link and I'm going to paste that
+
+fdea14c8-871d-436e-a1f1-2ff3db6690f4-1
+00:02:05.761 --> 00:02:07.440
+into a SQL command.
+
+9957c2c2-455a-4111-8124-6c4d2215c096-0
+00:02:07.720 --> 00:02:13.093
+What I'm going to say is copy
+and then the table name, tap
+
+9957c2c2-455a-4111-8124-6c4d2215c096-1
+00:02:13.093 --> 00:02:13.640
+these.
+
+5691c97a-724a-46fb-9b13-6f3b407eb6c1-0
+00:02:13.640 --> 00:02:17.225
+That's the table we're going to
+put the data into from then
+
+5691c97a-724a-46fb-9b13-6f3b407eb6c1-1
+00:02:17.225 --> 00:02:18.600
+where it's coming from.
+
+6fcae874-a633-4d56-b795-82171b1f450e-0
+00:02:18.600 --> 00:02:23.280
+So this URL here and then I'm
+going to say return summary.
+
+ef408536-f068-45b5-948e-e4e3f3a3f2f5-0
+00:02:23.480 --> 00:02:27.271
+So I'm going to ask CrateDB to
+return me a summary of what
+
+ef408536-f068-45b5-948e-e4e3f3a3f2f5-1
+00:02:27.271 --> 00:02:31.062
+happened when it attempted to
+load all of these CSV records
+
+ef408536-f068-45b5-948e-e4e3f3a3f2f5-2
+00:02:31.062 --> 00:02:32.199
+into the database.
+
+29f4405b-7de7-422e-b5a6-900a77a00409-0
+00:02:33.560 --> 00:02:38.710
+Let's click execute and you'll
+see here we have a success count
+
+29f4405b-7de7-422e-b5a6-900a77a00409-1
+00:02:38.710 --> 00:02:40.240
+and an error count.
+
+403047be-b702-400d-985d-87827d48564a-0
+00:02:40.240 --> 00:02:44.720
+I have 2655 records loaded with
+no errors.
+
+9579f821-986a-4cea-993a-2061f637b6ec-0
+00:02:45.520 --> 00:02:47.440
+That's what we want to see, no
+errors.
+
+f068c353-f231-4b1a-8816-9b6b15056f36-0
+00:02:47.480 --> 00:02:49.800
+We can now go ahead and query
+the data.
+
+0efec49b-9f04-40fb-b5bc-e38c7d32dfba-0
+00:02:52.440 --> 00:02:56.440
+Having created that table, it's
+now time to write our first
+
+0efec49b-9f04-40fb-b5bc-e38c7d32dfba-1
+00:02:56.440 --> 00:02:57.240
+query again.
+
+20118421-aa70-43cd-9572-9d18146f5dc9-0
+00:02:57.240 --> 00:03:01.385
+I have this in the clipboard,
+and we're going to ask CrateDB
+
+20118421-aa70-43cd-9572-9d18146f5dc9-1
+00:03:01.385 --> 00:03:05.465
+how many of each type of make
+and model of taxi are there in
+
+20118421-aa70-43cd-9572-9d18146f5dc9-2
+00:03:05.465 --> 00:03:06.000
+Chicago.
+
+44ff4eeb-305c-4394-a861-d9221d0798f6-0
+00:03:06.000 --> 00:03:07.400
+Which ones are the popular ones?
+
+00783546-3875-403a-b620-435115f64f71-0
+00:03:07.400 --> 00:03:10.595
+So we're going to ask it to
+order them by the number of
+
+00783546-3875-403a-b620-435115f64f71-1
+00:03:10.595 --> 00:03:11.280
+occurrences.
+
+ed951d36-58c9-4c64-89ef-48ef4dc29a40-0
+00:03:13.480 --> 00:03:16.946
+So what we see here is that the
+Toyota Camry is clearly the most
+
+ed951d36-58c9-4c64-89ef-48ef4dc29a40-1
+00:03:16.946 --> 00:03:17.640
+popular taxi.
+
+e9560144-8616-4ecd-aaaa-d145122a5ecf-0
+00:03:17.640 --> 00:03:22.120
+There's 1098 of those, followed
+by the Prius and the Sienna.
+
+063b2a00-46ca-43bc-a87c-59e33a479b9b-0
+00:03:22.120 --> 00:03:26.360
+And most of the popular vehicles
+here are all Toyotas.
+
+aca79819-70b9-44dc-af68-ba9b09f51961-0
+00:03:27.160 --> 00:03:31.400
+So what we've got here is a very
+basic query that we've run.
+
+d2681092-4aa1-4457-a835-a9fc1aec2d82-0
+00:03:31.440 --> 00:03:34.913
+We've created a table and we've
+copied data from a source on the
+
+d2681092-4aa1-4457-a835-a9fc1aec2d82-1
+00:03:34.913 --> 00:03:37.800
+Internet, which in this case was
+a GitHub repository.
+
+ceccdd7c-515e-422e-9bdc-312bb65968c2-0
+00:03:38.800 --> 00:03:42.007
+You'll now need to work through
+all of the commands in your
+
+ceccdd7c-515e-422e-9bdc-312bb65968c2-1
+00:03:42.007 --> 00:03:44.680
+workbook to install the data set
+for this course.

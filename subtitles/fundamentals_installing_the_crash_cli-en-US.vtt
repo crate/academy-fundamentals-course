@@ -1,0 +1,371 @@
+WEBVTT
+
+34affb2a-fdf8-4ed0-a6d3-003b3e0b882f-0
+00:00:03.880 --> 00:00:07.471
+Hello, in this video we'll look
+at Crash, a command line
+
+34affb2a-fdf8-4ed0-a6d3-003b3e0b882f-1
+00:00:07.471 --> 00:00:08.920
+interface for CrateDB.
+
+3a4b60ee-6889-488f-b900-6bbaa64139e0-0
+00:00:09.600 --> 00:00:11.920
+We'll start by downloading a
+copy of Crash.
+
+cdb53b53-d0a2-4c5a-9c85-e7bae56918a9-0
+00:00:11.920 --> 00:00:15.525
+Then we'll use it to connect
+both to a CrateDB cluster in
+
+cdb53b53-d0a2-4c5a-9c85-e7bae56918a9-1
+00:00:15.525 --> 00:00:18.946
+the cloud and one running
+locally using Docker, jumping
+
+cdb53b53-d0a2-4c5a-9c85-e7bae56918a9-2
+00:00:18.946 --> 00:00:19.680
+straight in.
+
+86cc84da-4024-49e1-8938-94a2e4ffa634-0
+00:00:19.680 --> 00:00:23.921
+We'll start here at the CrateDB
+website and you're going to want
+
+86cc84da-4024-49e1-8938-94a2e4ffa634-1
+00:00:23.921 --> 00:00:25.400
+to click documentation.
+
+3385d37e-1dad-476a-9235-6c0c7bfdcf90-0
+00:00:25.680 --> 00:00:28.920
+And then down here on the left,
+there's a Crash CLI section.
+
+64bc3c6e-14c5-437b-aad0-644f72c21804-0
+00:00:30.160 --> 00:00:33.544
+Inside here, there's various
+information about what Crash is
+
+64bc3c6e-14c5-437b-aad0-644f72c21804-1
+00:00:33.544 --> 00:00:34.560
+and how to use it.
+
+700e99ee-d437-4c1a-85ae-c348d060bbcf-0
+00:00:35.120 --> 00:00:37.040
+We're going to want the
+installation link.
+
+b4246a9f-6969-412e-a14d-1b9421f9a239-0
+00:00:38.400 --> 00:00:40.800
+There are two methods for
+installing Crash.
+
+d4cb8f50-906a-4921-b516-a53aee9264d9-0
+00:00:41.200 --> 00:00:44.813
+We can either use Python's pip
+package manager, which is the
+
+d4cb8f50-906a-4921-b516-a53aee9264d9-1
+00:00:44.813 --> 00:00:48.722
+method that I'm going to use, or
+you can download it using a curl
+
+d4cb8f50-906a-4921-b516-a53aee9264d9-2
+00:00:48.722 --> 00:00:52.335
+command and then change the
+permissions on that and just run
+
+d4cb8f50-906a-4921-b516-a53aee9264d9-3
+00:00:52.335 --> 00:00:53.520
+it as an executable.
+
+a6152015-6225-4a27-993b-ea77c027abd0-0
+00:00:54.360 --> 00:00:59.126
+But let's go with the Python
+method and I'll just click copy
+
+a6152015-6225-4a27-993b-ea77c027abd0-1
+00:00:59.126 --> 00:01:04.126
+here, swap to the terminal, and
+we'll paste a command there and
+
+a6152015-6225-4a27-993b-ea77c027abd0-2
+00:01:04.126 --> 00:01:06.079
+off it goes and installs.
+
+c4681b79-0fdc-45e3-9820-2eb2bb3b315a-0
+00:01:06.400 --> 00:01:09.381
+Now that installed quite quickly
+because I have some of these
+
+c4681b79-0fdc-45e3-9820-2eb2bb3b315a-1
+00:01:09.381 --> 00:01:11.160
+dependencies cached from
+beforehand.
+
+759cfa94-df03-462e-aff7-fa9b4874bc13-0
+00:01:11.280 --> 00:01:14.065
+Yours might take a moment while
+it downloads some of them from
+
+759cfa94-df03-462e-aff7-fa9b4874bc13-1
+00:01:14.065 --> 00:01:14.640
+the Internet.
+
+8eae45c9-3db8-46dd-a409-53f96b1f4c1f-0
+00:01:15.600 --> 00:01:19.037
+So now we've installed Crash,
+let's connect to our cloud
+
+8eae45c9-3db8-46dd-a409-53f96b1f4c1f-1
+00:01:19.037 --> 00:01:19.520
+cluster.
+
+691db8ea-8a7d-4aa6-8e02-d59a10289b5c-0
+00:01:20.160 --> 00:01:23.840
+What we need to do is go over
+here to the Cloud Console.
+
+d682eb45-e597-42f4-a354-a68fa5fc4034-0
+00:01:23.840 --> 00:01:27.648
+So this is from when you set up
+the cluster earlier, and here in
+
+d682eb45-e597-42f4-a354-a68fa5fc4034-1
+00:01:27.648 --> 00:01:30.930
+the overview, you'll see down
+the bottom here there's a
+
+d682eb45-e597-42f4-a354-a68fa5fc4034-2
+00:01:30.930 --> 00:01:33.040
+section connecting to your
+cluster.
+
+fcd58ecc-d29b-435f-88e6-10b0929955a0-0
+00:01:34.120 --> 00:01:38.460
+Click CLI and what you'll see is
+the command that we need to
+
+fcd58ecc-d29b-435f-88e6-10b0929955a0-1
+00:01:38.460 --> 00:01:40.240
+invoke Crash and pass it.
+
+bdf8a443-0be8-46f1-b0f7-5a7b6705e119-0
+00:01:40.240 --> 00:01:43.402
+The host names of the hosts,
+that part of the cluster, and
+
+bdf8a443-0be8-46f1-b0f7-5a7b6705e119-1
+00:01:43.402 --> 00:01:45.440
+the username that we want to
+connect.
+
+94439857-0c23-4163-8671-30c254ff7fa8-0
+00:01:45.440 --> 00:01:49.335
+As we have a single node cluster
+here, so there's only one host
+
+94439857-0c23-4163-8671-30c254ff7fa8-1
+00:01:49.335 --> 00:01:49.640
+name.
+
+a9b351a7-8fa8-4790-85d6-7e9c477dbe30-0
+00:01:49.640 --> 00:01:54.740
+I'm going to click copy here and
+then go back to the terminal and
+
+a9b351a7-8fa8-4790-85d6-7e9c477dbe30-1
+00:01:54.740 --> 00:01:56.440
+paste that command in.
+
+be673d60-f85e-447e-8fa3-f27131004096-0
+00:01:57.440 --> 00:02:00.040
+I now need to enter the password
+for the admin user.
+
+a984087a-0e4b-40be-acda-61430b900d5f-0
+00:02:00.320 --> 00:02:02.893
+And with that done, we're
+connected to our cluster in the
+
+a984087a-0e4b-40be-acda-61430b900d5f-1
+00:02:02.893 --> 00:02:03.160
+cloud.
+
+5c54fba6-19b6-4880-bf87-1a5bacf4ba38-0
+00:02:03.160 --> 00:02:07.240
+At the CR prompt here we can
+type SQL statements.
+
+351a0dd5-a413-4323-b585-2a9d0bb0fa87-0
+00:02:07.680 --> 00:02:13.960
+Let's do a simple select ID,
+hostname from sys.nodes.
+
+4bad68a1-20d1-45b2-93bd-2f253c4511a3-0
+00:02:14.040 --> 00:02:16.120
+This is a table that exists
+already.
+
+7d79eed8-52cf-4c69-a45f-e3dd38ef2065-0
+00:02:16.840 --> 00:02:19.760
+When we do that, you'll see we
+have a single entry.
+
+747725ff-5c5b-425a-ba84-cf09617cfdd2-0
+00:02:19.880 --> 00:02:22.240
+There's just one node in our
+cluster.
+
+521fe1ec-ccc3-418c-91c2-75731322b0cd-0
+00:02:23.800 --> 00:02:26.695
+If we want to look down at the
+bottom there you'll see the
+
+521fe1ec-ccc3-418c-91c2-75731322b0cd-1
+00:02:26.695 --> 00:02:28.560
+username that I'm connected as
+admin.
+
+ce4a25f0-c892-4758-a656-a8db7f673c94-0
+00:02:29.120 --> 00:02:32.144
+The default schema that Crash
+will use if we don't put a
+
+ce4a25f0-c892-4758-a656-a8db7f673c94-1
+00:02:32.144 --> 00:02:34.160
+schema name in front of a table
+name.
+
+7f6b1cc0-41b5-45dd-9a18-b799f1f954a4-0
+00:02:34.160 --> 00:02:38.013
+So that's doc, the cluster that
+I'm connected to, my course
+
+7f6b1cc0-41b5-45dd-9a18-b799f1f954a4-1
+00:02:38.013 --> 00:02:42.058
+cluster, and the host names that
+form part of that are sort of
+
+7f6b1cc0-41b5-45dd-9a18-b799f1f954a4-2
+00:02:42.058 --> 00:02:43.600
+over there to the right.
+
+868f2c47-8155-4413-abaf-9df4e29be247-0
+00:02:44.360 --> 00:02:48.788
+If we want to quit Crash, we
+can do Control+D and return to
+
+868f2c47-8155-4413-abaf-9df4e29be247-1
+00:02:48.788 --> 00:02:50.240
+the terminal prompt.
+
+08834476-96b7-404a-a068-e941639bed16-0
+00:02:51.560 --> 00:02:53.280
+So that covers the cloud
+cluster.
+
+27c17501-8e36-4691-b6d7-b12e36dc011b-0
+00:02:53.280 --> 00:02:56.273
+What we want to do next is
+connect to a cluster running
+
+27c17501-8e36-4691-b6d7-b12e36dc011b-1
+00:02:56.273 --> 00:02:59.000
+locally with Docker in case you
+chose that option.
+
+ee6dad9c-75c1-4d5d-a5df-844793faa71e-0
+00:02:59.480 --> 00:03:01.880
+So again, I'll just clear the
+terminal here.
+
+6bb12fae-994f-479d-be57-ffbed97471fd-0
+00:03:02.440 --> 00:03:07.200
+And when we run the cluster on
+Docker, it runs locally on our
+
+6bb12fae-994f-479d-be57-ffbed97471fd-1
+00:03:07.200 --> 00:03:12.192
+machine and it's in a container
+managed by docker and it exposes
+
+6bb12fae-994f-479d-be57-ffbed97471fd-2
+00:03:12.192 --> 00:03:12.960
+port 4200.
+
+f3a16c84-f6de-4f5e-afc3-22b781e1e01e-0
+00:03:13.600 --> 00:03:18.090
+So we can just use the default
+settings in Crash to just type
+
+f3a16c84-f6de-4f5e-afc3-22b781e1e01e-1
+00:03:18.090 --> 00:03:21.640
+Crash and it will connect to
+that local cluster.
+
+4fbaa557-a4ad-424e-9322-60f441f6ca77-0
+00:03:22.520 --> 00:03:27.430
+So as you saw before, we're now
+connected, we can type the same
+
+4fbaa557-a4ad-424e-9322-60f441f6ca77-1
+00:03:27.430 --> 00:03:32.188
+SQL statement, select ID,
+hostname from sys.nodes and
+
+4fbaa557-a4ad-424e-9322-60f441f6ca77-2
+00:03:32.188 --> 00:03:36.945
+you'll see that again we get a
+single result which is our one
+
+4fbaa557-a4ad-424e-9322-60f441f6ca77-3
+00:03:36.945 --> 00:03:38.480
+node in the cluster.
+
+430e63bd-5e0a-4b08-b3c7-f2e413073260-0
+00:03:39.080 --> 00:03:41.997
+And again down the bottom there
+we are connected as a user
+
+430e63bd-5e0a-4b08-b3c7-f2e413073260-1
+00:03:41.997 --> 00:03:42.640
+called crate.
+
+b991e41f-ecdf-45ed-a53e-cb0d5385a935-0
+00:03:42.640 --> 00:03:46.318
+This time that user doesn't need
+a password in the Docker
+
+b991e41f-ecdf-45ed-a53e-cb0d5385a935-1
+00:03:46.318 --> 00:03:47.080
+environment.
+
+14ffead1-624d-4b41-a3bd-adbeb78d66cb-0
+00:03:47.680 --> 00:03:52.073
+And again, our default schema
+is doc and we have a single
+
+14ffead1-624d-4b41-a3bd-adbeb78d66cb-1
+00:03:52.073 --> 00:03:56.320
+host in the cluster, similarly
+to before Control+D exits.
+
+2d6e2f93-32cc-49d4-ad46-b263c3e9c4db-0
+00:03:57.400 --> 00:04:01.281
+So that's everything that we
+need to know about Crash for the
+
+2d6e2f93-32cc-49d4-ad46-b263c3e9c4db-1
+00:04:01.281 --> 00:04:01.720
+moment.
+
+76f4c84b-1645-4962-bbed-b6b8bc140980-0
+00:04:01.720 --> 00:04:05.459
+So take a moment, download a
+copy of Crash and get connected
+
+76f4c84b-1645-4962-bbed-b6b8bc140980-1
+00:04:05.459 --> 00:04:06.440
+to your cluster.

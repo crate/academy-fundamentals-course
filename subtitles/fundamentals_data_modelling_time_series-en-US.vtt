@@ -1,0 +1,457 @@
+WEBVTT
+
+b4302cf0-724e-432f-b9ca-1a38c4e6c375-0
+00:00:04.640 --> 00:00:07.933
+Time series data is everywhere
+and can be found across a
+
+b4302cf0-724e-432f-b9ca-1a38c4e6c375-1
+00:00:07.933 --> 00:00:09.320
+multitude of industries.
+
+37e82c77-2133-4696-a833-336f3fd4be0e-0
+00:00:09.840 --> 00:00:12.883
+These include smart
+manufacturing, transport,
+
+37e82c77-2133-4696-a833-336f3fd4be0e-1
+00:00:12.883 --> 00:00:15.000
+logistics and the energy sector.
+
+af8b5423-42ba-41e3-9e41-8d7f460430fa-0
+00:00:16.240 --> 00:00:19.573
+The use of time series data for
+real time monitoring and
+
+af8b5423-42ba-41e3-9e41-8d7f460430fa-1
+00:00:19.573 --> 00:00:22.848
+forecasting is crucial to
+obtaining meaningful insights
+
+af8b5423-42ba-41e3-9e41-8d7f460430fa-2
+00:00:22.848 --> 00:00:26.005
+and to make data-driven
+decisions from huge and never
+
+af8b5423-42ba-41e3-9e41-8d7f460430fa-3
+00:00:26.005 --> 00:00:27.000
+ending data sets.
+
+064ff862-d6a0-4c98-85c2-3d0de9f43fb8-0
+00:00:28.160 --> 00:00:32.150
+In this video, you'll see why
+CrateDB is an ideal time series
+
+064ff862-d6a0-4c98-85c2-3d0de9f43fb8-1
+00:00:32.150 --> 00:00:32.720
+database.
+
+13751e82-5966-429a-8d1d-f450348d103e-0
+00:00:34.560 --> 00:00:38.499
+Widely recognised as one of the
+leading time series databases,
+
+13751e82-5966-429a-8d1d-f450348d103e-1
+00:00:38.499 --> 00:00:42.126
+CrateDB offers unparalleled
+capabilities to process very
+
+13751e82-5966-429a-8d1d-f450348d103e-2
+00:00:42.126 --> 00:00:43.440
+large data workloads.
+
+fdc70c8e-08e0-4e7a-8b9f-9511b7ab2896-0
+00:00:44.320 --> 00:00:48.235
+Its Postgres compatibility and
+SQL native interface make CrateDB
+
+fdc70c8e-08e0-4e7a-8b9f-9511b7ab2896-1
+00:00:48.235 --> 00:00:51.652
+easy to integrate without
+having to learn new query
+
+fdc70c8e-08e0-4e7a-8b9f-9511b7ab2896-2
+00:00:51.652 --> 00:00:54.760
+languages or adopt new database
+driver libraries.
+
+5cd4e0b0-6729-4b23-ba34-7e3d559218f5-0
+00:00:56.080 --> 00:01:00.284
+Thanks to it's shared nothing
+distributed architecture and
+
+5cd4e0b0-6729-4b23-ba34-7e3d559218f5-1
+00:01:00.284 --> 00:01:04.986
+horizontal scalability, CrateDB
+can handle large volumes of data
+
+5cd4e0b0-6729-4b23-ba34-7e3d559218f5-2
+00:01:04.986 --> 00:01:09.547
+from sensors, IoT gateways, ERP
+systems and so forth, ingesting
+
+5cd4e0b0-6729-4b23-ba34-7e3d559218f5-3
+00:01:09.547 --> 00:01:11.400
+and indexing data quickly.
+
+6a2a15cf-2b38-43a2-b127-09ccc352d992-0
+00:01:12.480 --> 00:01:16.415
+Columnar storage helps to enable
+fast aggregations, ensuring that
+
+6a2a15cf-2b38-43a2-b127-09ccc352d992-1
+00:01:16.415 --> 00:01:19.200
+data is available to query in
+near real time.
+
+f7bf5006-3c81-431f-aa25-b65f6a1586ee-0
+00:01:20.880 --> 00:01:24.965
+CrateDB has built in functions to
+support time series use cases
+
+f7bf5006-3c81-431f-aa25-b65f6a1586ee-1
+00:01:24.965 --> 00:01:27.560
+such as downsampling and
+interpolation.
+
+65ff1ef9-983a-43ce-b740-6d6387665396-0
+00:01:29.040 --> 00:01:32.957
+Thanks to its flexible data
+model, CrateDB can store other
+
+65ff1ef9-983a-43ce-b740-6d6387665396-1
+00:01:32.957 --> 00:01:37.212
+types of data such as relational,
+document, geospatial, BLOBs or
+
+65ff1ef9-983a-43ce-b740-6d6387665396-2
+00:01:37.212 --> 00:01:41.400
+vectors in the same database as
+your time series data, all of
+
+65ff1ef9-983a-43ce-b740-6d6387665396-3
+00:01:41.400 --> 00:01:44.440
+which can be combined in the
+same SQL query.
+
+8030e448-0448-4c60-90f4-38f981407841-0
+00:01:45.640 --> 00:01:48.756
+Let's briefly explore these
+concepts using our City of
+
+8030e448-0448-4c60-90f4-38f981407841-1
+00:01:48.756 --> 00:01:49.720
+Chicago data set.
+
+bacdaf06-f5e8-45fa-851d-01815157f94b-0
+00:01:51.640 --> 00:01:55.191
+The Chicago Park District
+maintains weather sensors at 3
+
+bacdaf06-f5e8-45fa-851d-01815157f94b-1
+00:01:55.191 --> 00:01:58.120
+weather stations along the Lake
+Michigan Waterfront.
+
+5a56c162-81b5-45e4-85b7-a013277d9ec2-0
+00:01:58.880 --> 00:02:02.584
+These sensors capture data about
+the temperature, humidity, and
+
+5a56c162-81b5-45e4-85b7-a013277d9ec2-1
+00:02:02.584 --> 00:02:06.000
+barometric pressure, as well as
+wind speeds and direction.
+
+33c5877f-0bc1-4fa1-83a3-d381d47820cc-0
+00:02:06.800 --> 00:02:09.000
+Data is captured at one hour
+intervals.
+
+fd58198a-bd29-440b-af32-c44d58a5a22f-0
+00:02:10.200 --> 00:02:13.390
+It's a SQL statement that
+creates a table to store this
+
+fd58198a-bd29-440b-af32-c44d58a5a22f-1
+00:02:13.390 --> 00:02:14.040
+information.
+
+b67f951b-4fe4-4f5d-a7a0-2ead039582b1-0
+00:02:14.760 --> 00:02:18.480
+The 'ts' field is our timestamp
+for this time series data.
+
+169d40a7-c145-4ce1-b632-7a844b0e0e8b-0
+00:02:19.600 --> 00:02:23.576
+The sample data set contains
+over 150,000 records taken from
+
+169d40a7-c145-4ce1-b632-7a844b0e0e8b-1
+00:02:23.576 --> 00:02:26.640
+three weather stations over a
+number of years.
+
+8ee78dbd-e8d1-4590-8293-b24f95435b22-0
+00:02:27.600 --> 00:02:31.145
+Unusually for the United States,
+temperatures in this data set
+
+8ee78dbd-e8d1-4590-8293-b24f95435b22-1
+00:02:31.145 --> 00:02:32.440
+are in degrees Celsius.
+
+42ae248d-b3d0-4578-ab36-3bc0bd843b8c-0
+00:02:35.240 --> 00:02:38.280
+Let's perform some simple
+aggregations with this data.
+
+0f297d8d-c367-4ee0-b4aa-0831d86fec7f-0
+00:02:38.920 --> 00:02:41.925
+First, let's look at the average
+temperature at each weather
+
+0f297d8d-c367-4ee0-b4aa-0831d86fec7f-1
+00:02:41.925 --> 00:02:42.320
+station.
+
+9a53921e-0770-4ef5-ac9a-a7d2dfcf5e66-0
+00:02:42.880 --> 00:02:45.635
+When I run this query, you'll
+see that I get an average
+
+9a53921e-0770-4ef5-ac9a-a7d2dfcf5e66-1
+00:02:45.635 --> 00:02:47.800
+temperature for each of the
+three stations.
+
+c1fe6359-5058-4b8b-a309-3d988dafcc27-0
+00:02:50.480 --> 00:02:53.680
+Now let's see what the highest
+temperature recorded at each
+
+c1fe6359-5058-4b8b-a309-3d988dafcc27-1
+00:02:53.680 --> 00:02:56.720
+weather station was and the time
+at which that occurred.
+
+2f4998e9-d05b-42d4-9e94-443e1032478f-0
+00:02:57.760 --> 00:03:01.962
+This query uses CrateDB's MAX_BY
+function which takes two
+
+2f4998e9-d05b-42d4-9e94-443e1032478f-1
+00:03:01.962 --> 00:03:02.720
+parameters.
+
+47135337-e09b-4429-b966-e9b1e9c0c6e0-0
+00:03:03.400 --> 00:03:05.760
+The 1st is the field to return.
+
+9c413cfc-a92a-4eb2-8108-2c64f8509f2f-0
+00:03:06.240 --> 00:03:09.597
+The 2nd is the field that we're
+looking for the maximum value
+
+9c413cfc-a92a-4eb2-8108-2c64f8509f2f-1
+00:03:09.597 --> 00:03:09.760
+of.
+
+3fc00868-4838-4846-a0a6-cd5f94124707-0
+00:03:10.280 --> 00:03:13.376
+So here we're going to return
+the timestamp at which the
+
+3fc00868-4838-4846-a0a6-cd5f94124707-1
+00:03:13.376 --> 00:03:15.440
+maximum air temperature was
+observed.
+
+89532dad-588d-4aa3-94e8-9107ecddadd3-0
+00:03:16.560 --> 00:03:17.640
+Let's run the query.
+
+63e71152-1ecf-430a-9e50-acdb54a56cf9-0
+00:03:18.800 --> 00:03:22.069
+We see for each station the
+maximum temperature observed and
+
+63e71152-1ecf-430a-9e50-acdb54a56cf9-1
+00:03:22.069 --> 00:03:24.160
+the time at which that event
+occurred.
+
+6a153f91-3f09-4719-9610-fcf76acc8ef3-0
+00:03:27.200 --> 00:03:30.724
+Large data sets with many data
+points can be challenging for
+
+6a153f91-3f09-4719-9610-fcf76acc8ef3-1
+00:03:30.724 --> 00:03:31.880
+humans to visualise.
+
+4dd4ede3-ad92-4f07-8b2a-f3ac8fe2b0d8-0
+00:03:32.360 --> 00:03:35.548
+This graph shows all of the
+hourly temperature readings from
+
+4dd4ede3-ad92-4f07-8b2a-f3ac8fe2b0d8-1
+00:03:35.548 --> 00:03:36.960
+the Foster weather station.
+
+64422e79-19b5-4839-8641-0f0d890d5042-0
+00:03:37.520 --> 00:03:41.360
+There are 64,266 observations.
+
+1f90e54f-6ca0-4ad4-9e9d-c38a819039c6-0
+00:03:42.760 --> 00:03:45.872
+Downsampling is a method of
+decreasing the number of data
+
+1f90e54f-6ca0-4ad4-9e9d-c38a819039c6-1
+00:03:45.872 --> 00:03:47.000
+points in a data set.
+
+7092635a-4036-45ff-b83a-7b5599d9f79f-0
+00:03:48.280 --> 00:03:51.691
+Our weather data observations
+are recorded at hourly intervals
+
+7092635a-4036-45ff-b83a-7b5599d9f79f-1
+00:03:51.691 --> 00:03:52.720
+over several years.
+
+cbfe4964-4bf3-4db2-bec4-a248c31e5922-0
+00:03:53.560 --> 00:03:57.070
+By downsampling this data, we
+more easily understand trends
+
+cbfe4964-4bf3-4db2-bec4-a248c31e5922-1
+00:03:57.070 --> 00:03:58.240
+across time periods.
+
+77c78209-8930-48fa-8daf-56b3c62c48f5-0
+00:03:59.280 --> 00:04:02.685
+Here we've downsampled the data
+into four week periods, showing
+
+77c78209-8930-48fa-8daf-56b3c62c48f5-1
+00:04:02.685 --> 00:04:04.920
+the minimum temperature recorded
+in each.
+
+93c09604-288c-4ad3-83b7-4db6843e4d19-0
+00:04:05.720 --> 00:04:09.746
+With fewer data points, 105 in
+this case, it's much easier to
+
+93c09604-288c-4ad3-83b7-4db6843e4d19-1
+00:04:09.746 --> 00:04:11.760
+get an idea of what's going on.
+
+1085bef9-06e9-4c58-b3d1-d3c58cc4556a-0
+00:04:12.960 --> 00:04:16.720
+CrateDB's DATE_BIN function is
+designed to help with this.
+
+c1c23a46-9aa0-416c-bc6b-dab237f43d04-0
+00:04:16.880 --> 00:04:18.240
+Let's see how it works.
+
+628d8d1b-9fd6-4c52-8159-9fc2ca6154c0-0
+00:04:20.520 --> 00:04:24.570
+This query makes use of CrateDB's
+DATE_BIN function to bucket
+
+628d8d1b-9fd6-4c52-8159-9fc2ca6154c0-1
+00:04:24.570 --> 00:04:28.427
+or bin the weather data into
+four week periods, effectively
+
+628d8d1b-9fd6-4c52-8159-9fc2ca6154c0-2
+00:04:28.427 --> 00:04:29.520
+downsampling it.
+
+53daaec0-9ed9-4483-b43a-c49531f26cf4-0
+00:04:30.360 --> 00:04:33.123
+It returns the lowest
+temperature from the foster
+
+53daaec0-9ed9-4483-b43a-c49531f26cf4-1
+00:04:33.123 --> 00:04:34.560
+weather stations for each.
+
+da15fcb0-c124-4bf1-9188-b6efc8463e5d-0
+00:04:35.360 --> 00:04:36.520
+Let's go ahead and run it.
+
+98f86bf6-2d8f-420f-b96e-4c1583fb6283-0
+00:04:38.240 --> 00:04:42.835
+As we can see, Chicago winters
+get pretty cold with a minimum
+
+98f86bf6-2d8f-420f-b96e-4c1583fb6283-1
+00:04:42.835 --> 00:04:46.320
+air temperature of -22.78
+Celsius in December.
+
+12671871-430e-45e4-8a3c-ebeec0611deb-0
+00:04:48.000 --> 00:04:50.870
+Consult the CreateDB
+documentation to learn more
+
+12671871-430e-45e4-8a3c-ebeec0611deb-1
+00:04:50.870 --> 00:04:53.520
+about downsampling with the
+DATE_BIN function.
+
+19d7227f-7b70-4e21-9e6d-06799d943d77-0
+00:04:54.000 --> 00:04:58.365
+And see how CrateDB supports
+data interpolation with LEAD and
+
+19d7227f-7b70-4e21-9e6d-06799d943d77-1
+00:04:58.365 --> 00:04:59.320
+LAG functions.
+
+ca96a1ef-8ac1-41ae-8ac2-abf44a22af63-0
+00:05:01.120 --> 00:05:04.652
+In this short video, we only
+scratch the surface of CrateDB's
+
+ca96a1ef-8ac1-41ae-8ac2-abf44a22af63-1
+00:05:04.652 --> 00:05:06.480
+time series capabilities.
+
+73520c8a-1bef-4232-859d-05034f6935fb-0
+00:05:06.960 --> 00:05:10.653
+If you'd like to take a deep
+dive into time series data with
+
+73520c8a-1bef-4232-859d-05034f6935fb-1
+00:05:10.653 --> 00:05:14.528
+CrateDB, I recommend taking our
+course Advanced Time Series at
+
+73520c8a-1bef-4232-859d-05034f6935fb-2
+00:05:14.528 --> 00:05:15.800
+the CrateDB Academy.
+
+f7b670ee-89d2-44e0-bcda-6067bf813d27-0
+00:05:17.120 --> 00:05:20.974
+Continue your time series
+learning journey by signing up
+
+f7b670ee-89d2-44e0-bcda-6067bf813d27-1
+00:05:20.974 --> 00:05:22.800
+today at learn.cratedb.com.
+
+2159df94-42f8-42c1-bd9d-eed09772915b-0
+00:05:23.320 --> 00:05:26.614
+And don't forget to try some
+queries of your own using your
+
+2159df94-42f8-42c1-bd9d-eed09772915b-1
+00:05:26.614 --> 00:05:29.360
+CrateDB cluster and the Chicago
+sample data set.

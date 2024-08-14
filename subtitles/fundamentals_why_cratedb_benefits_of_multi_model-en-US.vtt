@@ -1,0 +1,360 @@
+WEBVTT
+
+e28576de-2d2c-45fb-b0b7-d3f512785d2d-0
+00:00:03.800 --> 00:00:07.003
+Let's take a moment to
+understand how CrateDB solves
+
+e28576de-2d2c-45fb-b0b7-d3f512785d2d-1
+00:00:07.003 --> 00:00:10.799
+the challenges associated with
+today's diverse data sources and
+
+e28576de-2d2c-45fb-b0b7-d3f512785d2d-2
+00:00:10.799 --> 00:00:14.239
+the demands of modern systems or
+application development.
+
+dc375b4e-c2ff-4189-9b23-1e4d0d0f9429-0
+00:00:15.440 --> 00:00:19.056
+When developing a system or
+application that needs to store
+
+dc375b4e-c2ff-4189-9b23-1e4d0d0f9429-1
+00:00:19.056 --> 00:00:22.852
+and access data in the database,
+you'll often start by using a
+
+dc375b4e-c2ff-4189-9b23-1e4d0d0f9429-2
+00:00:22.852 --> 00:00:24.480
+relational database system.
+
+b27ed813-ea62-4f7b-b493-ff54a128be14-0
+00:00:25.840 --> 00:00:29.388
+Soon you realise you also need a
+search solution and add a search
+
+b27ed813-ea62-4f7b-b493-ff54a128be14-1
+00:00:29.388 --> 00:00:30.840
+engine to the architecture.
+
+638115de-dee3-467c-a7e6-3f383df02122-0
+00:00:31.360 --> 00:00:34.697
+Now you have to manage data
+replication processes to keep
+
+638115de-dee3-467c-a7e6-3f383df02122-1
+00:00:34.697 --> 00:00:37.920
+that engines data in sync with
+the relational database.
+
+3a26b17e-2ff2-4008-9b69-accdd6641b8d-0
+00:00:39.280 --> 00:00:42.867
+Maybe you have a need to store
+complex objects or arbitrary
+
+3a26b17e-2ff2-4008-9b69-accdd6641b8d-1
+00:00:42.867 --> 00:00:45.200
+JSON and streaming data from
+sensors.
+
+743a41ef-bbef-4bf8-b357-8a7bae70e48b-0
+00:00:45.760 --> 00:00:49.118
+Adding a document store and time
+series database helps you to
+
+743a41ef-bbef-4bf8-b357-8a7bae70e48b-1
+00:00:49.118 --> 00:00:50.040
+meet these needs.
+
+d128986f-a39f-45cc-962e-f9b40c07eaad-0
+00:00:51.800 --> 00:00:55.586
+As your system grows, geospatial
+data becomes important and you
+
+d128986f-a39f-45cc-962e-f9b40c07eaad-1
+00:00:55.586 --> 00:00:58.307
+also need normalised
+abstractions for machine
+
+d128986f-a39f-45cc-962e-f9b40c07eaad-2
+00:00:58.307 --> 00:00:58.840
+learning.
+
+0f149b93-7e7f-4f2b-a3cf-0d9e6640c0c3-0
+00:00:58.840 --> 00:01:01.960
+To work with embeddings, a
+vector store is added.
+
+afed7c5a-4e42-45fb-9987-cdbc7f2d6f2c-0
+00:01:02.880 --> 00:01:06.332
+In the end you have a very
+complex architecture with a lot
+
+afed7c5a-4e42-45fb-9987-cdbc7f2d6f2c-1
+00:01:06.332 --> 00:01:09.667
+of data replication, different
+technologies and multiple
+
+afed7c5a-4e42-45fb-9987-cdbc7f2d6f2c-2
+00:01:09.667 --> 00:01:13.120
+different languages in use for
+each of these technologies.
+
+06bb448d-554a-408f-a47a-578f0d5fab4d-0
+00:01:13.720 --> 00:01:17.273
+This adds complexity to
+deployment, monitoring and
+
+06bb448d-554a-408f-a47a-578f0d5fab4d-1
+00:01:17.273 --> 00:01:18.040
+operations.
+
+42d28a0f-b3f3-4fb9-9f19-04c4c820e588-0
+00:01:18.640 --> 00:01:21.976
+It also creates additional
+development overhead due to the
+
+42d28a0f-b3f3-4fb9-9f19-04c4c820e588-1
+00:01:21.976 --> 00:01:25.426
+different query languages and
+data abstractions used by each
+
+42d28a0f-b3f3-4fb9-9f19-04c4c820e588-2
+00:01:25.426 --> 00:01:26.840
+data store in the system.
+
+3753a04c-382d-4623-89f5-4f8a87c6bfa1-0
+00:01:27.840 --> 00:01:30.899
+There are issues and
+implications with adopting this
+
+3753a04c-382d-4623-89f5-4f8a87c6bfa1-1
+00:01:30.899 --> 00:01:32.400
+sort of data architecture.
+
+1583f9d6-cf45-4868-bd1f-357a0c8cda6a-0
+00:01:33.040 --> 00:01:34.520
+Let's begin with the issues.
+
+843e02c9-2881-4adc-bc31-3fc181f46e04-0
+00:01:35.040 --> 00:01:39.027
+Having a data store per use case
+requires data integration and
+
+843e02c9-2881-4adc-bc31-3fc181f46e04-1
+00:01:39.027 --> 00:01:40.040
+synchronisation.
+
+1f56947e-b4e5-4930-a13d-18d17c41bf9f-0
+00:01:40.480 --> 00:01:43.936
+It's difficult to manage scaling
+up and out of multiple data
+
+1f56947e-b4e5-4930-a13d-18d17c41bf9f-1
+00:01:43.936 --> 00:01:46.600
+stores, especially with time
+series databases.
+
+f81025c9-7ceb-4446-aea1-66ac29dd2a77-0
+00:01:47.320 --> 00:01:50.434
+You also end up with a complex
+application back end because
+
+f81025c9-7ceb-4446-aea1-66ac29dd2a77-1
+00:01:50.434 --> 00:01:53.808
+you're developing with different
+languages and in different data
+
+f81025c9-7ceb-4446-aea1-66ac29dd2a77-2
+00:01:53.808 --> 00:01:54.120
+silos.
+
+1e53dc5c-f92c-4b83-8929-d4e839b7df3c-0
+00:01:54.680 --> 00:01:57.920
+This leads to a growing
+complexity and technical debt
+
+1e53dc5c-f92c-4b83-8929-d4e839b7df3c-1
+00:01:57.920 --> 00:01:58.520
+over time.
+
+43a1e6c4-6266-41c2-8fe2-fc88a01afea9-0
+00:01:59.480 --> 00:02:01.920
+The implications here for your
+people: 
+
+d2c0d70f-2fae-43ca-b082-f3e43fda0b6e-0
+00:02:01.920 --> 00:02:04.200
+You'll have multiple skill sets
+required.
+
+8cce8584-e84f-45d9-a4fc-72f75f28c328-0
+00:02:04.200 --> 00:02:07.200
+You'll need more people to
+maintain this complexity.
+
+aedcb670-bc11-4ca1-928b-a6848ed4d1dc-0
+00:02:08.000 --> 00:02:10.600
+There's an implication for time
+to delivery as well.
+
+ea1be6ee-2670-4831-a791-987343302cb8-0
+00:02:10.800 --> 00:02:13.983
+It's a slow time to value
+because changes take a long time
+
+ea1be6ee-2670-4831-a791-987343302cb8-1
+00:02:13.983 --> 00:02:17.167
+and there are many overhead
+activities associated with all
+
+ea1be6ee-2670-4831-a791-987343302cb8-2
+00:02:17.167 --> 00:02:18.840
+of these different data stores.
+
+e9d3fd01-13a3-4822-afa8-e36c5c11220b-0
+00:02:19.680 --> 00:02:23.190
+Overall, this leads to a high
+total cost of ownership and a
+
+e9d3fd01-13a3-4822-afa8-e36c5c11220b-1
+00:02:23.190 --> 00:02:24.360
+high cost of change.
+
+eb572a82-4046-48d6-a278-a987749ba10f-0
+00:02:25.280 --> 00:02:28.080
+So what does a solution to these
+problems look like?
+
+eaa34204-8861-4380-959c-451ea4a45ae1-0
+00:02:28.600 --> 00:02:32.942
+Ideally, we want a single source
+of truth that keeps data in near
+
+eaa34204-8861-4380-959c-451ea4a45ae1-1
+00:02:32.942 --> 00:02:33.600
+real time.
+
+ab69f783-d4f3-4eaa-a5d5-19c4045777f6-0
+00:02:34.200 --> 00:02:37.809
+We want to support multiple
+different data types in a single
+
+ab69f783-d4f3-4eaa-a5d5-19c4045777f6-1
+00:02:37.809 --> 00:02:41.360
+technology and we want that to
+be performant and to scale.
+
+d1837caa-2c2d-4bc1-8050-9fa3cefb5b96-0
+00:02:42.080 --> 00:02:44.960
+Let's look at how CrateDB
+solves these challenges.
+
+e2491f19-c4a3-4629-aa6c-819cfbcffda4-0
+00:02:45.880 --> 00:02:50.634
+CrateDB offers a multi model
+approach that can cover tables,
+
+e2491f19-c4a3-4629-aa6c-819cfbcffda4-1
+00:02:50.634 --> 00:02:54.546
+time series, geospatial
+documents, or JSON, binary
+
+e2491f19-c4a3-4629-aa6c-819cfbcffda4-2
+00:02:54.546 --> 00:02:56.080
+objects and vectors.
+
+24fbd7ec-532b-477e-bdc1-c82a53502fcb-0
+00:02:56.600 --> 00:03:00.216
+All of these data types are
+accessible via standard SQL
+
+24fbd7ec-532b-477e-bdc1-c82a53502fcb-1
+00:03:00.216 --> 00:03:01.320
+by data consumers.
+
+89205ba8-c0b8-4615-ba52-d0aaf9e9bf2a-0
+00:03:02.240 --> 00:03:05.417
+A dynamic schema makes the
+database more resilient and
+
+89205ba8-c0b8-4615-ba52-d0aaf9e9bf2a-1
+00:03:05.417 --> 00:03:06.400
+easier to change.
+
+f5f1d1ac-da81-4dcf-8ddc-684fa80140d9-0
+00:03:07.080 --> 00:03:09.440
+Functions allow for more complex
+tasks.
+
+dcceddd7-5eb0-42de-ba4c-a0b32cba44b1-0
+00:03:10.560 --> 00:03:14.020
+This is backed by a distributed
+query engine that allows for
+
+dcceddd7-5eb0-42de-ba4c-a0b32cba44b1-1
+00:03:14.020 --> 00:03:16.800
+massive high volume concurrent
+reads and writes.
+
+46aced13-2379-45db-bf93-85591f7af99c-0
+00:03:17.640 --> 00:03:21.638
+Columnar storage and advanced
+indexing helps to support fast
+
+46aced13-2379-45db-bf93-85591f7af99c-1
+00:03:21.638 --> 00:03:25.314
+complex queries and eases
+development as not all indexes
+
+46aced13-2379-45db-bf93-85591f7af99c-2
+00:03:25.314 --> 00:03:27.120
+need to be defined manually.
+
+6d875b39-291e-49b0-af0e-6c75c0232555-0
+00:03:28.120 --> 00:03:31.204
+The distributed nature allows
+for highly available and
+
+6d875b39-291e-49b0-af0e-6c75c0232555-1
+00:03:31.204 --> 00:03:33.280
+horizontally scalable
+architectures.
+
+01df0151-f6d6-4a5b-9c1c-5fd8cbab4f2b-0
+00:03:34.400 --> 00:03:38.180
+CrateDB can be deployed on the
+edge in your data centres as
+
+01df0151-f6d6-4a5b-9c1c-5fd8cbab4f2b-1
+00:03:38.180 --> 00:03:40.040
+well as in cloud environments.
+
+4f57bf09-10a0-41f8-8a34-fa18058c1798-0
+00:03:40.240 --> 00:03:42.320
+It's also available as a managed
+service.
+
+d420cd0e-6252-4ef4-ae84-453c200f4820-0
+00:03:43.200 --> 00:03:46.478
+A synchronisation method helps
+to keep the edge and other
+
+d420cd0e-6252-4ef4-ae84-453c200f4820-1
+00:03:46.478 --> 00:03:47.440
+clusters in sync.
+
+c24e3af0-dace-4cb1-b209-d92b6feaa8e5-0
+00:03:48.000 --> 00:03:51.515
+For example, you could store and
+process individual data on the
+
+c24e3af0-dace-4cb1-b209-d92b6feaa8e5-1
+00:03:51.515 --> 00:03:54.811
+edge and synchronise relevant
+information into the cloud to
+
+c24e3af0-dace-4cb1-b209-d92b6feaa8e5-2
+00:03:54.811 --> 00:03:56.240
+perform holistic analysis.

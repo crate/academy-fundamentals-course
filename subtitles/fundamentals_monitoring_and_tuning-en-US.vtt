@@ -1,0 +1,413 @@
+WEBVTT
+
+3bb16ffe-6044-4275-a9fb-a5a06a205c7c-0
+00:00:04.640 --> 00:00:08.000
+In this video we'll cover some
+aspects of monitoring the
+
+3bb16ffe-6044-4275-a9fb-a5a06a205c7c-1
+00:00:08.000 --> 00:00:11.361
+behaviour of your CrateDB
+cluster and understanding how
+
+3bb16ffe-6044-4275-a9fb-a5a06a205c7c-2
+00:00:11.361 --> 00:00:12.600
+queries are executed.
+
+d144cfff-cbd8-4815-ac4d-ecfd6555bd85-0
+00:00:13.280 --> 00:00:17.149
+I'll also show you how CrateDB
+can be used as a long term
+
+d144cfff-cbd8-4815-ac4d-ecfd6555bd85-1
+00:00:17.149 --> 00:00:20.362
+storage, analysis and
+visualisation platform for
+
+d144cfff-cbd8-4815-ac4d-ecfd6555bd85-2
+00:00:20.362 --> 00:00:23.838
+metrics gathered from other
+systems via Telegraf or
+
+d144cfff-cbd8-4815-ac4d-ecfd6555bd85-3
+00:00:23.838 --> 00:00:24.560
+Prometheus.
+
+60146151-63ea-4bed-a401-f3f47d24cbbc-0
+00:00:25.280 --> 00:00:26.400
+Let's jump right in.
+
+129e4f32-b0a8-4574-86de-c24a0759a474-0
+00:00:28.160 --> 00:00:32.952
+You can monitor the behaviour of
+a CrateDB cluster using JMX
+
+129e4f32-b0a8-4574-86de-c24a0759a474-1
+00:00:32.952 --> 00:00:35.040
+Java Management Extensions.
+
+081b8552-2b27-4577-9aa7-14767b6dac4d-0
+00:00:35.880 --> 00:00:38.400
+I'll demonstrate this using a
+Docker image.
+
+6e2eb770-08d3-46f4-a276-9d2ca889b8e5-0
+00:00:39.680 --> 00:00:42.848
+This command starts a single
+node cluster with some
+
+6e2eb770-08d3-46f4-a276-9d2ca889b8e5-1
+00:00:42.848 --> 00:00:44.920
+additional configuration for
+JMX.
+
+ab810bf8-23d8-47c8-874b-b024117e42db-0
+00:00:45.840 --> 00:00:50.120
+We'll use port 7979 as the
+remote JMX port.
+
+c75708b4-0874-478f-8af9-34e3622e7f45-0
+00:00:52.080 --> 00:00:56.382
+JConsole is a basic graphical
+application supplied with Java
+
+c75708b4-0874-478f-8af9-34e3622e7f45-1
+00:00:56.382 --> 00:00:58.640
+that can connect to a JMX agent.
+
+c34c4f4d-7250-4eb8-bb2d-05da08578105-0
+00:01:00.440 --> 00:01:04.499
+I'm connecting it to port 7979
+so that it can attach to the
+
+c34c4f4d-7250-4eb8-bb2d-05da08578105-1
+00:01:04.499 --> 00:01:07.680
+agent running in the CrateDB
+docker instance.
+
+5664f806-e4a5-4237-845a-6c30ba32a9a5-0
+00:01:09.640 --> 00:01:13.425
+Once connected, JConsole starts
+to display metrics from the
+
+5664f806-e4a5-4237-845a-6c30ba32a9a5-1
+00:01:13.425 --> 00:01:15.760
+CrateDB node running inside
+Docker.
+
+f1820d72-b553-4866-bb60-ea7740642333-0
+00:01:16.840 --> 00:01:18.240
+Here we see an overview.
+
+c64b0657-6740-4b27-83fd-198384e92044-0
+00:01:19.440 --> 00:01:23.887
+We can also focus on memory
+usage, and finally we can drill
+
+c64b0657-6740-4b27-83fd-198384e92044-1
+00:01:23.887 --> 00:01:27.520
+down into the details of each
+thread in the JVM.
+
+52a9fafa-53df-47e1-855e-d9c296525f74-0
+00:01:30.160 --> 00:01:33.897
+The CrateDB admin interface
+has an overview screen that
+
+52a9fafa-53df-47e1-855e-d9c296525f74-1
+00:01:33.897 --> 00:01:37.120
+allows you to monitor key
+operational statistics.
+
+b771c5a7-262b-44fc-8daf-4c2061a8fdfd-0
+00:01:38.920 --> 00:01:42.740
+Scrolling down, we see live
+charts that show data pertaining
+
+b771c5a7-262b-44fc-8daf-4c2061a8fdfd-1
+00:01:42.740 --> 00:01:43.680
+to query speed.
+
+4f6f3533-87f9-474d-9af9-5b0f966b0720-0
+00:01:44.680 --> 00:01:49.157
+These are displayed as an
+overall value as well as by type
+
+4f6f3533-87f9-474d-9af9-5b0f966b0720-1
+00:01:49.157 --> 00:01:52.800
+of query: selects, inserts,
+updates and deletes.
+
+ad20c71a-8025-41d6-8447-f455b383c666-0
+00:01:55.400 --> 00:01:58.626
+Another tool that's available to
+you when monitoring the
+
+ad20c71a-8025-41d6-8447-f455b383c666-1
+00:01:58.626 --> 00:02:02.080
+performance of your CrateDB
+cluster is the EXPLAIN command.
+
+f02a600d-2af1-4957-a96d-dc15a8ce7c8d-0
+00:02:03.000 --> 00:02:06.449
+This command displays the
+execution plan for a given
+
+f02a600d-2af1-4957-a96d-dc15a8ce7c8d-1
+00:02:06.449 --> 00:02:06.840
+query.
+
+116c96ef-dbf0-42f0-967e-6340f53074bd-0
+00:02:07.800 --> 00:02:11.833
+Invoke it by prepending EXPLAIN
+to the query you want to
+
+116c96ef-dbf0-42f0-967e-6340f53074bd-1
+00:02:11.833 --> 00:02:12.400
+analyse.
+
+7f93d51f-9e43-4cc8-b327-59eb63c65130-0
+00:02:13.400 --> 00:02:18.098
+Here I'm analysing a SELECT
+query that uses our 311 call
+
+7f93d51f-9e43-4cc8-b327-59eb63c65130-1
+00:02:18.098 --> 00:02:21.560
+data, and here's the plan for
+that query.
+
+56c5b4f3-7417-445a-8fc5-195ccdb73dbc-0
+00:02:22.440 --> 00:02:25.316
+Please refer to the
+documentation for the EXPLAIN
+
+56c5b4f3-7417-445a-8fc5-195ccdb73dbc-1
+00:02:25.316 --> 00:02:27.560
+command to understand the output
+here.
+
+6c3d7056-10d4-4034-bc45-6f367bbe8230-0
+00:02:28.720 --> 00:02:32.560
+There's also a verbose mode that
+returns additional details.
+
+b5d1d1e5-c7be-46f5-b5d7-e5a950b5f98f-0
+00:02:33.160 --> 00:02:37.280
+Use it by prepending your query
+with EXPLAIN VERBOSE.
+
+701282ae-75b8-4433-8b06-a8ae5dbb5d54-0
+00:02:38.800 --> 00:02:42.044
+This returns a more human
+readable version of the plan
+
+701282ae-75b8-4433-8b06-a8ae5dbb5d54-1
+00:02:42.044 --> 00:02:45.170
+with a breakdown of the steps
+performed by the query
+
+701282ae-75b8-4433-8b06-a8ae5dbb5d54-2
+00:02:45.170 --> 00:02:45.760
+optimizer.
+
+625dd250-c0cb-4920-991a-7f947ff0f163-0
+00:02:46.840 --> 00:02:50.960
+Finally, there's a third
+variant, EXPLAIN ANALYZE.
+
+8c95918b-a94f-47f1-814d-e74335f7cea3-0
+00:02:51.680 --> 00:02:54.689
+In this case the plan is
+executed and the timings
+
+8c95918b-a94f-47f1-814d-e74335f7cea3-1
+00:02:54.689 --> 00:02:57.760
+associated with the different
+phases are returned.
+
+8fc836fd-f079-454a-b463-6e3ed2a2c17f-0
+00:02:58.880 --> 00:03:02.577
+To learn more about the output
+here, please consult the EXPLAIN
+
+8fc836fd-f079-454a-b463-6e3ed2a2c17f-1
+00:03:02.577 --> 00:03:05.640
+documentation in the CrateDB
+documentation portal.
+
+1c5345be-dde8-4ab6-a32c-87489b01036a-0
+00:03:07.080 --> 00:03:11.575
+CrateDB also makes an excellent
+data store and analysis platform
+
+1c5345be-dde8-4ab6-a32c-87489b01036a-1
+00:03:11.575 --> 00:03:14.640
+for metrics data generated by
+other systems.
+
+227f5fcb-7311-4e47-ba59-3f2f690a0b17-0
+00:03:15.400 --> 00:03:19.308
+Let's see how this works for two
+popular solutions, Telegraf and
+
+227f5fcb-7311-4e47-ba59-3f2f690a0b17-1
+00:03:19.308 --> 00:03:19.960
+Prometheus.
+
+a096c5fd-54e6-40e0-b089-64fd7e72d679-0
+00:03:20.600 --> 00:03:24.160
+Telegraf is a server based
+agent for collecting metrics and
+
+a096c5fd-54e6-40e0-b089-64fd7e72d679-1
+00:03:24.160 --> 00:03:26.320
+sending them for further
+processing.
+
+cf13c56c-05f0-40ed-a887-6d6160dd0ebd-0
+00:03:27.880 --> 00:03:32.661
+These metrics originate from a
+variety of data sources, for
+
+cf13c56c-05f0-40ed-a887-6d6160dd0ebd-1
+00:03:32.661 --> 00:03:37.762
+example via HTTP, from sensors,
+perhaps via MQTT, or from cloud
+
+cf13c56c-05f0-40ed-a887-6d6160dd0ebd-2
+00:03:37.762 --> 00:03:38.480
+services.
+
+e3079be1-638a-478c-bcf7-a21d82c1bfe7-0
+00:03:39.560 --> 00:03:43.033
+These are sent to Telegraf
+which uses its plug in
+
+e3079be1-638a-478c-bcf7-a21d82c1bfe7-1
+00:03:43.033 --> 00:03:47.120
+architecture to ingest, process,
+aggregate and output data.
+
+d8611c9f-1909-40ca-8e0a-99d9c12c5488-0
+00:03:48.640 --> 00:03:52.242
+Metrics can then be stored in
+CrateDB using Telegraf's
+
+d8611c9f-1909-40ca-8e0a-99d9c12c5488-1
+00:03:52.242 --> 00:03:53.760
+Postgres output plug in.
+
+763f7bdd-1068-49b2-a2db-72eed37a3eb9-0
+00:03:54.880 --> 00:03:57.974
+It's a simple matter of
+connecting the plug in with the
+
+763f7bdd-1068-49b2-a2db-72eed37a3eb9-1
+00:03:57.974 --> 00:04:00.240
+connection URL for the CrateDB
+cluster.
+
+51862b4e-7120-4bc8-abf7-35437aec803e-0
+00:04:01.600 --> 00:04:05.225
+Once the data's in CrateDB,
+you can use standard SQL to
+
+51862b4e-7120-4bc8-abf7-35437aec803e-1
+00:04:05.225 --> 00:04:08.725
+analyse it, as well as
+leveraging popular visualisation
+
+51862b4e-7120-4bc8-abf7-35437aec803e-2
+00:04:08.725 --> 00:04:12.600
+tools such as Grafana to build
+custom dashboards of your own.
+
+852bcd6b-30bb-424c-9ea3-6b187ad82ec9-0
+00:04:14.880 --> 00:04:18.734
+Prometheus is an open source
+systems monitoring and alerting
+
+852bcd6b-30bb-424c-9ea3-6b187ad82ec9-1
+00:04:18.734 --> 00:04:19.240
+toolkit.
+
+2174a9b5-7d24-4fac-a082-2200aa3a08bd-0
+00:04:20.360 --> 00:04:22.600
+It collects and stores metrics
+data.
+
+7d482639-78a4-4476-92d9-adff2d68a831-0
+00:04:23.200 --> 00:04:27.400
+It's great for short term
+storage and using the CrateDB
+
+7d482639-78a4-4476-92d9-adff2d68a831-1
+00:04:27.400 --> 00:04:28.800
+Prometheus adaptor.
+
+5ae484bd-4e6f-46d1-8e8a-2dfbb668a71e-0
+00:04:28.840 --> 00:04:33.489
+This metrics data can seamlessly
+flow into CrateDB where it can
+
+5ae484bd-4e6f-46d1-8e8a-2dfbb668a71e-1
+00:04:33.489 --> 00:04:38.139
+be stored long term and accessed
+using the power of CrateDB SQL
+
+5ae484bd-4e6f-46d1-8e8a-2dfbb668a71e-2
+00:04:38.139 --> 00:04:38.639
+engine.
+
+0a969fd0-1130-4655-bfa7-3fd016c5ae98-0
+00:04:40.240 --> 00:04:43.708
+Of course, you can also still
+use standard tools such as
+
+0a969fd0-1130-4655-bfa7-3fd016c5ae98-1
+00:04:43.708 --> 00:04:46.447
+Grafana to build custom
+dashboards and other
+
+0a969fd0-1130-4655-bfa7-3fd016c5ae98-2
+00:04:46.447 --> 00:04:47.359
+visualizations.
+
+942699e0-0c5d-4071-8cfa-e69bf2093b3f-0
+00:04:49.760 --> 00:04:53.493
+You should now have a high level
+understanding of how to monitor
+
+942699e0-0c5d-4071-8cfa-e69bf2093b3f-1
+00:04:53.493 --> 00:04:56.480
+your CrateDB cluster and dig
+into query behaviour.
+
+ba11c1f2-d23d-4f49-ad42-678f6dda1abd-0
+00:04:57.040 --> 00:05:00.369
+We also showed you how to use
+CrateDB as an analytics
+
+ba11c1f2-d23d-4f49-ad42-678f6dda1abd-1
+00:05:00.369 --> 00:05:04.000
+database for monitoring the
+behaviour of other systems with
+
+ba11c1f2-d23d-4f49-ad42-678f6dda1abd-2
+00:05:04.000 --> 00:05:07.814
+metrics collected by standard
+frameworks such as Telegraf and
+
+ba11c1f2-d23d-4f49-ad42-678f6dda1abd-3
+00:05:07.814 --> 00:05:08.479
+Prometheus.
+
+acce281e-c548-4ffb-abc0-1b4a18177f46-0
+00:05:09.680 --> 00:05:13.723
+For more information, be sure to
+check out CrateDB documentation
+
+acce281e-c548-4ffb-abc0-1b4a18177f46-1
+00:05:13.723 --> 00:05:17.400
+online as well as the resources
+associated with this video.

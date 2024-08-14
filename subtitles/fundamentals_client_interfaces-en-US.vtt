@@ -1,0 +1,405 @@
+WEBVTT
+
+b668d798-1784-45b7-b97d-91c5465906c1-0
+00:00:04.880 --> 00:00:08.672
+You've seen how to interact with
+CrateDB using the web-based
+
+b668d798-1784-45b7-b97d-91c5465906c1-1
+00:00:08.672 --> 00:00:10.960
+console and Crash command line
+tools.
+
+6c440ca5-1655-4cdd-bd49-a3e162cd0c84-0
+00:00:11.400 --> 00:00:15.383
+In this video I'll show you how
+to talk to CrateDB using its
+
+6c440ca5-1655-4cdd-bd49-a3e162cd0c84-1
+00:00:15.383 --> 00:00:17.280
+two primary client interfaces.
+
+507363d5-faf9-4e72-9d85-1d22e882cd80-0
+00:00:17.600 --> 00:00:19.080
+So let's jump right in.
+
+7649637f-93f7-44c2-bdae-5a314f6a4eac-0
+00:00:20.440 --> 00:00:23.560
+CrateDB has two main client
+interfaces.
+
+6e68799e-25b6-4f30-a868-ed5d6dc5a377-0
+00:00:24.440 --> 00:00:29.086
+The first of these uses the
+PostgreSQL Wire Protocol on port
+
+6e68799e-25b6-4f30-a868-ed5d6dc5a377-1
+00:00:29.086 --> 00:00:29.480
+5432.
+
+26f73df9-08e1-4c8b-a889-0bc941d73175-0
+00:00:30.360 --> 00:00:34.224
+Adopting the PostgreSQL Wire Protocol
+means that CrateDB is compatible
+
+26f73df9-08e1-4c8b-a889-0bc941d73175-1
+00:00:34.224 --> 00:00:37.720
+with a wide range of tools and
+libraries out-of-the-box.
+
+2e0ff10e-9a10-4908-85e2-52c56fa0f8c0-0
+00:00:39.480 --> 00:00:43.825
+The other interface is the
+HTTP endpoint and it's found
+
+2e0ff10e-9a10-4908-85e2-52c56fa0f8c0-1
+00:00:43.825 --> 00:00:44.800
+at port 4200.
+
+b47b09eb-183f-4efd-bfe9-2d2a569bedc5-0
+00:00:45.880 --> 00:00:49.539
+Using this endpoint, you can
+submit SQL statements for
+
+b47b09eb-183f-4efd-bfe9-2d2a569bedc5-1
+00:00:49.539 --> 00:00:52.600
+execution and receive results
+back over HTTP.
+
+aa580c62-973c-40bd-a684-c180de4bb926-0
+00:00:53.920 --> 00:00:57.795
+Both client interfaces can be
+secured using Transport Layer
+
+aa580c62-973c-40bd-a684-c180de4bb926-1
+00:00:57.795 --> 00:01:01.735
+Security and SSL certificates,
+but we won't focus on that in
+
+aa580c62-973c-40bd-a684-c180de4bb926-2
+00:01:01.735 --> 00:01:02.640
+this overview.
+
+f6e0188c-5a6c-4060-afd5-2cfefac06b5f-0
+00:01:04.480 --> 00:01:08.076
+If you're running CrateDB using
+Docker, you might have noticed
+
+f6e0188c-5a6c-4060-afd5-2cfefac06b5f-1
+00:01:08.076 --> 00:01:09.200
+these ports already.
+
+f67f681f-eceb-4b9f-b215-aa0dd535b818-0
+00:01:10.200 --> 00:01:15.376
+Here we're telling Docker to map
+port 4200 the HTTP interface and
+
+f67f681f-eceb-4b9f-b215-aa0dd535b818-1
+00:01:15.376 --> 00:01:20.474
+5432 Postgres to the equivalent
+port numbers on the host machine
+
+f67f681f-eceb-4b9f-b215-aa0dd535b818-2
+00:01:20.474 --> 00:01:22.200
+when running CrateDB.
+
+58c1dbd8-b368-434c-9d61-d66f952fe923-0
+00:01:23.080 --> 00:01:26.243
+This enables you to connect to
+the database running in the
+
+58c1dbd8-b368-434c-9d61-d66f952fe923-1
+00:01:26.243 --> 00:01:27.960
+container using either approach.
+
+82ecafca-28ad-415a-a718-1767d037955d-0
+00:01:30.160 --> 00:01:33.431
+Support for the Postgres wire
+protocol means you can use a
+
+82ecafca-28ad-415a-a718-1767d037955d-1
+00:01:33.431 --> 00:01:35.760
+variety of tools to connect to
+CrateDB.
+
+a807960c-616f-479c-9854-04ed8dee1992-0
+00:01:35.760 --> 00:01:40.487
+Here I've installed the PostgreSQL
+psql command line tool and I'm
+
+a807960c-616f-479c-9854-04ed8dee1992-1
+00:01:40.487 --> 00:01:43.760
+connecting to a local instance
+of CrateDB.
+
+0ee95035-c6ab-4779-bd5e-b8fb01a190ad-0
+00:01:44.840 --> 00:01:48.623
+I've specified the host and port
+that it's running on, as well as
+
+0ee95035-c6ab-4779-bd5e-b8fb01a190ad-1
+00:01:48.623 --> 00:01:52.120
+the user to connect as and the
+default schema to connect to.
+
+1c26804f-1e20-416f-a9df-65785a098581-0
+00:01:53.000 --> 00:01:57.062
+Note that in Postgres the
+default schema is called public,
+
+1c26804f-1e20-416f-a9df-65785a098581-1
+00:01:57.062 --> 00:02:01.055
+in CrateDB it's doc, so I'm
+making sure to pass that in
+
+1c26804f-1e20-416f-a9df-65785a098581-2
+00:02:01.055 --> 00:02:01.400
+here.
+
+2329da59-f280-4fa7-862f-cd67b4491e51-0
+00:02:03.080 --> 00:02:05.400
+SQL queries work as you'd
+expect.
+
+0ea50d3b-b6bb-46c3-80ea-93b5e0f9c2ea-0
+00:02:06.120 --> 00:02:10.010
+Here I'm asking CrateDB to tell
+me what the most popular types
+
+0ea50d3b-b6bb-46c3-80ea-93b5e0f9c2ea-1
+00:02:10.010 --> 00:02:12.320
+of car in the Chicago taxi fleet
+are.
+
+33826ec6-bb08-4587-a4f3-67b0c722a6e2-0
+00:02:13.200 --> 00:02:19.254
+The query is sent to CrateDB
+on port 5432 using the PostgreSQL
+
+33826ec6-bb08-4587-a4f3-67b0c722a6e2-1
+00:02:19.254 --> 00:02:25.405
+Wire Protocol and the response
+is received and formatted by the
+
+33826ec6-bb08-4587-a4f3-67b0c722a6e2-2
+00:02:25.405 --> 00:02:27.520
+psql CLI for display.
+
+d25d58d3-2013-4500-a18f-7ffac3ae2dc0-0
+00:02:27.520 --> 00:02:32.000
+Let's turn our attention to the
+HTTP endpoint for a moment.
+
+ad27b7e2-fddb-43ad-ae3c-6bdbfa23e0cb-0
+00:02:32.000 --> 00:02:37.480
+It's found at /_sql on port
+4200 of your CrateDB node.
+
+a9966e59-c355-4e5f-b918-13d601b12081-0
+00:02:38.120 --> 00:02:41.089
+If you want to use another port
+number, you can do this by
+
+a9966e59-c355-4e5f-b918-13d601b12081-1
+00:02:41.089 --> 00:02:42.800
+changing the node's
+configuration.
+
+3114ac5f-8879-4fdd-9b0c-ccc9752b23ed-0
+00:02:44.520 --> 00:02:48.543
+SQL statements are submitted for
+execution by sending a POST
+
+3114ac5f-8879-4fdd-9b0c-ccc9752b23ed-1
+00:02:48.543 --> 00:02:52.632
+request to the endpoint with the
+SQL in the JSON body of the
+
+3114ac5f-8879-4fdd-9b0c-ccc9752b23ed-2
+00:02:52.632 --> 00:02:53.160
+request.
+
+bb315ca5-79f4-4fd1-a5c0-9e6638fcb9f9-0
+00:02:54.440 --> 00:02:57.960
+Responses containing results are
+returned as JSON too.
+
+96bc0c05-dfb8-4f91-8ead-34873ded87df-0
+00:02:59.400 --> 00:03:03.481
+You can use parameterised
+queries by passing both the SQL
+
+96bc0c05-dfb8-4f91-8ead-34873ded87df-1
+00:03:03.481 --> 00:03:07.633
+statement and an array of
+arguments in the JSON body, and
+
+96bc0c05-dfb8-4f91-8ead-34873ded87df-2
+00:03:07.633 --> 00:03:11.504
+the HTTP endpoint also
+supports bulk operations, for
+
+96bc0c05-dfb8-4f91-8ead-34873ded87df-3
+00:03:11.504 --> 00:03:15.304
+example to insert several
+records in a single request
+
+96bc0c05-dfb8-4f91-8ead-34873ded87df-4
+00:03:15.304 --> 00:03:16.360
+response cycle.
+
+57e00c6a-4f3d-4770-8325-8b137800b92a-0
+00:03:18.760 --> 00:03:22.840
+Here's an example HTTP POST that
+runs a SELECT statement.
+
+30ee4ca1-1fd1-48c3-8356-e56bef66fb9c-0
+00:03:23.880 --> 00:03:27.261
+I'm using the curl command line
+tool to send this to CrateDB
+
+30ee4ca1-1fd1-48c3-8356-e56bef66fb9c-1
+00:03:27.261 --> 00:03:28.120
+running locally.
+
+2b468e10-8617-4cf2-8bd0-07ab3f0bc940-0
+00:03:28.680 --> 00:03:33.326
+You can of course use any API or
+HTTP request testing tool, for
+
+2b468e10-8617-4cf2-8bd0-07ab3f0bc940-1
+00:03:33.326 --> 00:03:35.360
+example Postman or Insomnia.
+
+8d5c8f65-2c03-445b-9e75-cc54f8dc4351-0
+00:03:36.960 --> 00:03:42.163
+The SQL statement is sent to
+CrateDB inside a JSON object
+
+8d5c8f65-2c03-445b-9e75-cc54f8dc4351-1
+00:03:42.163 --> 00:03:44.040
+with a key named stmt.
+
+888e9ea1-61fc-4c59-8725-46ce8ba0c987-0
+00:03:45.920 --> 00:03:49.610
+CrateDB executes the statement
+and returns a JSON response
+
+888e9ea1-61fc-4c59-8725-46ce8ba0c987-1
+00:03:49.610 --> 00:03:50.920
+containing the result.
+
+07b9eba7-5417-4c67-aac0-6a779182d436-0
+00:03:51.760 --> 00:03:55.426
+Here the cols array contains
+the names of the columns
+
+07b9eba7-5417-4c67-aac0-6a779182d436-1
+00:03:55.426 --> 00:03:59.293
+returned, and the rows array
+contains a further array for
+
+07b9eba7-5417-4c67-aac0-6a779182d436-2
+00:03:59.293 --> 00:04:01.960
+each matching row. For your
+convenience
+
+ba9abb24-37a6-4417-94e0-21b77240ef74-0
+00:04:02.000 --> 00:04:05.772
+rowcount indicates how many
+rows were affected and duration
+
+ba9abb24-37a6-4417-94e0-21b77240ef74-1
+00:04:05.772 --> 00:04:09.360
+tells you how long the query
+took to run in milliseconds.
+
+0c08302f-7ad8-48a2-be69-574af0f557cd-0
+00:04:11.680 --> 00:04:14.920
+This example inserts 3 records
+at once.
+
+adc6098f-d167-4ed5-88d5-210cfd239676-0
+00:04:15.640 --> 00:04:19.450
+The values are provided in the
+bulk_args array in the JSON
+
+adc6098f-d167-4ed5-88d5-210cfd239676-1
+00:04:19.450 --> 00:04:20.720
+body of the request.
+
+755376f5-c580-4072-a7f0-bdb93cd2b86a-0
+00:04:22.920 --> 00:04:26.532
+In this video you learnt about
+the two client interfaces
+
+755376f5-c580-4072-a7f0-bdb93cd2b86a-1
+00:04:26.532 --> 00:04:27.800
+offered by CrateDB.
+
+c1e30af2-0128-407d-9f33-e8266023d408-0
+00:04:28.640 --> 00:04:32.193
+Compatibility with the PostgreSQL
+Wire Protocol leads to easy
+
+c1e30af2-0128-407d-9f33-e8266023d408-1
+00:04:32.193 --> 00:04:36.200
+integration with a wide range of
+tools and ecosystems. 
+
+c1e30af2-0128-407d-9f33-e8266023d408-2
+00:04:36.200 --> 00:04:39.883
+An HTTP endpoint provides an
+alternative interface that's
+
+c1e30af2-0128-407d-9f33-e8266023d408-3
+00:04:39.883 --> 00:04:44.083
+also based on common standards,
+meaning ease of access from many
+
+c1e30af2-0128-407d-9f33-e8266023d408-4
+00:04:44.083 --> 00:04:45.440
+tools and frameworks.
+
+f6a21769-ec28-4ec8-ad48-cb14e1fb1066-0
+00:04:46.160 --> 00:04:49.942
+Many drivers and SDKs build on
+top of these to provide rich,
+
+f6a21769-ec28-4ec8-ad48-cb14e1fb1066-1
+00:04:49.942 --> 00:04:54.159
+idiomatic interfaces to CrateDB
+for popular programming language.
+
+12d20305-020c-447e-95e3-358818774f2a-0
+00:04:54.800 --> 00:04:57.080
+We'll cover these drivers in a
+separate video.
+
+bb452b86-5276-4f65-9701-0fc1b32aaff6-0
+00:04:58.280 --> 00:05:01.225
+Take a moment to try out some
+queries using the
+
+bb452b86-5276-4f65-9701-0fc1b32aaff6-1
+00:05:01.225 --> 00:05:05.029
+HTTP endpoint and the sample
+data set in your own CrateDB
+
+bb452b86-5276-4f65-9701-0fc1b32aaff6-2
+00:05:05.029 --> 00:05:05.520
+cluster.
+
+e9dc412d-4639-4707-a2e6-951804637ce3-0
+00:05:06.320 --> 00:05:09.925
+Remember you can use the curl
+command or tools such as
+
+e9dc412d-4639-4707-a2e6-951804637ce3-1
+00:05:09.925 --> 00:05:13.923
+Postman, Insomnia or whatever
+your favorite API testing tool
+
+e9dc412d-4639-4707-a2e6-951804637ce3-2
+00:05:13.923 --> 00:05:14.120
+is.

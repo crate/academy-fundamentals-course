@@ -1,0 +1,370 @@
+WEBVTT
+
+f8bb595e-8802-4985-9dbb-6eb7bc181881-0
+00:00:04.760 --> 00:00:08.998
+In SQL, a JOIN clause combines
+columns from one or more tables,
+
+f8bb595e-8802-4985-9dbb-6eb7bc181881-1
+00:00:08.998 --> 00:00:12.905
+allowing us to retrieve data
+stored in different tables by
+
+f8bb595e-8802-4985-9dbb-6eb7bc181881-2
+00:00:12.905 --> 00:00:14.760
+using values common to each.
+
+e183d1c2-0690-4ac1-88b2-1b4ce8514499-0
+00:00:15.720 --> 00:00:19.181
+Unlike some distributed
+databases, CrateDB fully
+
+e183d1c2-0690-4ac1-88b2-1b4ce8514499-1
+00:00:19.181 --> 00:00:20.200
+supports joins.
+
+2631d6b7-067d-441e-ad70-847a4fb52767-0
+00:00:21.040 --> 00:00:24.910
+In this video, you'll see how to
+join data from our Chicago taxis
+
+2631d6b7-067d-441e-ad70-847a4fb52767-1
+00:00:24.910 --> 00:00:26.200
+and taxi_rides tables.
+
+6627b54e-896d-404c-b93d-320b9df00012-0
+00:00:26.800 --> 00:00:32.640
+Let's get started. 
+This the schema for our taxis table.
+
+049dfa1c-1b15-4a0f-9fc5-c91c58348df1-0
+00:00:33.040 --> 00:00:36.660
+This table contains details
+about the vehicles comprising
+
+049dfa1c-1b15-4a0f-9fc5-c91c58348df1-1
+00:00:36.660 --> 00:00:40.093
+Chicago's taxi fleet, for
+example, the make, model and
+
+049dfa1c-1b15-4a0f-9fc5-c91c58348df1-2
+00:00:40.093 --> 00:00:41.280
+colour of each one.
+
+de72f9d1-a294-40e3-873b-95806a32c67d-0
+00:00:42.640 --> 00:00:45.960
+Each vehicle is assigned a
+unique vehicleid.
+
+ea9ff665-5a91-4377-aefe-dcc7b2194bbd-0
+00:00:47.640 --> 00:00:50.480
+And here's the schema for our
+taxi_rides table.
+
+93ffe78c-406d-469e-b207-2fd41f38f2a5-0
+00:00:51.240 --> 00:00:56.200
+This table holds details of each
+taxi ride taken in April 2024.
+
+cdea9e8e-c43b-4b3d-8c03-829ce55c3c66-0
+00:00:57.600 --> 00:01:00.646
+The vehicleid in this table
+refers to the vehicle that
+
+cdea9e8e-c43b-4b3d-8c03-829ce55c3c66-1
+00:01:00.646 --> 00:01:01.680
+performed the ride.
+
+3b37dad7-7482-4fae-9d72-10ae460428c3-0
+00:01:02.440 --> 00:01:06.610
+If we know the vehicleid for a
+ride, we can find the details of
+
+3b37dad7-7482-4fae-9d72-10ae460428c3-1
+00:01:06.610 --> 00:01:10.716
+the taxi that performed the ride
+in the taxis table, and we can
+
+3b37dad7-7482-4fae-9d72-10ae460428c3-2
+00:01:10.716 --> 00:01:14.695
+use a vehicleid from the Taxis
+table to query the taxi_rides
+
+3b37dad7-7482-4fae-9d72-10ae460428c3-3
+00:01:14.695 --> 00:01:15.080
+table.
+
+168a8994-eb0d-4a06-9bce-a60792023353-0
+00:01:17.000 --> 00:01:21.120
+This query retrieves some of the
+details for Kia Soul taxis.
+
+562726c7-332b-4ad5-88a8-a04105ec22fd-0
+00:01:22.080 --> 00:01:24.841
+There are eight of these
+vehicles in Chicago's taxi
+
+562726c7-332b-4ad5-88a8-a04105ec22fd-1
+00:01:24.841 --> 00:01:25.160
+fleet.
+
+8e6e4397-40f4-4b0e-9767-bcdc110c5300-0
+00:01:26.760 --> 00:01:30.200
+Using the vehicleid of one of
+these taxis, we can see the
+
+8e6e4397-40f4-4b0e-9767-bcdc110c5300-1
+00:01:30.200 --> 00:01:33.000
+details of the rides performed
+by that vehicle.
+
+09733c07-c9ca-4911-8739-d3691936b13a-0
+00:01:34.920 --> 00:01:38.124
+What if we wanted to show
+details from the taxis table in
+
+09733c07-c9ca-4911-8739-d3691936b13a-1
+00:01:38.124 --> 00:01:40.280
+the result set for this sort of
+query?
+
+49eeaf2b-242b-4b35-9a8e-d40de2e841ab-0
+00:01:40.920 --> 00:01:43.160
+This is where we need to use a
+join.
+
+18bb40cf-07ed-4c6f-be85-766085d5bb66-0
+00:01:45.360 --> 00:01:49.322
+This query retrieves the start
+time of the most recent taxi
+
+18bb40cf-07ed-4c6f-be85-766085d5bb66-1
+00:01:49.322 --> 00:01:52.360
+ride performed by each of our
+Kia Soul taxis.
+
+48b720ca-62ff-4f38-b227-a134550cc1cf-0
+00:01:52.920 --> 00:01:57.330
+We want to retrieve the vehicleid,
+make, model and latest start
+
+48b720ca-62ff-4f38-b227-a134550cc1cf-1
+00:01:57.330 --> 00:01:58.280
+time for each.
+
+1aa57b48-1079-4123-a128-ba206ca4e275-0
+00:01:58.880 --> 00:02:03.200
+The data is spread over 2
+tables, taxis and taxi_rides.
+
+e3ad860e-0f13-4e15-b54a-e67a171ccec2-0
+00:02:04.120 --> 00:02:08.348
+We use the t or r prefix when
+referencing the vehicleid
+
+e3ad860e-0f13-4e15-b54a-e67a171ccec2-1
+00:02:08.348 --> 00:02:12.799
+column, as this column is common
+to both tables in the where
+
+e3ad860e-0f13-4e15-b54a-e67a171ccec2-2
+00:02:12.799 --> 00:02:17.250
+clause, we're joining the two
+tables by specifying that for
+
+e3ad860e-0f13-4e15-b54a-e67a171ccec2-3
+00:02:17.250 --> 00:02:21.849
+each result, the vehicleid in
+the taxis table must match the
+
+e3ad860e-0f13-4e15-b54a-e67a171ccec2-4
+00:02:21.849 --> 00:02:24.520
+vehicleid in the taxi_rides
+table.
+
+93efe0fb-8bbf-446a-b962-0d2235ea8dd4-0
+00:02:26.280 --> 00:02:30.170
+This query returns a result set
+containing data from both
+
+93efe0fb-8bbf-446a-b962-0d2235ea8dd4-1
+00:02:30.170 --> 00:02:30.640
+tables.
+
+358ef7ac-ac75-440e-8c5e-d4b98934c849-0
+00:02:31.600 --> 00:02:35.463
+vehicleid an ride_start come
+from data in the taxi_rides
+
+358ef7ac-ac75-440e-8c5e-d4b98934c849-1
+00:02:35.463 --> 00:02:39.520
+table, while make and model come
+from data in the taxis table.
+
+b16b36d2-d65e-4df0-89d8-b91ee73891a7-0
+00:02:42.400 --> 00:02:45.320
+Here's the same query but
+expressed differently.
+
+2aff116f-b9f6-4094-accd-39ba0d0b01ae-0
+00:02:46.480 --> 00:02:49.936
+This time we're using a JOIN
+clause to specify how the rows
+
+2aff116f-b9f6-4094-accd-39ba0d0b01ae-1
+00:02:49.936 --> 00:02:52.240
+in the two tables relate to each
+other.
+
+ac2556b3-9cc1-4fe1-acca-1ad46c7d3d9c-0
+00:02:53.760 --> 00:02:57.000
+Running the query produces the
+same result as before.
+
+883fa89d-93f7-4be1-a0c1-299f3e58ee7b-0
+00:02:59.640 --> 00:03:04.380
+This query returns the number of
+trips made by each of our Kia
+
+883fa89d-93f7-4be1-a0c1-299f3e58ee7b-1
+00:03:04.380 --> 00:03:08.745
+Soul Taxis where the trip
+originated in Community area 76
+
+883fa89d-93f7-4be1-a0c1-299f3e58ee7b-2
+00:03:08.745 --> 00:03:11.680
+O'Hare and ended in Community
+Area 32: The Loop.
+
+1b9141a2-d777-4cab-b8aa-4d018e7951cf-0
+00:03:11.840 --> 00:03:16.640
+Running this query returns
+3 results.
+
+43c7ae20-d391-4903-9226-167819ba9349-0
+00:03:17.720 --> 00:03:21.480
+Each result is for a vehicle
+which had matching taxi rides.
+
+66ccd786-663d-47af-a6b0-366c50858cbf-0
+00:03:22.320 --> 00:03:26.040
+Recall that there are 8 Kia Soul
+taxis in Chicago's fleet.
+
+d19152d7-f357-427d-a14e-6e727e9f03b4-0
+00:03:26.600 --> 00:03:28.880
+So why do we only have 3
+results?
+
+2317661e-0a9a-4fa2-8e0b-037d4e700cf1-0
+00:03:29.440 --> 00:03:32.730
+This is because we're performing
+what's called an INNER JOIN
+
+2317661e-0a9a-4fa2-8e0b-037d4e700cf1-1
+00:03:32.730 --> 00:03:33.000
+here.
+
+c4ea4167-6a8c-4c27-8b63-7a855d8c87d3-0
+00:03:33.640 --> 00:03:38.148
+With an INNER JOIN, only records
+that have a match in both tables
+
+c4ea4167-6a8c-4c27-8b63-7a855d8c87d3-1
+00:03:38.148 --> 00:03:42.657
+are returned, as five of our Kia
+Soul taxis didn't perform a trip
+
+c4ea4167-6a8c-4c27-8b63-7a855d8c87d3-2
+00:03:42.657 --> 00:03:44.159
+that met the criteria.
+
+3465ce8b-88c0-4f4e-b7e9-101d189c4a46-0
+00:03:44.760 --> 00:03:48.261
+There are no matching results in
+the taxi_rides table for them,
+
+3465ce8b-88c0-4f4e-b7e9-101d189c4a46-1
+00:03:48.261 --> 00:03:50.560
+and they are omitted from the
+result set.
+
+efa410c5-55b8-490c-aa47-e9e702804d3c-0
+00:03:53.120 --> 00:03:57.049
+What if we wanted to produce a
+report including all the Kia
+
+efa410c5-55b8-490c-aa47-e9e702804d3c-1
+00:03:57.049 --> 00:04:00.847
+Soul taxis, even those that
+didn't perform any qualifying
+
+efa410c5-55b8-490c-aa47-e9e702804d3c-2
+00:04:00.847 --> 00:04:01.240
+trips?
+
+9ae49262-d7f2-4b6a-8fac-28b8f1d3c10f-0
+00:04:02.120 --> 00:04:04.280
+For that, we need an outer join.
+
+d1f0fbf1-d584-4789-a282-7c8a631a515f-0
+00:04:04.560 --> 00:04:06.800
+In this case, we want a left
+join.
+
+a34745ec-231e-4a15-af6d-9bb2bc536a00-0
+00:04:07.280 --> 00:04:11.081
+We want to return all of the
+rows from the left hand table
+
+a34745ec-231e-4a15-af6d-9bb2bc536a00-1
+00:04:11.081 --> 00:04:14.946
+taxis even if there aren't any
+matching records in the taxi
+
+a34745ec-231e-4a15-af6d-9bb2bc536a00-2
+00:04:14.946 --> 00:04:15.720
+rides table.
+
+559ba510-76b7-4286-bcc2-473829c71aee-0
+00:04:17.440 --> 00:04:20.680
+We achieved that by specifying
+LEFT JOIN here.
+
+1eff097f-b94a-4662-8809-85c4f43fe287-0
+00:04:21.440 --> 00:04:25.622
+When we run this query, we see
+that there are now 8 rows in the
+
+1eff097f-b94a-4662-8809-85c4f43fe287-1
+00:04:25.622 --> 00:04:28.760
+result set, one for each of the
+Kia Soul taxis.
+
+19ec9424-07f4-4922-9afe-f3dddbee1b1a-0
+00:04:29.320 --> 00:04:32.723
+This includes the five taxis
+that didn't perform any
+
+19ec9424-07f4-4922-9afe-f3dddbee1b1a-1
+00:04:32.723 --> 00:04:33.880
+qualifying rights.
+
+89cfae4f-9aec-468a-b1f7-2977e3affd4b-0
+00:04:36.880 --> 00:04:40.767
+In this video you saw how to
+perform queries with joins in
+
+89cfae4f-9aec-468a-b1f7-2977e3affd4b-1
+00:04:40.767 --> 00:04:41.360
+CrateDB.
+
+2aa335f4-d54e-4bad-be66-4207c8580739-0
+00:04:42.400 --> 00:04:45.880
+CrateDB supports INNER, OUTER
+and CROSS joins.
+
+442d4217-bd5f-4904-8ba8-20330c03e507-0
+00:04:46.640 --> 00:04:49.920
+For more information, consult
+the documentation online.

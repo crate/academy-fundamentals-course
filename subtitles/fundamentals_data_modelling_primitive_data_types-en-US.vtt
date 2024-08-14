@@ -1,0 +1,266 @@
+﻿WEBVTT
+
+00:00:04.200 --> 00:00:07.000
+Data in CrateDB is stored in
+tables.
+
+00:00:07.680 --> 00:00:10.483
+Tables are organised into
+columns which have different
+
+00:00:10.483 --> 00:00:13.440
+data types depending on what
+data will be stored in them.
+
+00:00:14.520 --> 00:00:17.756
+In this video, we'll look at
+some of the primitive data types
+
+00:00:17.756 --> 00:00:18.800
+built into CrateDB.
+
+00:00:20.040 --> 00:00:23.439
+Primitive types are used when
+defining columns that store
+
+00:00:23.439 --> 00:00:25.960
+scalar values such as numbers
+and strings.
+
+00:00:27.040 --> 00:00:30.168
+If you're familiar with SQL, you
+should recognise most of the
+
+00:00:30.168 --> 00:00:31.480
+data types described here.
+
+00:00:32.360 --> 00:00:36.000
+We'll begin with the data types
+used for storing numerical data.
+
+00:00:36.960 --> 00:00:40.720
+CrateDB uses these data types to
+represent integer values.
+
+00:00:41.280 --> 00:00:49.210
+A SMALLINT can store 2 byte
+numbers in the range -32,768 to
+
+00:00:49.210 --> 00:00:50.120
+32,767.
+
+00:00:51.120 --> 00:00:54.233
+Use the INTEGER type for
+integers that could be
+
+00:00:54.233 --> 00:00:58.126
+represented by 4 bytes and BIGINT
+for those that need an 8
+
+00:00:58.126 --> 00:00:58.840
+byte range.
+
+00:00:59.880 --> 00:01:03.446
+When storing floating point
+numbers, choose REAL for single
+
+00:01:03.446 --> 00:01:06.360
+precision or DOUBLE PRECISION
+for more accuracy.
+
+00:01:08.600 --> 00:01:11.945
+Character or string data can be
+represented with these data
+
+00:01:11.945 --> 00:01:12.280
+types.
+
+00:01:13.040 --> 00:01:16.120
+TEXT and VARCHAR represent
+variable length strings.
+
+00:01:17.040 --> 00:01:20.816
+To specify a string with a
+maximum length, use VARCHAR and
+
+00:01:20.816 --> 00:01:23.120
+specify the length shown as N
+here.
+
+00:01:24.120 --> 00:01:26.895
+Strings longer than this length
+will be truncated upon
+
+00:01:26.895 --> 00:01:27.400
+insertion.
+
+00:01:29.320 --> 00:01:32.646
+Use the CHARACTER type with an
+optional length value to
+
+00:01:32.646 --> 00:01:35.320
+represent fixed length blank
+padded strings.
+
+00:01:36.320 --> 00:01:39.608
+All of these data types support
+the storage of string data
+
+00:01:39.608 --> 00:01:41.280
+containing Unicode characters.
+
+00:01:41.920 --> 00:01:45.760
+Date and time data is stored
+using the TIMESTAMP data type.
+
+00:01:46.720 --> 00:01:49.883
+A timestamp represents a
+specific date and time as a
+
+00:01:49.883 --> 00:01:52.520
+number of milliseconds since the
+UNIX epoch.
+
+00:01:53.320 --> 00:01:55.360
+There are two variants of this
+data type.
+
+00:01:56.320 --> 00:02:00.370
+TIMESTAMP WITHOUT TIME ZONE
+assumes all values are in UTC
+
+00:02:00.370 --> 00:02:00.720
+time.
+
+00:02:01.480 --> 00:02:05.645
+Use TIMESTAMP WITH TIME ZONE
+when you want to specify a time
+
+00:02:05.645 --> 00:02:07.080
+zone offset from UTC.
+
+00:02:08.600 --> 00:02:12.380
+When inserting data into these
+columns, it can be expressed as
+
+00:02:12.380 --> 00:02:15.320
+string literals or as UNIX
+timestamps supporting
+
+00:02:15.320 --> 00:02:16.640
+millisecond precision.
+
+00:02:18.760 --> 00:02:23.000
+Finally, CrateDB has some other
+useful primitive data types.
+
+00:02:23.640 --> 00:02:26.600
+Use BOOLEAN to represent true or
+false data.
+
+00:02:27.280 --> 00:02:32.181
+The IP data type represents IP
+addresses and supports both V4
+
+00:02:32.181 --> 00:02:34.000
+and V6 representations.
+
+00:02:34.880 --> 00:02:39.183
+The BIT data type stores bit
+sequences, useful for storing
+
+00:02:39.183 --> 00:02:39.840
+bit maps.
+
+00:02:40.360 --> 00:02:44.464
+Here's a fragment of the CREATE
+TABLE statement used to define
+
+00:02:44.464 --> 00:02:48.372
+the schema for our taxi rides
+data in the Chicago data set,
+
+00:02:48.372 --> 00:02:51.760
+and here's some sample data for
+a taxi ride record.
+
+00:02:53.200 --> 00:02:56.960
+Trip IDs are variable length and
+contain alphanumeric data.
+
+00:02:57.160 --> 00:02:58.800
+They're stored in a TEXT column.
+
+00:02:58.800 --> 00:03:03.088
+For the numerical vehicle IDs,
+we're using an INTEGER
+
+00:03:03.088 --> 00:03:04.280
+representation.
+
+00:03:05.680 --> 00:03:09.671
+Start and end times for the ride
+are represented as UTC time
+
+00:03:09.671 --> 00:03:13.662
+stamps, with the data here being
+inserted in UNIX timestamp
+
+00:03:13.662 --> 00:03:14.120
+format.
+
+00:03:15.600 --> 00:03:20.388
+Chicago is divided into 77
+community areas numbered 1 to
+
+00:03:20.388 --> 00:03:20.640
+77.
+
+00:03:21.560 --> 00:03:24.872
+As we know the range of possible
+values when designing the
+
+00:03:24.872 --> 00:03:27.680
+schema, we've chosen SMALLINT
+for these columns.
+
+00:03:29.160 --> 00:03:33.111
+Each taxi ride has latitude and
+longitude values for the area
+
+00:03:33.111 --> 00:03:34.960
+that it started and ended in.
+
+00:03:35.760 --> 00:03:38.733
+Here, we're using DOUBLE PRECISION
+to represent these
+
+00:03:38.733 --> 00:03:40.000
+floating point numbers.
+
+00:03:41.480 --> 00:03:45.105
+CrateDB has specialised data
+types that handle geospatial
+
+00:03:45.105 --> 00:03:48.240
+data, and we'll explore those in
+a separate video.
+
+00:03:49.720 --> 00:03:53.622
+In this video, we introduce some
+of CrateDB's primitive data
+
+00:03:53.622 --> 00:03:54.000
+types.
+
+00:03:54.360 --> 00:03:58.142
+To learn more about these and
+others, including aliases
+
+00:03:58.142 --> 00:04:02.532
+provided for compatibility with
+Postgres, please visit the CrateDB
+
+00:04:02.532 --> 00:04:05.640
+documentation website at
+docs.cratedb.com.

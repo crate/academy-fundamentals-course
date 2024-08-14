@@ -1,0 +1,414 @@
+WEBVTT
+
+9868bed8-4177-499f-b4f7-7788a426f063-0
+00:00:03.840 --> 00:00:07.219
+When working with large amounts
+of data, we often need to
+
+9868bed8-4177-499f-b4f7-7788a426f063-1
+00:00:07.219 --> 00:00:10.773
+simplify or summarise the data
+set in order to gain insights
+
+9868bed8-4177-499f-b4f7-7788a426f063-2
+00:00:10.773 --> 00:00:11.240
+from it.
+
+b02ac3a9-07a4-4e23-8254-9fb17c628af1-0
+00:00:12.040 --> 00:00:15.733
+In SQL, this can be achieved by
+using a combination of aggregate
+
+b02ac3a9-07a4-4e23-8254-9fb17c628af1-1
+00:00:15.733 --> 00:00:17.040
+functions and grouping.
+
+99db8095-a5a8-483e-a274-fd3c3497a130-0
+00:00:17.920 --> 00:00:21.695
+CrateDB supports both of these
+concepts, and we'll explore them
+
+99db8095-a5a8-483e-a274-fd3c3497a130-1
+00:00:21.695 --> 00:00:24.600
+in this video using our Chicago
+Taxi Rides table.
+
+99edfb46-0965-4df6-8297-6e44fee6fe18-0
+00:00:25.280 --> 00:00:28.040
+Let's dive in!
+
+707fb1c3-48b0-4b8a-bb66-dc2f835ded43-0
+00:00:28.040 --> 00:00:31.760
+Here I've connected to my CrateDB
+cluster with the Crash CLI.
+
+74f0f3da-5381-41c5-914e-ea8b3be625c3-0
+00:00:32.680 --> 00:00:36.258
+The first thing to do is find
+out how many records are in our
+
+74f0f3da-5381-41c5-914e-ea8b3be625c3-1
+00:00:36.258 --> 00:00:37.240
+taxi rides table.
+
+a78e2f64-d525-433b-b456-6147558d2934-0
+00:00:38.080 --> 00:00:42.120
+This query tells us that there
+are 245,000 records.
+
+48e29593-26f1-42e6-90c7-93ee82a7c448-0
+00:00:42.360 --> 00:00:46.280
+These are all of the rides for
+the month of April 2024.
+
+c75cb5b4-3f31-4350-885a-1cdadf5a69ac-0
+00:00:47.280 --> 00:00:50.320
+We've actually already started
+using aggregations here.
+
+69bcd8e3-9aa5-4a64-8c24-42b9f030c4f9-0
+00:00:50.720 --> 00:00:54.240
+The COUNT function is a good
+example of a simple aggregation.
+
+63ab5f31-ee9e-41c8-a3b0-0b7d936b11b1-0
+00:00:55.440 --> 00:00:58.824
+It returns a single summary
+value telling us how many rows
+
+63ab5f31-ee9e-41c8-a3b0-0b7d936b11b1-1
+00:00:58.824 --> 00:00:59.800
+are in the table.
+
+a98502b2-cc06-435f-9f9b-44cbe72d133c-0
+00:01:01.120 --> 00:01:04.181
+With this much information
+available, the value of data
+
+a98502b2-cc06-435f-9f9b-44cbe72d133c-1
+00:01:04.181 --> 00:01:07.406
+contained in a single row is
+often less important than the
+
+a98502b2-cc06-435f-9f9b-44cbe72d133c-2
+00:01:07.406 --> 00:01:10.631
+insights gained from looking at
+the summary of some metric
+
+a98502b2-cc06-435f-9f9b-44cbe72d133c-3
+00:01:10.631 --> 00:01:12.599
+applied to all or some of the
+rows.
+
+869f7f2c-fbc3-4a22-9e07-2130cecc585f-0
+00:01:13.840 --> 00:01:17.607
+Let's dig in further and see how
+CrateDB can help us understand
+
+869f7f2c-fbc3-4a22-9e07-2130cecc585f-1
+00:01:17.607 --> 00:01:18.920
+the data in this table.
+
+26b50d2a-2e08-4d6d-9af1-bbabca01ab28-0
+00:01:21.080 --> 00:01:23.840
+Here is the schema for our taxi_rides
+table.
+
+7f4e267a-4693-49e6-a90a-ec465e824f20-0
+00:01:26.120 --> 00:01:30.488
+The total cost column contains
+data about the total Dollar cost
+
+7f4e267a-4693-49e6-a90a-ec465e824f20-1
+00:01:30.488 --> 00:01:34.651
+of each taxi ride made up from
+the base fare, plus any tips,
+
+7f4e267a-4693-49e6-a90a-ec465e824f20-2
+00:01:34.651 --> 00:01:35.880
+tolls, and extras.
+
+d3ec438c-9c3c-4851-92a3-0090e20a3cfa-0
+00:01:37.400 --> 00:01:42.805
+Using aggregate functions we can
+work out what the average total
+
+d3ec438c-9c3c-4851-92a3-0090e20a3cfa-1
+00:01:42.805 --> 00:01:48.127
+cost of a taxi ride was, and we
+can see that the average amount
+
+d3ec438c-9c3c-4851-92a3-0090e20a3cfa-2
+00:01:48.127 --> 00:01:50.040
+paid was around $25.73.
+
+b166d917-3113-4690-b621-8b45069b73e6-0
+00:01:51.040 --> 00:01:54.747
+The average aggregation function
+only considers values that are
+
+b166d917-3113-4690-b621-8b45069b73e6-1
+00:01:54.747 --> 00:01:58.281
+not null, so we don't need to
+add an extra clause to our SQL
+
+b166d917-3113-4690-b621-8b45069b73e6-2
+00:01:58.281 --> 00:02:01.120
+statement to exclude these from
+the calculation.
+
+13140779-dd14-481d-a44d-f8c5101c98ba-0
+00:02:03.200 --> 00:02:06.537
+Using the max aggregation
+function, we can find the
+
+13140779-dd14-481d-a44d-f8c5101c98ba-1
+00:02:06.537 --> 00:02:08.720
+highest value for a given
+column.
+
+cb230e52-fbe3-45a1-8438-5b18573f88b4-0
+00:02:09.520 --> 00:02:14.128
+This query finds the ride that
+went the furthest, and that's a
+
+cb230e52-fbe3-45a1-8438-5b18573f88b4-1
+00:02:14.128 --> 00:02:15.280
+pretty long way.
+
+4be7e0e3-c857-4dcb-bc68-aff138fcb3a8-0
+00:02:16.040 --> 00:02:19.323
+What if we wanted to know the
+trip ID of the furthest ride so
+
+4be7e0e3-c857-4dcb-bc68-aff138fcb3a8-1
+00:02:19.323 --> 00:02:21.760
+that we could dig into the
+details some more?
+
+101420a1-4d29-457a-8dbd-04d299b6b245-0
+00:02:22.160 --> 00:02:23.240
+Let's find out how.
+
+af3cde39-d776-4406-be19-4260a3209d0e-0
+00:02:25.760 --> 00:02:29.698
+The max_by aggregation function
+returns the value of one column
+
+af3cde39-d776-4406-be19-4260a3209d0e-1
+00:02:29.698 --> 00:02:33.320
+from the row that contains the
+maximum value of another.
+
+715f626e-f40b-4ac7-b8fa-7eb174ac6ef9-0
+00:02:34.040 --> 00:02:37.360
+This query retrieves the tripid
+for that long ride.
+
+dd9806d5-666f-4b98-b77a-87493f6a4de8-0
+00:02:39.400 --> 00:02:43.177
+Using this ID we can ask
+questions such as which vehicle
+
+dd9806d5-666f-4b98-b77a-87493f6a4de8-1
+00:02:43.177 --> 00:02:46.160
+drove that trip and what was the
+total cost.
+
+b492dc69-82be-4ff3-b5a7-13cc60e5be6e-0
+00:02:47.920 --> 00:02:55.120
+Here we see it cost $1579.50 and
+that the trip was undertaken by
+
+b492dc69-82be-4ff3-b5a7-13cc60e5be6e-1
+00:02:55.120 --> 00:02:56.560
+vehicle 5413.
+
+415f4197-f9de-4b5b-957a-0cb4238190c5-0
+00:02:58.120 --> 00:03:01.822
+As you might expect, we can also
+use aggregations against a
+
+415f4197-f9de-4b5b-957a-0cb4238190c5-1
+00:03:01.822 --> 00:03:03.920
+subset of the records in a
+table.
+
+d76aec0f-cc85-4ebf-ad84-7e8853da7daf-0
+00:03:04.800 --> 00:03:08.287
+Here we're asking for the
+average total cost of trips
+
+d76aec0f-cc85-4ebf-ad84-7e8853da7daf-1
+00:03:08.287 --> 00:03:10.160
+between 10 and 20 miles long.
+
+901daa07-dc7a-4a1e-b7a0-40dcf0ac31c0-0
+00:03:12.640 --> 00:03:16.640
+These trips cost, on average
+$47.40.
+
+b97a7bdf-6872-4b58-9df6-d90d3cbe916d-0
+00:03:18.760 --> 00:03:21.520
+Aggregate functions produce a
+single result.
+
+361a3f72-9e87-45d8-8345-50d17eb35120-0
+00:03:22.240 --> 00:03:24.920
+We often need to produce richer
+summaries of the data.
+
+2fabed46-2d90-4f61-9283-11a7a579d633-0
+00:03:25.480 --> 00:03:29.017
+For example, what if we wanted
+to know the average total cost
+
+2fabed46-2d90-4f61-9283-11a7a579d633-1
+00:03:29.017 --> 00:03:32.440
+per ride originating in each of
+the city's community areas?
+
+5ae7439f-5c99-4521-8e6e-03b9c1f58ece-0
+00:03:33.760 --> 00:03:37.393
+For this, we need to introduce
+grouping using a GROUP BY
+
+5ae7439f-5c99-4521-8e6e-03b9c1f58ece-1
+00:03:37.393 --> 00:03:37.840
+clause.
+
+3cecc12c-d448-4fe0-ab77-d9dbdf007ddd-0
+00:03:39.280 --> 00:03:42.680
+GROUP BY groups rows that have
+the same values.
+
+29733868-c5fc-461e-9143-6ec1ec4a284e-0
+00:03:43.480 --> 00:03:47.027
+Aggregation functions can then
+be applied to these groups to
+
+29733868-c5fc-461e-9143-6ec1ec4a284e-1
+00:03:47.027 --> 00:03:49.760
+produce a single resulting value
+for each one.
+
+e3de886d-64e5-4c56-a11d-f80f71f03ca8-0
+00:03:50.840 --> 00:03:54.529
+Here is a query that tells us the
+average cost per ride, split out
+
+e3de886d-64e5-4c56-a11d-f80f71f03ca8-1
+00:03:54.529 --> 00:03:55.600
+by community area.
+
+597b24bb-670d-4d01-9652-b14bc51e6dbc-0
+00:03:57.640 --> 00:04:01.527
+I've chosen to return these in
+descending order of average cost
+
+597b24bb-670d-4d01-9652-b14bc51e6dbc-1
+00:04:01.527 --> 00:04:04.200
+and to limit my result set to
+five entries.
+
+854819d8-f909-4540-a29c-b61033e93511-0
+00:04:06.720 --> 00:04:10.609
+Community area 76 seems to be
+the best place for taxi drivers
+
+854819d8-f909-4540-a29c-b61033e93511-1
+00:04:10.609 --> 00:04:14.310
+to pick up passengers whose
+trips have the highest average
+
+854819d8-f909-4540-a29c-b61033e93511-2
+00:04:14.310 --> 00:04:15.000
+total fare.
+
+75cae5a5-6abf-4ec5-bbdc-dbe3086ca2d3-0
+00:04:17.760 --> 00:04:21.876
+We could also return the
+community name directly using a
+
+75cae5a5-6abf-4ec5-bbdc-dbe3086ca2d3-1
+00:04:21.876 --> 00:04:25.920
+single query like this, and
+here's our combined result.
+
+07ac46b5-71df-48bb-9114-8882b4de260d-0
+00:04:26.560 --> 00:04:30.123
+It's not surprising to find out
+that these trips originate from
+
+07ac46b5-71df-48bb-9114-8882b4de260d-1
+00:04:30.123 --> 00:04:33.575
+the O'Hare community area, which
+is home to Chicago's largest
+
+07ac46b5-71df-48bb-9114-8882b4de260d-2
+00:04:33.575 --> 00:04:34.800
+International Airport.
+
+7f81b016-e8dc-41db-9c65-5576ccf33648-0
+00:04:37.520 --> 00:04:41.198
+In this video, you learnt how
+CrateDB helps you make sense of
+
+7f81b016-e8dc-41db-9c65-5576ccf33648-1
+00:04:41.198 --> 00:04:44.234
+large amounts of data using
+aggregate functions and
+
+7f81b016-e8dc-41db-9c65-5576ccf33648-2
+00:04:44.234 --> 00:04:44.760
+grouping.
+
+346d7163-078c-4d6f-aa48-9ff12e12ac48-0
+00:04:45.400 --> 00:04:48.211
+You'll have noticed the
+impressive performance that
+
+346d7163-078c-4d6f-aa48-9ff12e12ac48-1
+00:04:48.211 --> 00:04:51.671
+CrateDB offers when performing
+these operations. Each query in
+
+346d7163-078c-4d6f-aa48-9ff12e12ac48-2
+00:04:51.671 --> 00:04:54.320
+this video taking mere
+milliseconds to complete.
+
+6549daea-224f-4917-b516-42c1d4c6e53d-0
+00:04:55.240 --> 00:04:58.687
+This is in part due to the use
+of columnar storage by default
+
+6549daea-224f-4917-b516-42c1d4c6e53d-1
+00:04:58.687 --> 00:05:00.800
+rather than using a row based
+format.
+
+e6ef54a2-49eb-4919-835b-002cc787101d-0
+00:05:01.880 --> 00:05:05.272
+Adopting this approach, in which
+relevant values are stored
+
+e6ef54a2-49eb-4919-835b-002cc787101d-1
+00:05:05.272 --> 00:05:07.760
+together makes aggregations more
+efficient.
+
+f4f12b92-b80e-4c0d-b94d-8170fd58f437-0
+00:05:08.960 --> 00:05:12.673
+I encourage you to experiment
+with these concepts using your
+
+f4f12b92-b80e-4c0d-b94d-8170fd58f437-1
+00:05:12.673 --> 00:05:16.387
+own CrateDB cluster at Taxi
+Rides table and by referring to
+
+f4f12b92-b80e-4c0d-b94d-8170fd58f437-2
+00:05:16.387 --> 00:05:20.040
+the relevant sections of the
+CrateDB documentation online.

@@ -1,0 +1,38 @@
+﻿WEBVTT
+
+00:00:03.760 --> 00:00:07.360 line:50%
+In this module, we'll focus on
+data modelling with CrateDB.
+
+00:00:07.840 --> 00:00:10.976 line:50%
+We'll begin by covering
+primitive data types, then move
+
+00:00:10.976 --> 00:00:14.336 line:50%
+quickly onto more advanced
+topics including time series and
+
+00:00:14.336 --> 00:00:15.120 line:50%
+document data.
+
+00:00:15.920 --> 00:00:18.240 line:50%
+We'll also look at vector
+similarity search.
+
+00:00:19.080 --> 00:00:22.490 line:50%
+Last but not least, you'll learn
+about CrateDB's support for
+
+00:00:22.490 --> 00:00:23.400 line:50%
+geospatial data.
+
+00:00:24.280 --> 00:00:27.736 line:50%
+These modules include hands on
+exercises, giving you the
+
+00:00:27.736 --> 00:00:31.314 line:50%
+opportunity to explore these
+concepts in your own CrateDB
+
+00:00:31.314 --> 00:00:31.800 line:50%
+cluster.

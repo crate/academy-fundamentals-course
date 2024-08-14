@@ -1,0 +1,778 @@
+WEBVTT
+
+17c0cc4c-55c3-48fe-af5f-f5f902ab6991-0
+00:00:04.320 --> 00:00:08.329
+CrateDB supports full text
+search over text data with
+
+17c0cc4c-55c3-48fe-af5f-f5f902ab6991-1
+00:00:08.329 --> 00:00:08.840
+Lucene.
+
+c8a96264-335a-4edc-9efd-11ce914e3730-0
+00:00:09.400 --> 00:00:12.887
+In this video I'll show you when
+you should consider full text
+
+c8a96264-335a-4edc-9efd-11ce914e3730-1
+00:00:12.887 --> 00:00:16.320
+search, how it works and how its
+behaviour can be customized.
+
+7e1a9569-45f9-4a75-ab52-82e7e3135cc7-0
+00:00:17.200 --> 00:00:20.531
+We will of course also examine
+some full text search queries
+
+7e1a9569-45f9-4a75-ab52-82e7e3135cc7-1
+00:00:20.531 --> 00:00:22.880
+using our Chicago neighbourhoods
+data set.
+
+a326b54b-b374-4649-8234-eb0d3a0bed8d-0
+00:00:24.840 --> 00:00:27.600
+When should you consider using
+full text search?
+
+0dcce7c1-1dbc-40d4-9264-fc8dd4be3273-0
+00:00:28.400 --> 00:00:32.060
+When you have lots of semi or
+unstructured data and you want
+
+0dcce7c1-1dbc-40d4-9264-fc8dd4be3273-1
+00:00:32.060 --> 00:00:34.760
+to query for terms and phrases
+in that data.
+
+f06b46e0-b114-4738-b7ec-8c83940be563-0
+00:00:35.600 --> 00:00:38.545
+When you need a search engine
+that understands the language
+
+f06b46e0-b114-4738-b7ec-8c83940be563-1
+00:00:38.545 --> 00:00:39.920
+that the text is written in.
+
+ea551509-20b5-4edd-b153-f01e28a148e4-0
+00:00:40.720 --> 00:00:44.080
+When you want to consider search
+results in order of relevance to
+
+ea551509-20b5-4edd-b153-f01e28a148e4-1
+00:00:44.080 --> 00:00:44.640
+your query.
+
+acd3a21d-18fd-4aa0-bbbc-1fc19af72ab4-0
+00:00:45.840 --> 00:00:49.745
+Querying text data for character
+sequences using LIKE isn't going
+
+acd3a21d-18fd-4aa0-bbbc-1fc19af72ab4-1
+00:00:49.745 --> 00:00:53.413
+to help with these requirements,
+especially if you need fuzzy
+
+acd3a21d-18fd-4aa0-bbbc-1fc19af72ab4-2
+00:00:53.413 --> 00:00:55.840
+searching or want to search for
+phrases.
+
+94671fca-ed1a-4b13-999b-7ac1a648e0d9-0
+00:00:57.440 --> 00:01:00.960
+What can full text search be
+applied to in CrateDB?
+
+bfbebd53-f1aa-4786-bb20-277ff13e7ca8-0
+00:01:01.960 --> 00:01:06.168
+Any TEXT column in a table,
+including those deeply nested in
+
+bfbebd53-f1aa-4786-bb20-277ff13e7ca8-1
+00:01:06.168 --> 00:01:06.720
+objects.
+
+6d8f142f-435a-4983-804a-6b6c9dbeac57-0
+00:01:07.800 --> 00:01:10.560
+And how does this work in Crate
+DB?
+
+77d4820d-0ac9-4bc5-8b1b-48afa74aef4c-0
+00:01:10.560 --> 00:01:14.457
+Full text search is powered by
+the indexing capabilities of
+
+77d4820d-0ac9-4bc5-8b1b-48afa74aef4c-1
+00:01:14.457 --> 00:01:18.160
+Apache Lucene and queries are
+expressed in standard SQL.
+
+73ee16a6-2055-4f1a-9698-2750230e31b4-0
+00:01:19.000 --> 00:01:22.155
+Full text search queries can
+also be combined with the
+
+73ee16a6-2055-4f1a-9698-2750230e31b4-1
+00:01:22.155 --> 00:01:24.680
+querying and filtering by other
+data types.
+
+a9bf1784-9f21-4672-8bab-3086f127369f-0
+00:01:25.720 --> 00:01:29.340
+For example, with our Chicago
+data set, we might perform a
+
+a9bf1784-9f21-4672-8bab-3086f127369f-1
+00:01:29.340 --> 00:01:32.960
+full text search over the
+community areas data, find areas
+
+a9bf1784-9f21-4672-8bab-3086f127369f-2
+00:01:32.960 --> 00:01:36.519
+that match the term historic or
+railroad and which have a
+
+a9bf1784-9f21-4672-8bab-3086f127369f-3
+00:01:36.519 --> 00:01:40.139
+population above a certain
+threshold, where the population
+
+a9bf1784-9f21-4672-8bab-3086f127369f-4
+00:01:40.139 --> 00:01:43.760
+data is stored in a regular
+numerical column in the table.
+
+21178c36-f823-48c8-a4e9-36f75273d2ed-0
+00:01:45.280 --> 00:01:48.354
+Here's a SQL statement that
+creates a table for our
+
+21178c36-f823-48c8-a4e9-36f75273d2ed-1
+00:01:48.354 --> 00:01:49.560
+community area data.
+
+72a411f9-7d53-47d7-a6cc-39fabfc9dfd4-0
+00:01:50.240 --> 00:01:54.038
+As part of the data set, we have
+a textual description of each
+
+72a411f9-7d53-47d7-a6cc-39fabfc9dfd4-1
+00:01:54.038 --> 00:01:57.655
+area that we're storing as the
+field description inside the
+
+72a411f9-7d53-47d7-a6cc-39fabfc9dfd4-2
+00:01:57.655 --> 00:01:58.560
+details object.
+
+d61ecd9a-c6ee-4e85-9c32-a2e0cab780ea-0
+00:01:59.320 --> 00:02:03.803
+description is of type TEXT and
+here we're telling CrateDB to
+
+d61ecd9a-c6ee-4e85-9c32-a2e0cab780ea-1
+00:02:03.803 --> 00:02:07.860
+create a full text index for
+this field and that we have
+
+d61ecd9a-c6ee-4e85-9c32-a2e0cab780ea-2
+00:02:07.860 --> 00:02:09.640
+English language content.
+
+ea407420-5dbb-47a8-9a48-838e425ee49b-0
+00:02:10.560 --> 00:02:13.715
+When new rows are written to
+this table, CrateDB will
+
+ea407420-5dbb-47a8-9a48-838e425ee49b-1
+00:02:13.715 --> 00:02:17.101
+analyse the content of the
+description field and build and
+
+ea407420-5dbb-47a8-9a48-838e425ee49b-2
+00:02:17.101 --> 00:02:18.880
+maintain a search index for it.
+
+9b16a792-0305-474b-af65-68229bed6d3d-0
+00:02:20.000 --> 00:02:23.498
+This indexing process is
+extremely fast, minimising the
+
+9b16a792-0305-474b-af65-68229bed6d3d-1
+00:02:23.498 --> 00:02:26.997
+time between new data being
+received and the ability to
+
+9b16a792-0305-474b-af65-68229bed6d3d-2
+00:02:26.997 --> 00:02:27.560
+query it.
+
+d07aed9a-beda-49b5-96c0-c17d855d6c20-0
+00:02:29.400 --> 00:02:32.657
+In this version of the CREATE
+TABLE statement for our
+
+d07aed9a-beda-49b5-96c0-c17d855d6c20-1
+00:02:32.657 --> 00:02:36.216
+community_areas table, we're
+defining a separate composite
+
+d07aed9a-beda-49b5-96c0-c17d855d6c20-2
+00:02:36.216 --> 00:02:40.137
+index that combines the contents
+of the name and the description
+
+d07aed9a-beda-49b5-96c0-c17d855d6c20-3
+00:02:40.137 --> 00:02:40.560
+fields.
+
+084bfa63-f89a-4998-88f8-98fa509ced61-0
+00:02:42.160 --> 00:02:45.880
+Let's look at how the indexing
+process works in more detail.
+
+df65df13-c084-425e-b74a-71a77b5aff17-0
+00:02:46.760 --> 00:02:50.277
+Imagine we have two text
+documents that look like this,
+
+df65df13-c084-425e-b74a-71a77b5aff17-1
+00:02:50.277 --> 00:02:54.297
+and the content is a TEXT column
+with full text search indexing
+
+df65df13-c084-425e-b74a-71a77b5aff17-2
+00:02:54.297 --> 00:02:54.800
+enabled.
+
+05a5feaf-9f21-4ef6-b958-562034aaa644-0
+00:02:56.080 --> 00:03:00.500
+As documents in this column are
+added or updated, they are first
+
+05a5feaf-9f21-4ef6-b958-562034aaa644-1
+00:03:00.500 --> 00:03:02.200
+processed by an analyzer.
+
+a3e93910-989a-44ad-a40a-b4a13041974b-0
+00:03:03.080 --> 00:03:06.549
+The analyzer takes the contents
+of the field and splits it into
+
+a3e93910-989a-44ad-a40a-b4a13041974b-1
+00:03:06.549 --> 00:03:08.880
+tokens which are used in the
+search index.
+
+5b6c2205-a15d-4273-9a7f-b9979b619f87-0
+00:03:10.000 --> 00:03:14.136
+The analyzer consists of a
+tokenizer, zero or more token
+
+5b6c2205-a15d-4273-9a7f-b9979b619f87-1
+00:03:14.136 --> 00:03:17.040
+filters, and zero or more char
+filters.
+
+d83e6f49-b5f1-4654-acb5-956d13cc903e-0
+00:03:18.320 --> 00:03:21.643
+When content is analysed to
+become a stream of tokens, the
+
+d83e6f49-b5f1-4654-acb5-956d13cc903e-1
+00:03:21.643 --> 00:03:24.515
+char filter is applied,
+filtering out some special
+
+d83e6f49-b5f1-4654-acb5-956d13cc903e-2
+00:03:24.515 --> 00:03:26.600
+characters, for example
+apostrophes.
+
+c27c999f-6fba-4ded-8a73-aa374a22e747-0
+00:03:27.480 --> 00:03:31.356
+A tokeniser takes the filtered
+character stream and splits it
+
+c27c999f-6fba-4ded-8a73-aa374a22e747-1
+00:03:31.356 --> 00:03:34.982
+into tokens, for example using
+white space to distinguish
+
+c27c999f-6fba-4ded-8a73-aa374a22e747-2
+00:03:34.982 --> 00:03:35.920
+between tokens.
+
+9ef70487-a02e-4525-9645-c4981cae44d3-0
+00:03:37.280 --> 00:03:40.840
+Using this process an inverted
+search index is created.
+
+957cf657-697e-462a-bcbd-b9cb1ff0e4aa-0
+00:03:41.600 --> 00:03:45.434
+This maps tokens or terms back
+to the documents that contain
+
+957cf657-697e-462a-bcbd-b9cb1ff0e4aa-1
+00:03:45.434 --> 00:03:48.640
+them and normalises them for
+example to lowercase.
+
+c90a4128-3fbd-4f25-adbb-8f39c078581a-0
+00:03:49.520 --> 00:03:53.098
+The analyser process is highly
+configurable and can be adapted
+
+c90a4128-3fbd-4f25-adbb-8f39c078581a-1
+00:03:53.098 --> 00:03:56.280
+to different languages and for
+different content types.
+
+debea778-985a-4e3f-b3aa-63094160a7e9-0
+00:03:57.920 --> 00:04:01.360
+CrateDB supports numerous
+analysers out-of-the-box.
+
+e13dc239-8261-4164-8d2e-8bb6a599a801-0
+00:04:01.680 --> 00:04:04.280
+These are pre configured for
+common scenarios.
+
+49f75ab9-b1b0-4391-8718-bf553e60a909-0
+00:04:04.920 --> 00:04:08.607
+For example, the standard
+analyzer includes the lowercase
+
+49f75ab9-b1b0-4391-8718-bf553e60a909-1
+00:04:08.607 --> 00:04:12.613
+token filter to transform tokens
+to lowercase and a stop words
+
+49f75ab9-b1b0-4391-8718-bf553e60a909-2
+00:04:12.613 --> 00:04:13.440
+token filter.
+
+f787c999-3bf8-4b38-a32b-4179a59dd6b2-0
+00:04:14.320 --> 00:04:17.940
+This removes commonly used words
+that aren't needed for searches
+
+f787c999-3bf8-4b38-a32b-4179a59dd6b2-1
+00:04:17.940 --> 00:04:20.280
+because they contain very little
+meaning.
+
+c88da915-518f-4ccd-8bf1-a236b9775766-0
+00:04:20.800 --> 00:04:23.440
+Examples stop words in English
+include a, 
+
+e30f5bca-ed96-4c8c-8ea0-461cac363cb9-0
+00:04:23.840 --> 00:04:28.560
+the, is, and are. When configuring
+an analyzer 
+
+ef1b4257-5957-4ee9-a02d-e86a757892b3-0
+00:04:28.960 --> 00:04:31.440
+here are some of the tokenier
+options supported.
+
+e7ef90c2-4c67-4da1-adbf-d812e262a6fa-0
+00:04:32.480 --> 00:04:36.238
+When processing documents
+containing e-mail addresses, the
+
+e7ef90c2-4c67-4da1-adbf-d812e262a6fa-1
+00:04:36.238 --> 00:04:39.933
+URL e-mail tokeniser ensures
+that these are recognised as
+
+e7ef90c2-4c67-4da1-adbf-d812e262a6fa-2
+00:04:39.933 --> 00:04:41.080
+individual tokens.
+
+f1257bd3-97ce-4d7c-8cc5-0806f9cf462f-0
+00:04:43.040 --> 00:04:45.560
+Here are some of the supported
+token filters.
+
+a9c59ddd-0295-4ea1-af7e-31ab3ef316a7-0
+00:04:46.440 --> 00:04:50.303
+For example, stemmer will have
+the token plus words with the
+
+a9c59ddd-0295-4ea1-af7e-31ab3ef316a7-1
+00:04:50.303 --> 00:04:51.760
+same root form or stem.
+
+70c286b9-21f5-478e-b907-5ede44b27ded-0
+00:04:52.880 --> 00:04:54.480
+This is language specific.
+
+c6dd8b6d-c6b1-48db-b983-017262c500b7-0
+00:04:54.960 --> 00:04:59.877
+In English, runs, running and
+ran might all stem to the word
+
+c6dd8b6d-c6b1-48db-b983-017262c500b7-1
+00:04:59.877 --> 00:05:00.200
+run.
+
+ed9d2ead-e752-459e-906b-56d10390153d-0
+00:05:01.520 --> 00:05:05.320
+Phonetic converts tokens to
+their phonetic representations.
+
+9dcac729-10fa-4671-9b04-067a08bb08f0-0
+00:05:07.160 --> 00:05:10.893
+Finally, it is a representative
+selection of the character
+
+9dcac729-10fa-4671-9b04-067a08bb08f0-1
+00:05:10.893 --> 00:05:11.400
+filters.
+
+7b01155c-6d8c-4d4c-b53a-8d148f582664-0
+00:05:12.400 --> 00:05:17.165
+The HTML strip filter removes
+HTML elements from analyse text,
+
+7b01155c-6d8c-4d4c-b53a-8d148f582664-1
+00:05:17.165 --> 00:05:20.040
+useful when the text contains
+markup.
+
+3cc99d49-ef97-4c33-b2a0-94fe250ad12f-0
+00:05:21.360 --> 00:05:24.593
+Remember that more than one
+token and character filter can
+
+3cc99d49-ef97-4c33-b2a0-94fe250ad12f-1
+00:05:24.593 --> 00:05:26.840
+be used when creating a custom
+analyzer.
+
+dce42032-dd82-4ebd-adb3-05d8d8088963-0
+00:05:27.760 --> 00:05:29.840
+There are many more options
+available to you.
+
+93162cbc-1668-493f-aeaf-106168a29ef0-0
+00:05:30.320 --> 00:05:33.716
+Consult the full Text Analyzers
+section of the CrateDB
+
+93162cbc-1668-493f-aeaf-106168a29ef0-1
+00:05:33.716 --> 00:05:36.160
+documentation for a
+comprehensive guide.
+
+8e292564-c959-4d49-ae44-6914ce605bab-0
+00:05:37.080 --> 00:05:41.420
+Custom analyzers can be created
+using the CREATE ANALYZER SQL
+
+8e292564-c959-4d49-ae44-6914ce605bab-1
+00:05:41.420 --> 00:05:42.120
+statement.
+
+8614c924-740b-468c-870c-87d00e6373f3-0
+00:05:42.920 --> 00:05:47.034
+Here I'm specifying an analyzer
+called myanalyzer that uses the
+
+8614c924-740b-468c-870c-87d00e6373f3-1
+00:05:47.034 --> 00:05:50.120
+white space tokenizer and the
+lowercase filter.
+
+17e0812e-05c7-41ee-906f-0eb1749434e1-0
+00:05:50.880 --> 00:05:54.831
+It also contains a custom char
+filter that maps certain
+
+17e0812e-05c7-41ee-906f-0eb1749434e1-1
+00:05:54.831 --> 00:05:59.066
+sequences of characters to
+others, for example replacing ph
+
+17e0812e-05c7-41ee-906f-0eb1749434e1-2
+00:05:59.066 --> 00:05:59.559
+with f.
+
+8917927a-9cbf-499e-8e29-6d0ad7bea6e6-0
+00:06:00.840 --> 00:06:04.896
+The custom analyzer can then be
+referenced by name when defining
+
+8917927a-9cbf-499e-8e29-6d0ad7bea6e6-1
+00:06:04.896 --> 00:06:08.640
+full text indexes against text
+columns in a CrateDB table.
+
+4d3981ea-d74a-4383-a553-fcffaf5fb798-0
+00:06:10.480 --> 00:06:13.513
+You can also create new
+analyzers by extending the
+
+4d3981ea-d74a-4383-a553-fcffaf5fb798-1
+00:06:13.513 --> 00:06:15.120
+behaviour of existing ones.
+
+40a002dd-0e7c-41eb-ab92-04b654c59736-0
+00:06:15.960 --> 00:06:19.471
+Here I'm extending the Snowball
+analyzer to use the German
+
+40a002dd-0e7c-41eb-ab92-04b654c59736-1
+00:06:19.471 --> 00:06:20.960
+language when tokenizing.
+
+5b600947-d0b6-4e46-b7b0-126d4cba89a6-0
+00:06:22.600 --> 00:06:26.547
+CrateDB supports a wide range
+of languages for building full
+
+5b600947-d0b6-4e46-b7b0-126d4cba89a6-1
+00:06:26.547 --> 00:06:28.840
+text search indexes
+out-of-the-box.
+
+29f37044-382f-4078-800f-1e9da76e3978-0
+00:06:29.600 --> 00:06:33.230
+Solve the documentation for more
+details on what's supported with
+
+29f37044-382f-4078-800f-1e9da76e3978-1
+00:06:33.230 --> 00:06:34.000
+each language.
+
+d6d39cc3-961a-4897-a7bb-466b3f6a0fb2-0
+00:06:37.280 --> 00:06:40.944
+Now we've indexed our data for
+full text search, it's time to
+
+d6d39cc3-961a-4897-a7bb-466b3f6a0fb2-1
+00:06:40.944 --> 00:06:42.600
+try some queries against it.
+
+8b46cd4b-566c-4075-a310-6f8996f9e59f-0
+00:06:43.560 --> 00:06:46.680
+The MATCH predicate is used to
+perform these queries.
+
+6bbea585-4777-4153-9a8a-11eefe4c4b6c-0
+00:06:47.360 --> 00:06:51.868
+At it's simplest, MATCH takes
+the field to query as a first
+
+6bbea585-4777-4153-9a8a-11eefe4c4b6c-1
+00:06:51.868 --> 00:06:55.400
+parameter and a search query
+term as a second.
+
+fdb0beb2-3c81-4586-911e-48eaf3becc52-0
+00:06:55.400 --> 00:06:58.882
+This query searches for
+community areas whose
+
+fdb0beb2-3c81-4586-911e-48eaf3becc52-1
+00:06:58.882 --> 00:07:01.760
+description matches the term
+railway.
+
+72f7f5c8-12ae-400c-9c0b-88150b7b5a6d-0
+00:07:01.760 --> 00:07:06.635
+When using MATCH, we can also
+return a score that indicates
+
+72f7f5c8-12ae-400c-9c0b-88150b7b5a6d-1
+00:07:06.635 --> 00:07:09.480
+the relative quality of the
+match.
+
+f3b1a2b9-8e8a-4e15-892b-899faa091df1-0
+00:07:09.480 --> 00:07:10.720
+Select _score to retrieve.
+
+936037b7-d15e-4e3b-803b-eb4076131f89-0
+00:07:10.720 --> 00:07:14.520
+This is the result of running
+this query.
+
+fb141d5d-0c8d-44fb-8491-cc142b4ea316-0
+00:07:15.520 --> 00:07:18.600
+This is the result with the
+highest relevant score and we
+
+fb141d5d-0c8d-44fb-8491-cc142b4ea316-1
+00:07:18.600 --> 00:07:21.680
+can see where our search term
+matched in the description.
+
+992e76c6-33f3-4a88-a12e-ed93f0ffe931-0
+00:07:24.120 --> 00:07:28.160
+This query uses 2 terms,
+railroad and tracks.
+
+f1ac0457-707c-4ae3-94b8-b6ceb0e13266-0
+00:07:28.800 --> 00:07:33.120
+MATCH treats this as a query for
+railroad or tracks.
+
+963d7f42-2e53-422f-a93b-fdaec3cc5dae-0
+00:07:33.320 --> 00:07:37.563
+When we run this query, we see
+that the highest scoring result
+
+963d7f42-2e53-422f-a93b-fdaec3cc5dae-1
+00:07:37.563 --> 00:07:41.200
+contains 2 occurrences of tracks
+and one of railroad.
+
+9f4f936f-39b5-4f50-9994-32a2b3c8936a-0
+00:07:43.280 --> 00:07:47.272
+Here I'm specifying I want to
+search for the phrase railroad
+
+9f4f936f-39b5-4f50-9994-32a2b3c8936a-1
+00:07:47.272 --> 00:07:47.600
+yard.
+
+c04bab81-425f-4146-8158-8d44b9d8830f-0
+00:07:48.000 --> 00:07:51.370
+This means that I want to find
+the results containing those
+
+c04bab81-425f-4146-8158-8d44b9d8830f-1
+00:07:51.370 --> 00:07:53.000
+terms together in that order.
+
+2dfe62f9-9c2a-497a-b254-3a351d95e21c-0
+00:07:54.280 --> 00:07:57.280
+Here we see we have a match for
+railroad yards.
+
+3f9cb090-6fc0-40ba-9fdb-4425d2445f9a-0
+00:07:57.960 --> 00:08:01.287
+Other community areas that
+contain mentions of railroads
+
+3f9cb090-6fc0-40ba-9fdb-4425d2445f9a-1
+00:08:01.287 --> 00:08:04.440
+and stock yards don't match and
+aren't returned here.
+
+b38577c6-ce84-4e6e-b109-163ec853ca6e-0
+00:08:05.760 --> 00:08:10.188
+MATCH also supports the option
+to specify a slop or proximity
+
+b38577c6-ce84-4e6e-b109-163ec853ca6e-1
+00:08:10.188 --> 00:08:11.760
+for words in a phrase.
+
+d0129137-1a37-4f80-b626-3cf9230683d5-0
+00:08:12.440 --> 00:08:16.378
+For example, setting a slop of
+one would match railroad goods
+
+d0129137-1a37-4f80-b626-3cf9230683d5-1
+00:08:16.378 --> 00:08:16.760
+yards.
+
+b4968860-9706-447f-bf5c-4e465fbefd78-0
+00:08:18.440 --> 00:08:22.339
+It's important to remember that
+with CrateDB, other data types
+
+b4968860-9706-447f-bf5c-4e465fbefd78-1
+00:08:22.339 --> 00:08:25.933
+can be used in SELECT queries
+that also leverage full text
+
+b4968860-9706-447f-bf5c-4e465fbefd78-2
+00:08:25.933 --> 00:08:26.359
+search.
+
+7ac5b211-61d0-4c17-8adc-ec83d8418ad7-0
+00:08:26.960 --> 00:08:31.016
+Here I'm looking for community
+areas whose descriptions contain
+
+7ac5b211-61d0-4c17-8adc-ec83d8418ad7-1
+00:08:31.016 --> 00:08:34.883
+both the terms railroad and
+historic or words that stem from
+
+7ac5b211-61d0-4c17-8adc-ec83d8418ad7-2
+00:08:34.883 --> 00:08:38.877
+these words and I've specified
+the AND operator instead of the
+
+7ac5b211-61d0-4c17-8adc-ec83d8418ad7-3
+00:08:38.877 --> 00:08:41.920
+default OR as an option to the
+MATCH predicate.
+
+9965aa7f-e547-4bcc-8411-80fb40f1bb1a-0
+00:08:42.920 --> 00:08:46.870
+I've also added a regular SQL
+AND clause to check the value of
+
+9965aa7f-e547-4bcc-8411-80fb40f1bb1a-1
+00:08:46.870 --> 00:08:49.880
+the population field inside the
+details object.
+
+b6b0b3f7-cb28-4088-a31f-6d126ea5e031-0
+00:08:51.320 --> 00:08:54.080
+These multi model queries can be
+very powerful.
+
+07693785-8752-4acf-bd15-308f4eea54ed-0
+00:08:54.640 --> 00:08:58.142
+For example, we might combine
+geospatial data with review
+
+07693785-8752-4acf-bd15-308f4eea54ed-1
+00:08:58.142 --> 00:09:02.008
+ratings and text descriptions to
+find a restaurant that's got a
+
+07693785-8752-4acf-bd15-308f4eea54ed-2
+00:09:02.008 --> 00:09:05.390
+high star rating, allows dogs to
+visit, and is within 5
+
+07693785-8752-4acf-bd15-308f4eea54ed-3
+00:09:05.390 --> 00:09:06.840
+kilometres of our hotel.
+
+a4e839ee-45d2-4519-af76-033c55854dc0-0
+00:09:09.000 --> 00:09:12.892
+This video provided a high level
+introduction to full text search
+
+a4e839ee-45d2-4519-af76-033c55854dc0-1
+00:09:12.892 --> 00:09:13.600
+in CrateDB.
+
+d40590f6-35f9-4819-b74d-06da0e342a44-0
+00:09:14.320 --> 00:09:17.736
+To learn more about how to
+create and configure full text
+
+d40590f6-35f9-4819-b74d-06da0e342a44-1
+00:09:17.736 --> 00:09:20.976
+search indexes and perform rich
+queries with the match
+
+d40590f6-35f9-4819-b74d-06da0e342a44-2
+00:09:20.976 --> 00:09:24.511
+predicate, please refer to the
+CrateDB documentation where
+
+d40590f6-35f9-4819-b74d-06da0e342a44-3
+00:09:24.511 --> 00:09:27.280
+you'll find reference materials
+and tutorials.
