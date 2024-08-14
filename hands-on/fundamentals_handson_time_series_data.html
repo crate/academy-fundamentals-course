@@ -1,0 +1,17 @@
+<p>This exercise requires a CrateDB cluster with the course dataset loaded.&nbsp; If you didn't create your cluster earlier in the course, complete <a href="/cratedb-fundamentals?lesson=handson-your-first-cratedb-cluster" rel="noopener" target="_blank">these steps</a> before going further.</p>
+<hr>
+<p>Several tables in the course data set contain time series data. These are:</p>
+<ul>
+<li><span style="font-family: terminal, monospace;">three_eleven_calls</span></li>
+<li><span style="font-family: terminal, monospace;">beach_weather</span></li>
+<li><span style="font-family: terminal, monospace;">taxi_rides</span></li>
+</ul>
+<p>Open your CrateDB cluster’s console, and we’ll try running some queries using this data.</p>
+<p>This query uses CrateDB’s <span style="font-family: terminal, monospace;">min_by</span> function. <span style="font-family: terminal, monospace;">min_by</span> returns the value of the field specified in its first parameter from the record where the value of the field specified in its second parameter is lowest. Here, we’re asking CrateDB to tell us what the minimum temperature recorded at each weather station was, and when that occurred.</p>
+<p>Run this query in your CrateDB console:</p>
+<pre>SELECT station,<br>&nbsp;&nbsp; min(airtemp) as min_temp,<br>&nbsp;&nbsp; min_by(ts, airtemp) AS time_of_min_temp<br>FROM beach_weather<br>GROUP BY station;</pre>
+<p>You’ll see that winter can get very cold in Chicago!</p>
+<p>Downsampling is a way of reducing the number of data points in a data set. This query reduces the hourly observations at one of the weather stations to return the average temperature over four week periods. Run this query and browse through the output, paying particular attention to the date values:</p>
+<pre>SELECT<br>   date_bin('4 weeks'::INTERVAL, ts, 0) AS date,<br>&nbsp;&nbsp; AVG(airtemp) as avg_air_temp<br>FROM<br>&nbsp;&nbsp; beach_weather<br>WHERE<br>&nbsp;&nbsp; station = 'Foster'<br>GROUP BY<br>&nbsp;&nbsp; date<br>ORDER BY<br>&nbsp;&nbsp; date DESC;</pre>
+<p>Notice how you can spot the seasonal variations in temperature more easily now.</p>
+<p>Try out some time series queries of your own, referring to the <a href="https://cratedb.com/docs/guide/domain/timeseries/index.html">Time Series Data</a> section in the CrateDB documentation for inspiration.</p>

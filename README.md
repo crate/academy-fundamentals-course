@@ -12,3 +12,7 @@ Thanks!
 ## Subtitles
 
 The `subtitles` folder contains the subtitles files used in the course videos.  These are in [WebVTT](https://en.wikipedia.org/wiki/WebVTT) (Web Video Text Tracks) format.
+
+## Hands-on Segments
+
+The `hands-on` folder contains the HTML fragments used for each hands-on exercise in the course.
