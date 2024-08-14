@@ -15,7 +15,7 @@ The `subtitles` folder contains the subtitles files used in the course videos.  
 
 ## Transcripts
 
-The `transcripts` folder contains the HTML fragements used for the transcripts displayed below each video.
+The `transcripts` folder contains the HTML fragments used for the transcripts displayed below each video.
 
 ## Hands-on Segments
 
