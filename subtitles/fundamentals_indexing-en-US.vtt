@@ -1,0 +1,388 @@
+WEBVTT
+
+4da31368-fc90-42e1-8973-157db285d73d-0
+00:00:04.800 --> 00:00:08.423
+In this video, we'll dive deeper
+into indexing in CrateDB,
+
+4da31368-fc90-42e1-8973-157db285d73d-1
+00:00:08.423 --> 00:00:10.800
+beginning with what is indexed
+and how.
+
+67bf9ff7-963e-46e5-80d9-9f28a7d80d61-0
+00:00:11.560 --> 00:00:15.088
+I'll show you how the different
+object column policies influence
+
+67bf9ff7-963e-46e5-80d9-9f28a7d80d61-1
+00:00:15.088 --> 00:00:18.345
+the indexing of objects, and
+we'll end with a quick look at
+
+67bf9ff7-963e-46e5-80d9-9f28a7d80d61-2
+00:00:18.345 --> 00:00:20.680
+how to configure or even disable
+indexing.
+
+446b81b8-552b-4bcf-8af8-81f22ebc4471-0
+00:00:22.160 --> 00:00:25.580
+Let's start with the question
+what's indexed by default in
+
+446b81b8-552b-4bcf-8af8-81f22ebc4471-1
+00:00:25.580 --> 00:00:26.160
+CrateDB?
+
+ac8e80b6-74fe-4016-b739-6e4fab5239e1-0
+00:00:27.040 --> 00:00:28.440
+Well, everything is.
+
+20dbbf73-93dd-445a-8b75-edc9ffb69ff1-0
+00:00:29.320 --> 00:00:32.963
+To ensure fast responses for any
+type of query, CrateDB
+
+20dbbf73-93dd-445a-8b75-edc9ffb69ff1-1
+00:00:32.963 --> 00:00:36.160
+automatically indexes every
+attribute by default.
+
+20e35ccf-7244-4e40-952b-7e445713c511-0
+00:00:36.720 --> 00:00:40.048
+This is especially useful when
+query patterns and use cases
+
+20e35ccf-7244-4e40-952b-7e445713c511-1
+00:00:40.048 --> 00:00:43.432
+evolve over time and may not
+have been clear at the point at
+
+20e35ccf-7244-4e40-952b-7e445713c511-2
+00:00:43.432 --> 00:00:46.040
+which the data was ingested into
+the database.
+
+09f450d8-dbbf-482a-b765-a0c13929fe07-0
+00:00:47.600 --> 00:00:49.440
+How does CrateDB achieve this?
+
+0c8e59f8-3c6d-4069-94cd-66d3e347a45f-0
+00:00:49.680 --> 00:00:50.560
+Let's find out.
+
+c6e9a5ea-aa81-4a56-9a6e-8853c8bf725f-0
+00:00:52.240 --> 00:00:56.361
+CrateDB leverages the powerful
+search and indexing capabilities
+
+c6e9a5ea-aa81-4a56-9a6e-8853c8bf725f-1
+00:00:56.361 --> 00:00:57.440
+of Apache Lucene.
+
+d5f7bcda-27c5-497b-8007-f7b589a21ac4-0
+00:00:58.360 --> 00:01:01.360
+Inverted indexes are used for
+text values.
+
+e5f3b41f-2810-4149-a4bb-69ee06bc0817-0
+00:01:01.800 --> 00:01:05.471
+This facilitates efficient
+search for precise text matches,
+
+e5f3b41f-2810-4149-a4bb-69ee06bc0817-1
+00:01:05.471 --> 00:01:08.960
+including support for wild card
+and regular expressions.
+
+2fffdc27-c94a-454a-8ed4-f08d86d5d5ca-0
+00:01:10.960 --> 00:01:16.098
+Block-KD trees or BKD trees are
+used for numeric, date, and
+
+2fffdc27-c94a-454a-8ed4-f08d86d5d5ca-1
+00:01:16.098 --> 00:01:17.640
+geospatial values.
+
+dea8bdb5-c0c7-4c55-a58e-6b0882d39b86-0
+00:01:18.320 --> 00:01:21.760
+These are highly efficient
+indexes designed for optimal IO.
+
+a80384a0-d6b5-402d-9577-84e6df7b73c5-0
+00:01:23.960 --> 00:01:27.483
+Hierarchical Navigable Small
+World Graphs enable efficient
+
+a80384a0-d6b5-402d-9577-84e6df7b73c5-1
+00:01:27.483 --> 00:01:31.245
+approximate nearest neighbour
+search, commonly known as vector
+
+a80384a0-d6b5-402d-9577-84e6df7b73c5-2
+00:01:31.245 --> 00:01:32.320
+similarity search.
+
+580c70cc-8492-4e76-a595-baeb28ac128e-0
+00:01:34.200 --> 00:01:38.176
+Full-text indexes can be added to
+enable features such as fuzzy
+
+580c70cc-8492-4e76-a595-baeb28ac128e-1
+00:01:38.176 --> 00:01:41.080
+search, phrase search and
+attribute boosting.
+
+b55d9ee1-e002-4020-90ab-f5d7597d015e-0
+00:01:42.080 --> 00:01:45.565
+CrateDB offers multiple
+languages, analysers and
+
+b55d9ee1-e002-4020-90ab-f5d7597d015e-1
+00:01:45.565 --> 00:01:50.027
+tokenizers, plus the flexibility
+to create custom analysers and
+
+b55d9ee1-e002-4020-90ab-f5d7597d015e-2
+00:01:50.027 --> 00:01:54.280
+tokenizers. In conjunction with
+advanced indexing strategies.
+
+fa8bd22c-5ccc-4268-91e3-dec4dfae9a96-0
+00:01:54.280 --> 00:01:57.200
+CrateDB uses a columnar storage
+approach.
+
+eb9415e9-d8c6-4e78-b384-f8db7f6cdf6b-0
+00:01:57.960 --> 00:02:01.997
+This facilitates fast queries
+and complex aggregations across
+
+eb9415e9-d8c6-4e78-b384-f8db7f6cdf6b-1
+00:02:01.997 --> 00:02:03.040
+large data sets.
+
+33c7c7da-b245-409c-af0e-37513d2d87cd-0
+00:02:05.920 --> 00:02:07.000
+How does this work?
+
+e45ec37d-9d7f-4727-89bf-2ecab5814f88-0
+00:02:07.400 --> 00:02:09.520
+Let's consider a simple example.
+
+5a2b18a1-d981-4055-aa54-1a65922146e2-0
+00:02:10.520 --> 00:02:13.794
+Imagine we have data about
+products and quantities in stock
+
+5a2b18a1-d981-4055-aa54-1a65922146e2-1
+00:02:13.794 --> 00:02:16.360
+stored in a table such as the
+one on the left.
+
+a95060d4-b7b0-4fe7-8962-bf4aff83ae1e-0
+00:02:17.480 --> 00:02:21.134
+If we want to search for a given
+product term, for example
+
+a95060d4-b7b0-4fe7-8962-bf4aff83ae1e-1
+00:02:21.134 --> 00:02:24.664
+almond, we could go through the
+table row by row to find
+
+a95060d4-b7b0-4fe7-8962-bf4aff83ae1e-2
+00:02:24.664 --> 00:02:25.160
+matches.
+
+a169f648-d922-40c1-ab4c-ba85363b0179-0
+00:02:26.200 --> 00:02:29.400
+When storing the data, an
+inverted index is created.
+
+99cbc06c-3092-4e07-a4a4-c73a92585505-0
+00:02:29.920 --> 00:02:33.705
+This index maps each term to the
+IDs of the records that it
+
+99cbc06c-3092-4e07-a4a4-c73a92585505-1
+00:02:33.705 --> 00:02:34.400
+appears in.
+
+192d5efe-8059-4154-991c-84687a6448ba-0
+00:02:35.560 --> 00:02:38.911
+This approach enables faster
+queries as rather than going
+
+192d5efe-8059-4154-991c-84687a6448ba-1
+00:02:38.911 --> 00:02:42.608
+through the entire table to look
+for the term, the query engine
+
+192d5efe-8059-4154-991c-84687a6448ba-2
+00:02:42.608 --> 00:02:46.017
+can refer to the inverted index
+to get the IDs of matching
+
+192d5efe-8059-4154-991c-84687a6448ba-3
+00:02:46.017 --> 00:02:47.000
+records directly.
+
+68c2ef76-3884-4ab2-8180-e9f3ec022a36-0
+00:02:48.480 --> 00:02:52.324
+The use of columnar storage to
+store data for the same field
+
+68c2ef76-3884-4ab2-8180-e9f3ec022a36-1
+00:02:52.324 --> 00:02:56.358
+together optimises file system
+cache utilisation and eliminates
+
+68c2ef76-3884-4ab2-8180-e9f3ec022a36-2
+00:02:56.358 --> 00:03:00.203
+the need to load unnecessary
+data for fields not used in the
+
+68c2ef76-3884-4ab2-8180-e9f3ec022a36-3
+00:03:00.203 --> 00:03:00.960
+given query.
+
+be6f2561-507a-4478-8b77-6d42f6be9f2f-0
+00:03:02.440 --> 00:03:06.378
+CrateDB segments this data into
+blocks, storing it with
+
+be6f2561-507a-4478-8b77-6d42f6be9f2f-1
+00:03:06.378 --> 00:03:07.000
+metadata.
+
+4fe759f8-d346-4a5e-a8d2-d1e4922e4ce8-0
+00:03:07.000 --> 00:03:10.821
+That allows some queries to
+entirely skip blocks that don't
+
+4fe759f8-d346-4a5e-a8d2-d1e4922e4ce8-1
+00:03:10.821 --> 00:03:14.706
+contain matching values and
+query data without decompressing
+
+4fe759f8-d346-4a5e-a8d2-d1e4922e4ce8-2
+00:03:14.706 --> 00:03:15.280
+it first.
+
+60463a4e-77d6-417c-8172-950e5689455d-0
+00:03:18.200 --> 00:03:21.547
+Objects offer a lot of
+flexibility when modelling data
+
+60463a4e-77d6-417c-8172-950e5689455d-1
+00:03:21.547 --> 00:03:22.400
+with CrateDB.
+
+205fb500-55d3-41f1-a17f-5fd63f7da5f0-0
+00:03:23.040 --> 00:03:25.640
+Let's take a moment to learn how
+they are indexed.
+
+7523e2e7-a083-4bc0-981a-93bce93ddbd8-0
+00:03:26.600 --> 00:03:30.498
+Here's a CREATE TABLE statement for
+a table that models the details
+
+7523e2e7-a083-4bc0-981a-93bce93ddbd8-1
+00:03:30.498 --> 00:03:31.960
+of Chicago's taxi fleet.
+
+e4cb0f4c-61cd-4463-90c4-d5dfefbae3b2-0
+00:03:32.960 --> 00:03:36.140
+Recall that CrateDB has three
+different object schema
+
+e4cb0f4c-61cd-4463-90c4-d5dfefbae3b2-1
+00:03:36.140 --> 00:03:36.680
+policies.
+
+eb0985a2-e421-446f-8577-c62629d19b31-0
+00:03:37.360 --> 00:03:42.346
+When using DYNAMIC, the default
+policy, CrateDB creates a schema
+
+eb0985a2-e421-446f-8577-c62629d19b31-1
+00:03:42.346 --> 00:03:46.320
+for the object based on the data
+inserted into it.
+
+a5575ea7-8713-4230-a091-5341a3513872-0
+00:03:46.320 --> 00:03:50.012
+Here we're storing an object
+containing 2 TEXT values in the
+
+a5575ea7-8713-4230-a091-5341a3513872-1
+00:03:50.012 --> 00:03:50.920
+operator field.
+
+6e435b09-170d-4c3a-a7ff-622e269b7316-0
+00:03:51.760 --> 00:03:56.790
+CrateDB indexes dynamic objects,
+so both name and affiliation are
+
+6e435b09-170d-4c3a-a7ff-622e269b7316-1
+00:03:56.790 --> 00:03:57.400
+indexed.
+
+09ba159c-2610-4dc4-8da2-408822a69220-0
+00:03:59.560 --> 00:04:03.080
+The details object has a STRICT
+schema definition.
+
+007da136-0c96-4642-9703-dd16cf51cfcb-0
+00:04:03.880 --> 00:04:07.120
+Objects inserted here must match
+the declared schema.
+
+d0346da3-8293-475e-84d7-7dba62949c4b-0
+00:04:08.000 --> 00:04:10.560
+Everything inside this object is
+indexed too.
+
+abe420e0-4923-4787-90f9-ed4b520aa051-0
+00:04:12.440 --> 00:04:16.013
+Finally, an object using the
+IGNORED policy can have any
+
+abe420e0-4923-4787-90f9-ed4b520aa051-1
+00:04:16.013 --> 00:04:16.640
+structure.
+
+ede38478-2b7c-46dc-8a07-227a4fbef0ba-0
+00:04:17.240 --> 00:04:20.920
+Only fields specified in the
+schema are indexed in this case.
+
+63b3982e-ad67-4458-ae66-4a64d946d8ef-0
+00:04:21.320 --> 00:04:25.080
+So we see that emissions and
+seat belt check are not indexed.
+
+8951f552-eabf-4dda-8653-2d19d14f98b3-0
+00:04:28.000 --> 00:04:31.960
+This video provided an overview
+of indexing in CrateDB.
+
+c2f21942-e1e8-4dfd-9c32-658a7f46601c-0
+00:04:32.880 --> 00:04:36.662
+CrateDB ensures fast responses
+to all types of query by
+
+c2f21942-e1e8-4dfd-9c32-658a7f46601c-1
+00:04:36.662 --> 00:04:38.720
+indexing everything by default.
+
+3659f37b-914a-466d-a37d-11bdceabde78-0
+00:04:39.680 --> 00:04:43.000
+Full-text and vector similarity
+search are also possible.
+
+a1c2bea0-7726-49d9-b003-6181a90c68c0-0
+00:04:43.640 --> 00:04:46.040
+These topics are covered in
+other videos.

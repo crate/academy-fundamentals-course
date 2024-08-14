@@ -1,0 +1,870 @@
+WEBVTT
+
+23050f55-b424-4f47-84f8-bd53c87cb739-0
+00:00:04.840 --> 00:00:08.502
+It's time to take a deeper look
+at the architecture of
+
+23050f55-b424-4f47-84f8-bd53c87cb739-1
+00:00:08.502 --> 00:00:08.680
+CrateDB.
+
+2c39d5a6-a6ab-4652-b9b4-614ac0221d0b-0
+00:00:09.440 --> 00:00:12.760
+In this video, you'll learn more
+about how CrateDB clusters
+
+2c39d5a6-a6ab-4652-b9b4-614ac0221d0b-1
+00:00:12.760 --> 00:00:15.760
+work and how data is stored in a
+clustered environment.
+
+b71a0967-293a-4846-89cf-ec60db691b57-0
+00:00:16.720 --> 00:00:19.656
+We'll also take a look at the
+different ways that CrateDB
+
+b71a0967-293a-4846-89cf-ec60db691b57-1
+00:00:19.656 --> 00:00:20.440
+can be deployed.
+
+9f04fe71-5cf2-4731-b268-69c742c28321-0
+00:00:21.720 --> 00:00:25.185
+CrateDB is an open source
+database that allows you to
+
+9f04fe71-5cf2-4731-b268-69c742c28321-1
+00:00:25.185 --> 00:00:29.155
+store any kind of structured,
+semi structured and unstructured
+
+9f04fe71-5cf2-4731-b268-69c742c28321-2
+00:00:29.155 --> 00:00:30.920
+data in a single data store.
+
+91603043-d21a-4921-ba20-53e2eb8cd8ad-0
+00:00:31.840 --> 00:00:35.520
+It offers dynamic schemas and
+provides access to data via
+
+91603043-d21a-4921-ba20-53e2eb8cd8ad-1
+00:00:35.520 --> 00:00:39.200
+standard SQL with support for
+the Postgres Wire Protocol.
+
+d68d27a1-85c1-4fb4-b887-5482d28e8bb5-0
+00:00:40.680 --> 00:00:45.039
+CrateDB offers the best of SQL,
+NoSQL and search engines
+
+d68d27a1-85c1-4fb4-b887-5482d28e8bb5-1
+00:00:45.039 --> 00:00:49.250
+enabling full-text and vector
+similarity search to power
+
+d68d27a1-85c1-4fb4-b887-5482d28e8bb5-2
+00:00:49.250 --> 00:00:52.280
+traditional and AI enabled
+applications.
+
+9f9db06f-5465-4646-96a1-763a2f24b527-0
+00:00:53.840 --> 00:00:57.350
+A distributed shared-nothing
+architecture enables high
+
+9f9db06f-5465-4646-96a1-763a2f24b527-1
+00:00:57.350 --> 00:01:00.796
+availability, vertical and
+horizontal scaling, and high
+
+9f9db06f-5465-4646-96a1-763a2f24b527-2
+00:01:00.796 --> 00:01:04.370
+volume concurrent reads and
+writes with the distributed
+
+9f9db06f-5465-4646-96a1-763a2f24b527-3
+00:01:04.370 --> 00:01:05.200
+query engine.
+
+0f7de027-4113-406a-a199-e25685be7c73-0
+00:01:06.800 --> 00:01:10.357
+The combination of advanced
+indexing and columnar storage
+
+0f7de027-4113-406a-a199-e25685be7c73-1
+00:01:10.357 --> 00:01:14.282
+enables queries in single digit
+milliseconds across billions of
+
+0f7de027-4113-406a-a199-e25685be7c73-2
+00:01:14.282 --> 00:01:15.079
+rows of data.
+
+f4180135-614a-4834-861b-cc71d3d1754e-0
+00:01:16.920 --> 00:01:21.058
+CrateDB enables faster time to
+market with very low operational
+
+f4180135-614a-4834-861b-cc71d3d1754e-1
+00:01:21.058 --> 00:01:21.640
+overhead.
+
+2ff8e72f-7f02-44c3-aca2-5b2086ca47c4-0
+00:01:22.800 --> 00:01:26.440
+Flexible deployment options
+address a variety of use cases.
+
+35b28235-9662-490b-92f6-1a8655ab0a8e-0
+00:01:28.960 --> 00:01:32.541
+CrateDB is a distributed
+database that uses a
+
+35b28235-9662-490b-92f6-1a8655ab0a8e-1
+00:01:32.541 --> 00:01:33.960
+shared-nothing architecture.
+
+d0826819-8bba-412c-bde9-cabce152c3d9-0
+00:01:34.680 --> 00:01:36.440
+Each node is autonomous.
+
+3a5bb013-60d4-41dd-be55-7fbcc845b16d-0
+00:01:36.680 --> 00:01:39.800
+It operates independently
+without relying on shared
+
+3a5bb013-60d4-41dd-be55-7fbcc845b16d-1
+00:01:39.800 --> 00:01:40.400
+resources.
+
+b59491b8-ae12-466c-9dd3-7f3b018ed7b3-0
+00:01:41.120 --> 00:01:44.464
+This approach enables high
+availability, vertical and
+
+b59491b8-ae12-466c-9dd3-7f3b018ed7b3-1
+00:01:44.464 --> 00:01:47.998
+horizontal scaling, and high
+volume concurrent reads and
+
+b59491b8-ae12-466c-9dd3-7f3b018ed7b3-2
+00:01:47.998 --> 00:01:48.440
+writes.
+
+9ca41a44-0d42-495f-a5b6-fd849304242c-0
+00:01:49.720 --> 00:01:53.726
+As your data set grows or your
+processing needs increase, you
+
+9ca41a44-0d42-495f-a5b6-fd849304242c-1
+00:01:53.726 --> 00:01:56.440
+can simply add more nodes to the
+cluster.
+
+30ecd747-da4b-43f2-972b-79064adffb83-0
+00:01:57.800 --> 00:02:01.414
+CrateDB will automatically
+balance the data across the
+
+30ecd747-da4b-43f2-972b-79064adffb83-1
+00:02:01.414 --> 00:02:04.705
+nodes, optimizing query
+efficiency and simplifying
+
+30ecd747-da4b-43f2-972b-79064adffb83-2
+00:02:04.705 --> 00:02:05.480
+maintenance.
+
+03124bee-2fda-44e5-b8f7-d07425040861-0
+00:02:07.280 --> 00:02:10.626
+Let's dig deeper into the
+architecture of a node in a
+
+03124bee-2fda-44e5-b8f7-d07425040861-1
+00:02:10.626 --> 00:02:11.680
+CrateDB cluster.
+
+f5a2e7fe-bd47-4881-9e60-6b68557dc895-0
+00:02:12.560 --> 00:02:16.182
+Unlike in a primary secondary
+architecture, all nodes in a
+
+f5a2e7fe-bd47-4881-9e60-6b68557dc895-1
+00:02:16.182 --> 00:02:17.840
+CrateDB cluster are equal.
+
+a032aee7-fb92-4725-a674-be39ec9678d6-0
+00:02:18.040 --> 00:02:19.880
+They can perform any operation.
+
+6b54881a-04dd-4dd6-98cb-00f6ba6a41e6-0
+00:02:20.840 --> 00:02:23.880
+The four major components of
+each node are as follows.
+
+d0d05810-9258-4193-80d5-472dd268bb41-0
+00:02:24.840 --> 00:02:28.520
+The SQL handler is responsible
+for incoming client requests.
+
+62161e21-6ca2-4d37-be4a-5532af9b73ee-0
+00:02:29.040 --> 00:02:32.489
+The SQL handler pauses and
+analysis SQL statements,
+
+62161e21-6ca2-4d37-be4a-5532af9b73ee-1
+00:02:32.489 --> 00:02:34.280
+creating an execution plan.
+
+3f355078-df61-44ff-ba16-ce7845f24948-0
+00:02:35.840 --> 00:02:40.084
+The Job execution service
+manages the execution of plans
+
+3f355078-df61-44ff-ba16-ce7845f24948-1
+00:02:40.084 --> 00:02:40.680
+or jobs.
+
+14b14100-dd8d-4246-9381-a2ff8bf09b2d-0
+00:02:41.600 --> 00:02:45.399
+Jobs, which may contain multiple
+operations, are distributed by
+
+14b14100-dd8d-4246-9381-a2ff8bf09b2d-1
+00:02:45.399 --> 00:02:48.486
+the transport node to other
+nodes involved in their
+
+14b14100-dd8d-4246-9381-a2ff8bf09b2d-2
+00:02:48.486 --> 00:02:49.080
+execution.
+
+64c356bd-3a85-4c86-b4af-3cdb37ca8c7b-0
+00:02:50.560 --> 00:02:53.640
+The Cluster State service
+manages the cluster state.
+
+2a07657e-2449-4249-8c9d-46aff94829f7-0
+00:02:54.400 --> 00:02:57.553
+It is responsible for master
+node election and node
+
+2a07657e-2449-4249-8c9d-46aff94829f7-1
+00:02:57.553 --> 00:02:58.160
+discovery.
+
+f45a2bbe-e52b-422e-89ed-8f5987355343-0
+00:02:59.680 --> 00:03:01.880
+Finally, the Data Storage
+component.
+
+f5fbd142-2a78-4de8-8d60-2206af800515-0
+00:03:02.480 --> 00:03:06.135
+This component handles storage
+and retrieval of data from disk
+
+f5fbd142-2a78-4de8-8d60-2206af800515-1
+00:03:06.135 --> 00:03:07.760
+based on the execution plan.
+
+9ecfb83c-44ce-48f7-b6f4-53faf2ad5b1c-0
+00:03:09.480 --> 00:03:13.585
+As CrateDB stores data in sharded
+tables, it is divided across
+
+9ecfb83c-44ce-48f7-b6f4-53faf2ad5b1c-1
+00:03:13.585 --> 00:03:15.440
+multiple nodes in a cluster.
+
+51d569eb-8454-4ea4-9867-baa5d3540d39-0
+00:03:16.640 --> 00:03:20.320
+Each shard is a distinct Lucene
+index stored on the file system.
+
+f8cd8d91-3133-44d1-8b11-db6b74f965a4-0
+00:03:21.560 --> 00:03:24.480
+Each node is accessible via 3
+ports.
+
+c7a3dcb9-ad43-49f4-bbee-32330c7e2ff0-0
+00:03:25.680 --> 00:03:29.481
+SQL queries are accepted and
+results returned via the
+
+c7a3dcb9-ad43-49f4-bbee-32330c7e2ff0-1
+00:03:29.481 --> 00:03:32.720
+Postgres Wire Protocol port or
+the HTTP port.
+
+280e642e-6a6d-423e-bbb4-ce94e8761456-0
+00:03:34.160 --> 00:03:37.673
+The third port is used as a
+transport port for inter cluster
+
+280e642e-6a6d-423e-bbb4-ce94e8761456-1
+00:03:37.673 --> 00:03:38.480
+communication.
+
+c85ed8e4-ad92-4f97-8399-e0c89d8e4c12-0
+00:03:40.400 --> 00:03:43.821
+For a deeper dive into node
+operations, be sure to download
+
+c85ed8e4-ad92-4f97-8399-e0c89d8e4c12-1
+00:03:43.821 --> 00:03:45.760
+a copy of our architecture
+guide.
+
+8615d1cf-a3d8-4e01-9a14-26f59cbf19d3-0
+00:03:48.240 --> 00:03:51.648
+As business needs grow, so do
+data volumes and hardware
+
+8615d1cf-a3d8-4e01-9a14-26f59cbf19d3-1
+00:03:51.648 --> 00:03:52.440
+requirements.
+
+94284359-ac38-43fa-899e-857ba32af2ed-0
+00:03:53.080 --> 00:03:56.489
+When more CPU, RAM or disk
+storage is needed, additional
+
+94284359-ac38-43fa-899e-857ba32af2ed-1
+00:03:56.489 --> 00:03:59.840
+nodes can be seamlessly added to
+the CrateDB cluster.
+
+735edb38-552f-4915-9e22-23bd3e9fd54e-0
+00:03:59.840 --> 00:04:03.759
+Without manual intervention, the
+cluster will automatically
+
+735edb38-552f-4915-9e22-23bd3e9fd54e-1
+00:04:03.759 --> 00:04:06.960
+rebalance the data to
+accommodate the new nodes.
+
+54651f02-f51e-4f00-a2af-83bb4b06361e-0
+00:04:07.960 --> 00:04:11.489
+Here, we have a three node
+cluster that's utilising around
+
+54651f02-f51e-4f00-a2af-83bb4b06361e-1
+00:04:11.489 --> 00:04:13.680
+70% of its available storage
+space.
+
+53be6244-896f-445f-b6e5-1fcfb240ab5f-0
+00:04:15.560 --> 00:04:20.037
+Adding a fourth node results in
+an unbalanced distribution of
+
+53be6244-896f-445f-b6e5-1fcfb240ab5f-1
+00:04:20.037 --> 00:04:20.760
+data.
+
+6a13bb2d-0cd4-4219-8ae9-ede1a6a566a3-0
+00:04:20.760 --> 00:04:23.680
+CrateDB initiates an automatic
+redistribution.
+
+1cc7bfd2-9e21-4a34-abc7-4f248ecefeaf-0
+00:04:25.520 --> 00:04:29.326
+Data redistribution continues
+until an almost equal level of
+
+1cc7bfd2-9e21-4a34-abc7-4f248ecefeaf-1
+00:04:29.326 --> 00:04:33.382
+storage utilization is achieved
+across the four nodes now making
+
+1cc7bfd2-9e21-4a34-abc7-4f248ecefeaf-2
+00:04:33.382 --> 00:04:34.880
+up the enlarged cluster.
+
+63c6b594-671e-4b71-9f77-e440c839716c-0
+00:04:37.400 --> 00:04:40.907
+One of the key benefits of a
+distributed database is the
+
+63c6b594-671e-4b71-9f77-e440c839716c-1
+00:04:40.907 --> 00:04:44.415
+ability to provide high
+availability, crucial for always
+
+63c6b594-671e-4b71-9f77-e440c839716c-2
+00:04:44.415 --> 00:04:45.400
+on applications.
+
+cac1d724-6d6d-4b57-81b4-f66d50e82328-0
+00:04:46.440 --> 00:04:49.971
+CrateDB allows nodes in a cluster
+to be distributed across
+
+cac1d724-6d6d-4b57-81b4-f66d50e82328-1
+00:04:49.971 --> 00:04:52.760
+multiple availability zones or
+data centres.
+
+f3dd2c40-2ebe-4d25-b5e6-d9d54a861030-0
+00:04:54.040 --> 00:04:57.640
+CrateDB clusters exhibit self
+healing characteristics.
+
+ccce30e9-96e6-4b71-9833-02c808ea422b-0
+00:04:58.160 --> 00:05:01.221
+Nodes rejoining a cluster after
+a failure automatically
+
+ccce30e9-96e6-4b71-9833-02c808ea422b-1
+00:05:01.221 --> 00:05:03.080
+synchronize with the latest
+data.
+
+4ae66153-64cc-4420-8f92-3e3376402157-0
+00:05:03.880 --> 00:05:07.000
+Let's walk through a typical
+failure and recovery process.
+
+8c95ea22-0741-4f1f-9403-376f31436275-0
+00:05:10.000 --> 00:05:12.520
+Here, we have a cluster of three
+nodes.
+
+07cc5bc6-fb2c-4ab2-8b04-228f5d6fe220-0
+00:05:13.080 --> 00:05:16.635
+A node leaves the cluster,
+perhaps due to hardware failure,
+
+07cc5bc6-fb2c-4ab2-8b04-228f5d6fe220-1
+00:05:16.635 --> 00:05:19.480
+network partition or a rolling
+maintenance task.
+
+817d4aa6-9be3-43e5-821e-b6485294d99d-0
+00:05:20.880 --> 00:05:23.760
+The data is automatically
+replicated in CrateDB.
+
+86d3ca45-2f21-40d1-a24d-2d82683fba3e-0
+00:05:24.080 --> 00:05:27.841
+There is an automatic failover,
+ensuring no loss of data despite
+
+86d3ca45-2f21-40d1-a24d-2d82683fba3e-1
+00:05:27.841 --> 00:05:29.840
+one node having left the
+cluster.
+
+680bf526-21f1-443a-afbd-912ec54c337b-0
+00:05:31.680 --> 00:05:35.357
+When the node is back up, or a
+new node joins the cluster to
+
+680bf526-21f1-443a-afbd-912ec54c337b-1
+00:05:35.357 --> 00:05:38.432
+replace it, data is
+automatically synchronised and
+
+680bf526-21f1-443a-afbd-912ec54c337b-2
+00:05:38.432 --> 00:05:39.880
+rebalanced as necessary.
+
+b2afa5de-c16d-47d4-b749-625b2d8ebeb9-0
+00:05:42.160 --> 00:05:45.916
+Once the data synchronisation is
+complete, the node becomes fully
+
+b2afa5de-c16d-47d4-b749-625b2d8ebeb9-1
+00:05:45.916 --> 00:05:46.600
+operational.
+
+75674a0e-1bf0-49f3-adac-7c7504222458-0
+00:05:46.920 --> 00:05:50.052
+The cluster has recovered
+autonomously without any manual
+
+75674a0e-1bf0-49f3-adac-7c7504222458-1
+00:05:50.052 --> 00:05:51.240
+intervention required.
+
+30d6f2a8-2813-4982-86ce-b20dfab42419-0
+00:05:54.400 --> 00:05:57.722
+All tables in CrateDB are
+sharded and optionally
+
+30d6f2a8-2813-4982-86ce-b20dfab42419-1
+00:05:57.722 --> 00:05:58.520
+partitioned.
+
+d2824a40-66e2-4a2c-b5b0-76a68aaf5bfe-0
+00:05:59.160 --> 00:06:02.413
+This means that tables are
+divided and distributed across
+
+d2824a40-66e2-4a2c-b5b0-76a68aaf5bfe-1
+00:06:02.413 --> 00:06:04.040
+the nodes, forming a cluster.
+
+499c1011-24af-45da-801b-92ca9069228f-0
+00:06:05.080 --> 00:06:08.205
+Each shard in CrateDB
+corresponds to a Lucene index
+
+499c1011-24af-45da-801b-92ca9069228f-1
+00:06:08.205 --> 00:06:10.800
+made of segments stored on the
+file system.
+
+d8f65cb3-423b-49d7-8310-027334eb7ede-0
+00:06:11.720 --> 00:06:15.613
+These files physically reside in
+one of the configured data
+
+d8f65cb3-423b-49d7-8310-027334eb7ede-1
+00:06:15.613 --> 00:06:18.080
+directories on the nodes. Lucene
+
+71f149fa-42c2-4cd5-97d0-586f863bdc20-0
+00:06:18.080 --> 00:06:20.280
+only appends data to segment
+files.
+
+7ef706fc-b31f-4fe8-89fc-a22ace8f1400-0
+00:06:20.440 --> 00:06:23.400
+Data already written to disk is
+never mutated.
+
+a09ef846-3ecc-4875-b888-b65405abc22c-0
+00:06:24.720 --> 00:06:27.120
+This simplifies replication and
+recovery.
+
+4eb95b81-a8b0-4c92-a235-543319e1de09-0
+00:06:27.600 --> 00:06:30.762
+Synchronising a shard becomes a
+straightforward process of
+
+4eb95b81-a8b0-4c92-a235-543319e1de09-1
+00:06:30.762 --> 00:06:32.800
+fetching data from a specific
+marker.
+
+2bb0052e-cfcc-403f-ae63-340c5b968bc1-0
+00:06:34.520 --> 00:06:38.160
+CrateDB periodically merges
+segments as they grow over time.
+
+6c467c6f-5edf-4232-80a0-67eac35bd854-0
+00:06:39.280 --> 00:06:43.150
+This is an automatic process
+that runs in the background, but
+
+6c467c6f-5edf-4232-80a0-67eac35bd854-1
+00:06:43.150 --> 00:06:47.020
+users can also initiate it on
+demand using the OPTIMIZE TABLE
+
+6c467c6f-5edf-4232-80a0-67eac35bd854-2
+00:06:47.020 --> 00:06:47.519
+command.
+
+9bc0e6b3-c9e8-4cb5-b118-6473c5206fb9-0
+00:06:49.240 --> 00:06:52.240
+See the CrateDB documentation
+for more details.
+
+1b44a53d-9466-41ee-921a-e082c7469cbb-0
+00:06:54.640 --> 00:06:58.498
+Tables in CrateDB can be
+divided by defining partition
+
+1b44a53d-9466-41ee-921a-e082c7469cbb-1
+00:06:58.498 --> 00:06:59.040
+columns.
+
+3eea3849-c51b-45f1-81a6-5d77190805f4-0
+00:06:59.640 --> 00:07:03.596
+This CREATE TABLE statement
+creates a table to store details
+
+3eea3849-c51b-45f1-81a6-5d77190805f4-1
+00:07:03.596 --> 00:07:06.320
+of our 311 calls from the Chicago
+data set.
+
+0eaf4597-97c2-488a-8c0d-afde14e3ac26-0
+00:07:07.360 --> 00:07:10.885
+The created date column contains
+a timestamp representing the
+
+0eaf4597-97c2-488a-8c0d-afde14e3ac26-1
+00:07:10.885 --> 00:07:13.160
+date and time that the call was
+logged.
+
+e6aa73e6-2d36-4ba4-b7a9-eab358675784-0
+00:07:14.920 --> 00:07:18.927
+Here we're defining a generated
+column 'week' populated by
+
+e6aa73e6-2d36-4ba4-b7a9-eab358675784-1
+00:07:18.927 --> 00:07:23.287
+truncating the created date to
+the timestamp for the start of
+
+e6aa73e6-2d36-4ba4-b7a9-eab358675784-2
+00:07:23.287 --> 00:07:27.365
+the week that it falls in. Now
+we're telling CrateDB to
+
+e6aa73e6-2d36-4ba4-b7a9-eab358675784-3
+00:07:27.365 --> 00:07:30.600
+partition this table by that
+generated field.
+
+f0c07cc3-3865-45d9-aa16-0232fd3cd744-0
+00:07:32.200 --> 00:07:35.429
+This partitions the table by
+week, with CrateDB
+
+f0c07cc3-3865-45d9-aa16-0232fd3cd744-1
+00:07:35.429 --> 00:07:39.187
+automatically generating
+partitions as needed on the fly
+
+f0c07cc3-3865-45d9-aa16-0232fd3cd744-2
+00:07:39.187 --> 00:07:41.560
+as data is inserted into the
+table.
+
+54b553b7-6d4f-4736-af3a-b88d33388814-0
+00:07:42.720 --> 00:07:46.373
+Partitioning tables offers
+several advantages, including
+
+54b553b7-6d4f-4736-af3a-b88d33388814-1
+00:07:46.373 --> 00:07:49.898
+flexible sharding, improved
+query performance, and the
+
+54b553b7-6d4f-4736-af3a-b88d33388814-2
+00:07:49.898 --> 00:07:53.680
+ability to backup and delete old
+data in an efficient way.
+
+a41ca73d-cfb2-4230-abf4-311547c8c65d-0
+00:07:55.080 --> 00:07:58.026
+For more information on
+partitioning, refer to the
+
+a41ca73d-cfb2-4230-abf4-311547c8c65d-1
+00:07:58.026 --> 00:07:59.240
+online documentation.
+
+73582f0c-eaf3-427b-862e-0ab127919e1e-0
+00:08:01.880 --> 00:08:04.868
+CrateDB offers a range of
+deployment options, ensuring
+
+73582f0c-eaf3-427b-862e-0ab127919e1e-1
+00:08:04.868 --> 00:08:08.023
+that there's a solution that
+aligns seamlessly with your
+
+73582f0c-eaf3-427b-862e-0ab127919e1e-2
+00:08:08.023 --> 00:08:09.960
+infrastructure and business
+goals.
+
+0a4e9bd1-8377-4660-bcbd-66ae1899d2ea-0
+00:08:11.480 --> 00:08:16.114
+CrateDB excels in public cloud
+environments, including AWS,
+
+0a4e9bd1-8377-4660-bcbd-66ae1899d2ea-1
+00:08:16.114 --> 00:08:18.000
+Azure, and Google Cloud.
+
+43b6567f-8f5f-4328-9221-eb04d99e02f5-0
+00:08:18.760 --> 00:08:22.369
+This option is ideal for those
+in pursuit of scalability and
+
+43b6567f-8f5f-4328-9221-eb04d99e02f5-1
+00:08:22.369 --> 00:08:23.080
+flexibility.
+
+c97c86cb-528c-4e82-9f33-be60d58b259a-0
+00:08:24.320 --> 00:08:27.527
+Leveraging the public cloud
+model enables CrateDB to
+
+c97c86cb-528c-4e82-9f33-be60d58b259a-1
+00:08:27.527 --> 00:08:30.920
+dynamically scale resources
+based on workload demands.
+
+e8e0e3b5-3de8-490f-917d-995b6396d4ed-0
+00:08:31.600 --> 00:08:34.945
+This provides a cost effective
+solution without requiring
+
+e8e0e3b5-3de8-490f-917d-995b6396d4ed-1
+00:08:34.945 --> 00:08:36.560
+upfront hardware investment.
+
+93e8ded4-d465-41a5-aea5-50cdcf239520-0
+00:08:38.840 --> 00:08:42.484
+For those seeking cloud-like
+flexibility while maintaining
+
+93e8ded4-d465-41a5-aea5-50cdcf239520-1
+00:08:42.484 --> 00:08:45.572
+control of their own
+environment, CrateDB can be
+
+93e8ded4-d465-41a5-aea5-50cdcf239520-2
+00:08:45.572 --> 00:08:47.240
+deployed in private clouds.
+
+8d62311a-c271-4a57-bffa-2592a4decd98-0
+00:08:48.320 --> 00:08:51.584
+This approach combines the
+advantages of cloud computing
+
+8d62311a-c271-4a57-bffa-2592a4decd98-1
+00:08:51.584 --> 00:08:54.849
+with the privacy and security
+controls of an on premises
+
+8d62311a-c271-4a57-bffa-2592a4decd98-2
+00:08:54.849 --> 00:08:55.480
+deployment.
+
+954a2589-75a4-4ca5-87a4-62bf71a52c68-0
+00:08:59.480 --> 00:09:03.610
+Organisations prioritising
+security and control can deploy
+
+954a2589-75a4-4ca5-87a4-62bf71a52c68-1
+00:09:03.610 --> 00:09:05.080
+CrateDB on premise.
+
+5da0f820-2a7c-402e-a613-741232338409-0
+00:09:05.800 --> 00:09:09.298
+In this model, existing
+infrastructure can be utilised
+
+5da0f820-2a7c-402e-a613-741232338409-1
+00:09:09.298 --> 00:09:13.114
+and comprehensive control over
+data and database management
+
+5da0f820-2a7c-402e-a613-741232338409-2
+00:09:13.114 --> 00:09:16.803
+maintained to ensure adherence
+to compliance and security
+
+5da0f820-2a7c-402e-a613-741232338409-3
+00:09:16.803 --> 00:09:17.440
+protocols.
+
+70d04a91-9499-4026-a841-84bdc255b6e5-0
+00:09:20.280 --> 00:09:23.767
+Hybrid deployments offer a
+balanced solution, combining the
+
+70d04a91-9499-4026-a841-84bdc255b6e5-1
+00:09:23.767 --> 00:09:26.906
+control and security of an on
+premise system with the
+
+70d04a91-9499-4026-a841-84bdc255b6e5-2
+00:09:26.906 --> 00:09:28.360
+scalability of the cloud.
+
+36813f99-9e00-49a8-9f64-db5ae841da66-0
+00:09:29.800 --> 00:09:33.588
+CrateDB allows sensitive data
+to be stored on premise whilst
+
+36813f99-9e00-49a8-9f64-db5ae841da66-1
+00:09:33.588 --> 00:09:37.071
+also leveraging cloud resources
+for scalable compute and
+
+36813f99-9e00-49a8-9f64-db5ae841da66-2
+00:09:37.071 --> 00:09:37.560
+storage.
+
+63671a32-5b0d-42f5-8824-51d8864964c0-0
+00:09:40.000 --> 00:09:43.960
+CrateDB is uniquely positioned
+for edge computing environments.
+
+8eb92872-4d91-4ba2-bb2c-a6b5bb0d013a-0
+00:09:45.120 --> 00:09:48.648
+Deploying CrateDB at the edge
+facilitates immediate data
+
+8eb92872-4d91-4ba2-bb2c-a6b5bb0d013a-1
+00:09:48.648 --> 00:09:52.663
+processing, reducing latency and
+bandwidth constraints associated
+
+8eb92872-4d91-4ba2-bb2c-a6b5bb0d013a-2
+00:09:52.663 --> 00:09:55.280
+with data transfer to
+centralized systems.
+
+b323be9b-9692-4f55-9c9a-503d31870238-0
+00:09:57.160 --> 00:10:01.043
+This ensures faster insights and
+decision making at the point of
+
+b323be9b-9692-4f55-9c9a-503d31870238-1
+00:10:01.043 --> 00:10:02.000
+data generation.
+
+3b4eec2d-21fe-4b55-a5c8-a6e77c1b5183-0
+00:10:04.200 --> 00:10:08.115
+Finally, CrateDB offers support
+for containerization and
+
+3b4eec2d-21fe-4b55-a5c8-a6e77c1b5183-1
+00:10:08.115 --> 00:10:12.232
+orchestration tools such as
+Docker and Kubernetes, enhancing
+
+3b4eec2d-21fe-4b55-a5c8-a6e77c1b5183-2
+00:10:12.232 --> 00:10:16.350
+operational flexibility and
+ensuring adaptability to varying
+
+3b4eec2d-21fe-4b55-a5c8-a6e77c1b5183-3
+00:10:16.350 --> 00:10:18.240
+infrastructure requirements.
+
+50415e62-a303-400e-a5bc-bf1a3e62f746-0
+00:10:20.200 --> 00:10:24.275
+This video provided a high level
+overview of the architecture of
+
+50415e62-a303-400e-a5bc-bf1a3e62f746-1
+00:10:24.275 --> 00:10:24.840
+CrateDB.
+
+0df0eca9-5e02-45a2-8579-3fd6b126ed41-0
+00:10:25.720 --> 00:10:29.408
+To learn more, including how
+CrateDB handles replication,
+
+0df0eca9-5e02-45a2-8579-3fd6b126ed41-1
+00:10:29.408 --> 00:10:32.544
+atomicity, and consistency,
+download a copy of the
+
+0df0eca9-5e02-45a2-8579-3fd6b126ed41-2
+00:10:32.544 --> 00:10:35.680
+comprehensive Architecture guide
+from our website.

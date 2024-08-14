@@ -1,0 +1,501 @@
+WEBVTT
+
+86522a6a-776f-4614-a0a2-0700cea59c82-0
+00:00:04.280 --> 00:00:08.072
+CrateDB excels at storing,
+analysing, and tracking the
+
+86522a6a-776f-4614-a0a2-0700cea59c82-1
+00:00:08.072 --> 00:00:11.120
+location of people and objects
+in real time.
+
+6edb71e8-e44b-4ef2-bc6f-373633fdc749-0
+00:00:11.720 --> 00:00:15.565
+Whether you're managing a fleet
+of vehicles, offering customers
+
+6edb71e8-e44b-4ef2-bc6f-373633fdc749-1
+00:00:15.565 --> 00:00:19.231
+information about services near
+their location, or analysing
+
+6edb71e8-e44b-4ef2-bc6f-373633fdc749-2
+00:00:19.231 --> 00:00:22.897
+historical traffic patterns,
+CrateDB's geospatial data types
+
+6edb71e8-e44b-4ef2-bc6f-373633fdc749-3
+00:00:22.897 --> 00:00:24.759
+and functions have you covered.
+
+191b2b9a-d910-4d2d-882f-231c8720c4d9-0
+00:00:26.120 --> 00:00:29.581
+We'll begin by learning how to
+store different types of
+
+191b2b9a-d910-4d2d-882f-231c8720c4d9-1
+00:00:29.581 --> 00:00:33.414
+geospatial data in CrateDB and
+move on to explore different
+
+191b2b9a-d910-4d2d-882f-231c8720c4d9-2
+00:00:33.414 --> 00:00:34.960
+types of geosearch query.
+
+80a796ec-77b3-4525-9efa-c5831974c71e-0
+00:00:37.640 --> 00:00:41.739
+The GEO_POINT data type is used
+to store latitude and longitude
+
+80a796ec-77b3-4525-9efa-c5831974c71e-1
+00:00:41.739 --> 00:00:42.520
+coordinates.
+
+8b512099-d78d-438a-a4b5-10323f615857-0
+00:00:43.040 --> 00:00:46.968
+In common with other data types
+in CrateDB, GEO_POINTs can be
+
+8b512099-d78d-438a-a4b5-10323f615857-1
+00:00:46.968 --> 00:00:50.771
+used to define a column in a
+table or the field in an object
+
+8b512099-d78d-438a-a4b5-10323f615857-2
+00:00:50.771 --> 00:00:51.520
+type column.
+
+a764eeac-0ee5-4213-8439-29b256a3684b-0
+00:00:52.920 --> 00:00:56.744
+Here we're looking at an excerpt
+of the CREATE TABLE command that
+
+a764eeac-0ee5-4213-8439-29b256a3684b-1
+00:00:56.744 --> 00:01:00.280
+creates the table for the 311
+calls in our Chicago data set.
+
+b2f89685-ec81-4375-923a-fdc6f76a8c4c-0
+00:01:01.760 --> 00:01:04.160
+Inside the locationdetails
+object.
+
+dd22063d-8333-4727-bbf2-7fb092b7c33b-0
+00:01:04.720 --> 00:01:07.951
+The location column stores the
+latitude and longitude from
+
+dd22063d-8333-4727-bbf2-7fb092b7c33b-1
+00:01:07.951 --> 00:01:10.800
+which the issue described in the
+call was reported.
+
+8f6b49f9-8a0d-4194-af90-7f7980ca0e53-0
+00:01:12.960 --> 00:01:17.286
+This is a fragment of an INSERT
+statement to add a new 311 call
+
+8f6b49f9-8a0d-4194-af90-7f7980ca0e53-1
+00:01:17.286 --> 00:01:17.760
+record.
+
+112178be-2cea-4bcf-a129-65c2474afded-0
+00:01:18.520 --> 00:01:22.785
+When specifying the location
+details, we can either provide
+
+112178be-2cea-4bcf-a129-65c2474afded-1
+00:01:22.785 --> 00:01:26.624
+an array containing the
+longitude and latitude values
+
+112178be-2cea-4bcf-a129-65c2474afded-2
+00:01:26.624 --> 00:01:30.889
+separated by a comma as shown
+here, or we can provide these
+
+112178be-2cea-4bcf-a129-65c2474afded-3
+00:01:30.889 --> 00:01:34.159
+details in the WKT or Well Known
+Text format.
+
+b69c5a2e-88ba-4c31-8b5b-910d48fcf7ef-0
+00:01:36.280 --> 00:01:39.851
+This is what a GEO_POINT field
+looks like when returned from a
+
+b69c5a2e-88ba-4c31-8b5b-910d48fcf7ef-1
+00:01:39.851 --> 00:01:40.600
+SELECT query.
+
+e2671a99-a0ee-4152-bca6-f3226b4a7d4b-0
+00:01:43.520 --> 00:01:47.187
+Now we've stored some GEO_POINT
+data, let's study some basic
+
+e2671a99-a0ee-4152-bca6-f3226b4a7d4b-1
+00:01:47.187 --> 00:01:48.960
+queries using this data type.
+
+1bfeae44-ea4e-4d4f-9b7e-c478bfffd542-0
+00:01:49.480 --> 00:01:53.221
+The distance function returns
+the distance in meters between
+
+1bfeae44-ea4e-4d4f-9b7e-c478bfffd542-1
+00:01:53.221 --> 00:01:54.080
+two GEO_POINTs.
+
+6dabe9a9-a10e-4c72-a55b-35479769d614-0
+00:01:54.960 --> 00:01:58.189
+Here we have a query that
+calculates the distance between
+
+6dabe9a9-a10e-4c72-a55b-35479769d614-1
+00:01:58.189 --> 00:02:01.196
+the location of a specific
+street light that has been
+
+6dabe9a9-a10e-4c72-a55b-35479769d614-2
+00:02:01.196 --> 00:02:04.538
+reported as not working and the
+location of the maintenance
+
+6dabe9a9-a10e-4c72-a55b-35479769d614-3
+00:02:04.538 --> 00:02:06.320
+depot responsible for fixing it.
+
+451971b3-a060-422b-8737-58c6ba0084ba-0
+00:02:07.600 --> 00:02:11.733
+We can see that CrateDB has
+calculated that these two points
+
+451971b3-a060-422b-8737-58c6ba0084ba-1
+00:02:11.733 --> 00:02:15.666
+are about 4.3 kilometers apart
+and we can see that mapping
+
+451971b3-a060-422b-8737-58c6ba0084ba-2
+00:02:15.666 --> 00:02:18.199
+software agrees with this
+assessment.
+
+9378356b-8543-47d0-82c7-375ff3f98f86-0
+00:02:20.360 --> 00:02:23.481
+We can of course use the
+distance function as a filter
+
+9378356b-8543-47d0-82c7-375ff3f98f86-1
+00:02:23.481 --> 00:02:24.560
+when querying data.
+
+76f15952-2d0e-4179-ac40-8b7d76735d9a-0
+00:02:25.480 --> 00:02:29.413
+This query finds all open street
+light out reports within 2
+
+76f15952-2d0e-4179-ac40-8b7d76735d9a-1
+00:02:29.413 --> 00:02:32.954
+kilometers of the depot
+returning the service request
+
+76f15952-2d0e-4179-ac40-8b7d76735d9a-2
+00:02:32.954 --> 00:02:34.200
+number and address.
+
+50b7f948-a5dc-401b-829e-7736f6f53394-0
+00:02:37.000 --> 00:02:41.430
+The second geospatial data type
+supported by CrateDB is the
+
+50b7f948-a5dc-401b-829e-7736f6f53394-1
+00:02:41.430 --> 00:02:41.840
+GEO_SHAPE.
+
+07ab52d5-3b09-4000-addc-a8c499e336c2-0
+00:02:42.520 --> 00:02:47.246
+A GEO_SHAPE column can store 2
+dimensional shapes represented
+
+07ab52d5-3b09-4000-addc-a8c499e336c2-1
+00:02:47.246 --> 00:02:50.600
+as either GeoJSON objects or in
+WKT format.
+
+c223c33c-64f2-4c63-ae51-fd0f6e9f4b1d-0
+00:02:51.840 --> 00:02:56.237
+CrateDB's GEO_SHAPE supports a
+range of shapes from a simple
+
+c223c33c-64f2-4c63-ae51-fd0f6e9f4b1d-1
+00:02:56.237 --> 00:03:00.492
+point or a line string with
+complex polygons and even multi
+
+c223c33c-64f2-4c63-ae51-fd0f6e9f4b1d-2
+00:03:00.492 --> 00:03:04.393
+polygons for non contiguous
+areas, and even a geometry
+
+c223c33c-64f2-4c63-ae51-fd0f6e9f4b1d-3
+00:03:04.393 --> 00:03:08.294
+collection, a set of shapes
+containing any of the other
+
+c223c33c-64f2-4c63-ae51-fd0f6e9f4b1d-4
+00:03:08.294 --> 00:03:08.719
+types.
+
+c6f5d5f6-7b31-49f1-9b1b-43a81bd24a38-0
+00:03:11.080 --> 00:03:14.470
+Here I'm using an online tool to
+visualise the GeoJSON
+
+c6f5d5f6-7b31-49f1-9b1b-43a81bd24a38-1
+00:03:14.470 --> 00:03:18.293
+representation of Kenwood, one
+of the Chicago community areas
+
+c6f5d5f6-7b31-49f1-9b1b-43a81bd24a38-2
+00:03:18.293 --> 00:03:19.280
+in our data set.
+
+c4ae1e21-f4ba-43bf-8162-b452360ffdb3-0
+00:03:20.240 --> 00:03:23.840
+Each community area is
+represented as a MultiPolygon.
+
+1ecbd797-7a98-43de-abb1-173ecc086a75-0
+00:03:24.760 --> 00:03:28.190
+This format enables us to model
+complex shapes such as the
+
+1ecbd797-7a98-43de-abb1-173ecc086a75-1
+00:03:28.190 --> 00:03:30.400
+lakeside edge of this community
+area.
+
+eb262374-72cd-4e7c-a43e-88259b1afb7a-0
+00:03:31.560 --> 00:03:34.888
+We'll see how to perform queries
+over this sort of data later in
+
+eb262374-72cd-4e7c-a43e-88259b1afb7a-1
+00:03:34.888 --> 00:03:35.400
+the video.
+
+138d371b-5dd9-42b7-9527-03f4fe019911-0
+00:03:37.760 --> 00:03:41.250
+When defining a GEO_SHAPE
+column, you can choose how
+
+138d371b-5dd9-42b7-9527-03f4fe019911-1
+00:03:41.250 --> 00:03:43.160
+CrateDB indexes the shapes.
+
+1c0f7a22-40e1-4692-93f7-eaeaacb27d58-0
+00:03:43.880 --> 00:03:46.925
+This allows you to control the
+size of the index needed for
+
+1c0f7a22-40e1-4692-93f7-eaeaacb27d58-1
+00:03:46.925 --> 00:03:49.920
+your GEO_SHAPEs and the accuracy
+that they're stored with.
+
+14655c37-d4af-4ce6-aaf7-2e8da9068044-0
+00:03:50.760 --> 00:03:54.520
+In this example, take our
+Chicago Community Areas data set.
+
+444e51d6-edfe-48e9-b407-7a9e7b3bbc98-0
+00:03:54.800 --> 00:03:58.320
+We're using the geohash index
+with one meter accuracy.
+
+3bb8e6db-793e-4c7f-976e-3192fefa5588-0
+00:03:59.040 --> 00:04:03.553
+Other options for indexing
+include a Quad-tree or a BKD-
+
+3bb8e6db-793e-4c7f-976e-3192fefa5588-1
+00:04:03.553 --> 00:04:04.440
+tree index.
+
+3a610cb7-83d8-4ae2-bc05-2647d5620f38-0
+00:04:05.320 --> 00:04:09.081
+Refer to the CrateDB GEO_SHAPE
+documentation to understand the
+
+3a610cb7-83d8-4ae2-bc05-2647d5620f38-1
+00:04:09.081 --> 00:04:12.489
+benefits and trade-offs of each
+of the available indexing
+
+3a610cb7-83d8-4ae2-bc05-2647d5620f38-2
+00:04:12.489 --> 00:04:12.960
+options.
+
+7f6f7b6a-1bc4-4b80-a7b2-92b315e63ac6-0
+00:04:15.040 --> 00:04:19.909
+GEO_SHAPE values are inserted
+using either the GeoJSON
+
+7f6f7b6a-1bc4-4b80-a7b2-92b315e63ac6-1
+00:04:19.909 --> 00:04:25.291
+geometry object representation
+as shown here, or using the WKT
+
+7f6f7b6a-1bc4-4b80-a7b2-92b315e63ac6-2
+00:04:25.291 --> 00:04:27.000
+representation here.
+
+0bc812d6-b81a-47de-90af-357fdb61b2cc-0
+00:04:28.920 --> 00:04:32.640
+Let's look at two ways to use
+GEO_SHAPE data in a query.
+
+f6b90368-147f-489e-8f6f-e15e9e910748-0
+00:04:33.200 --> 00:04:36.947
+The within function takes 2 
+GEO_SHAPEs as its parameters and
+
+f6b90368-147f-489e-8f6f-e15e9e910748-1
+00:04:36.947 --> 00:04:40.880
+returns true if the first shape
+is contained within the second.
+
+493aff82-b593-4be6-a89c-614a34bacad0-0
+00:04:42.240 --> 00:04:45.854
+This query tells us which
+community area the point
+
+493aff82-b593-4be6-a89c-614a34bacad0-1
+00:04:45.854 --> 00:04:48.760
+representing a cafe at 807 W
+Maxwell St.
+
+ef2827a4-c062-41bb-a1f2-5308d68d0416-0
+00:04:48.760 --> 00:04:49.480
+is part of.
+
+a24b0799-abf1-48c5-9a37-a5375c4345de-0
+00:04:50.400 --> 00:04:52.520
+We'll use WKT for this query.
+
+097b9c78-ead2-49c7-9ff3-15a3bc9f2ab6-0
+00:04:53.720 --> 00:04:57.006
+CrateDB tells us that this
+location is part of the Near
+
+097b9c78-ead2-49c7-9ff3-15a3bc9f2ab6-1
+00:04:57.006 --> 00:04:58.160
+West Side community.
+
+3283a1b9-2d97-4e37-8193-2fb83d912393-0
+00:05:01.480 --> 00:05:05.538
+We can also ask CrateDB which
+communities intersect with an
+
+3283a1b9-2d97-4e37-8193-2fb83d912393-1
+00:05:05.538 --> 00:05:07.960
+area described by a given GEO_SHAPE
+
+275ea239-51da-42bf-a09c-75ede9126ba3-0
+00:05:08.960 --> 00:05:12.405
+This query returns the names of
+all communities that intersect
+
+275ea239-51da-42bf-a09c-75ede9126ba3-1
+00:05:12.405 --> 00:05:14.320
+with the Polygon shown on the
+map.
+
+70cd9263-87ec-4572-8489-ce622d8ee723-0
+00:05:14.320 --> 00:05:18.256
+In this case, we're using
+GeoJSON when specifying the
+
+70cd9263-87ec-4572-8489-ce622d8ee723-1
+00:05:18.256 --> 00:05:20.880
+points of the Polygon in our
+query.
+
+d315e95e-3e94-436d-b9b3-02941f0f46f8-0
+00:05:22.840 --> 00:05:26.544
+When we run the query, we see
+that the area drawn on the map
+
+d315e95e-3e94-436d-b9b3-02941f0f46f8-1
+00:05:26.544 --> 00:05:29.520
+intersects with 17 of Chicago's
+community areas.
+
+6c7bb7a2-ef62-4f37-a995-32bbfa9bddf2-0
+00:05:31.400 --> 00:05:35.083
+Thanks to CrateDB's PostgreSQL Wire 
+Protocol compatibility,
+
+6c7bb7a2-ef62-4f37-a995-32bbfa9bddf2-1
+00:05:35.083 --> 00:05:38.092
+it's easy to connect it to
+popular dashboard and
+
+6c7bb7a2-ef62-4f37-a995-32bbfa9bddf2-2
+00:05:38.092 --> 00:05:39.320
+visualization tools.
+
+154fb645-0b2c-4c3f-8b31-0d70e603fce3-0
+00:05:40.080 --> 00:05:43.843
+Here I'm running a simple query
+from Grafana to generate a map
+
+154fb645-0b2c-4c3f-8b31-0d70e603fce3-1
+00:05:43.843 --> 00:05:47.249
+showing the location of all the
+open street light issues
+
+154fb645-0b2c-4c3f-8b31-0d70e603fce3-2
+00:05:47.249 --> 00:05:49.400
+contained in our 311 call data
+set.
+
+06904ed3-fc2a-4390-901a-6193daeddcec-0
+00:05:50.480 --> 00:05:54.320
+CreateDB has excellent support
+for geospatial data types.
+
+06430d20-23de-489f-8105-839b7872f307-0
+00:05:54.720 --> 00:05:58.831
+The use of standard
+representations such as GeoJSON
+
+06430d20-23de-489f-8105-839b7872f307-1
+00:05:58.831 --> 00:06:03.654
+and WKT make it easy to import,
+query, analyse and visualise
+
+06430d20-23de-489f-8105-839b7872f307-2
+00:06:03.654 --> 00:06:04.920
+geospatial data.
+
+68ab1060-425a-4f19-a2a1-69c50d77664f-0
+00:06:05.920 --> 00:06:10.398
+The sample data set contains
+geospatial data in the community
+
+68ab1060-425a-4f19-a2a1-69c50d77664f-1
+00:06:10.398 --> 00:06:13.360
+areas, 311 calls and taxi rights
+tables.
+
+ab6ee33d-3a48-4085-9034-87059d982321-0
+00:06:14.920 --> 00:06:18.464
+Take some time to explore these
+in your CrateDB cluster and
+
+ab6ee33d-3a48-4085-9034-87059d982321-1
+00:06:18.464 --> 00:06:21.080
+try out some geospatial queries
+of your own.

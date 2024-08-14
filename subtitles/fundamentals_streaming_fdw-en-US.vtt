@@ -1,0 +1,484 @@
+WEBVTT
+
+08a264ea-9984-447e-b04c-7bae9ac03fde-0
+00:00:04.800 --> 00:00:08.312
+It's time to look at how CrateDB
+can be used to provide
+
+08a264ea-9984-447e-b04c-7bae9ac03fde-1
+00:00:08.312 --> 00:00:11.640
+insights into fast moving
+continuous streams of data.
+
+aed78832-1f09-4412-817b-043653862061-0
+00:00:11.640 --> 00:00:15.455
+I'll then also show you how to
+use data stored in other
+
+aed78832-1f09-4412-817b-043653862061-1
+00:00:15.455 --> 00:00:19.066
+databases in your CrateDB
+queries with foreign data
+
+aed78832-1f09-4412-817b-043653862061-2
+00:00:19.066 --> 00:00:19.679
+wrappers.
+
+0bb2ab15-c67d-4bd6-9d5c-80ac1ada39b9-0
+00:00:20.200 --> 00:00:21.640
+Let's begin with streaming.
+
+34057475-6d91-4c15-a7f8-484a4afb442c-0
+00:00:23.080 --> 00:00:25.440
+A data stream is a continuous
+flow.
+
+20ef1264-8b0e-4ccf-980a-09f6cb8caec4-0
+00:00:25.640 --> 00:00:28.040
+There's no defined beginning or
+end to it.
+
+66eeb91a-eaca-4b86-84f4-f85f14f4fc4d-0
+00:00:28.520 --> 00:00:31.838
+Data arrives constantly, usually
+as the result of events
+
+66eeb91a-eaca-4b86-84f4-f85f14f4fc4d-1
+00:00:31.838 --> 00:00:33.120
+happening in a system.
+
+c61e9016-e3f0-4cd1-9c8d-b298c6a1754a-0
+00:00:33.640 --> 00:00:37.274
+Some examples being a user
+clicking on a website, a new
+
+c61e9016-e3f0-4cd1-9c8d-b298c6a1754a-1
+00:00:37.274 --> 00:00:40.908
+entry being created in an
+application log, or perhaps a
+
+c61e9016-e3f0-4cd1-9c8d-b298c6a1754a-2
+00:00:40.908 --> 00:00:43.440
+sense of providing an updated
+reading.
+
+01d7f159-afe0-4419-8b97-a3dc21b0b54c-0
+00:00:45.000 --> 00:00:49.275
+Streaming data is often time
+sensitive in nature because data
+
+01d7f159-afe0-4419-8b97-a3dc21b0b54c-1
+00:00:49.275 --> 00:00:51.000
+is continuously arriving.
+
+c42fd424-24ea-4108-86d3-efff35dfb84a-0
+00:00:51.080 --> 00:00:54.787
+Insights from the stream are
+best obtained using aggregations
+
+c42fd424-24ea-4108-86d3-efff35dfb84a-1
+00:00:54.787 --> 00:00:57.120
+or queries over a rolling time
+window.
+
+1d4ee482-b7b3-4441-9dc4-4e33f977ef75-0
+00:00:58.520 --> 00:01:02.755
+CrateDB's ability to ingest and
+index data at high speed, along
+
+1d4ee482-b7b3-4441-9dc4-4e33f977ef75-1
+00:01:02.755 --> 00:01:06.535
+with its flexible schemas make
+it ideal as a database for
+
+1d4ee482-b7b3-4441-9dc4-4e33f977ef75-2
+00:01:06.535 --> 00:01:08.360
+working with streaming data.
+
+e53d062b-fb3d-473e-bfd2-8c642bad49b5-0
+00:01:09.360 --> 00:01:12.960
+Specialised software is often
+used to manage data streams.
+
+4a2b50e6-7862-4093-a486-ecccf29a91c5-0
+00:01:13.840 --> 00:01:17.128
+Let's take a look at an example
+with one of the most popular
+
+4a2b50e6-7862-4093-a486-ecccf29a91c5-1
+00:01:17.128 --> 00:01:18.800
+open source streaming packages.
+
+889ca11f-d762-41a8-b312-e718bbe37296-0
+00:01:20.560 --> 00:01:24.187
+Apache Kafka is an extremely
+popular open source event
+
+889ca11f-d762-41a8-b312-e718bbe37296-1
+00:01:24.187 --> 00:01:25.440
+streaming platform.
+
+3a8ba948-48df-4c9b-8bd5-1308257fb0a5-0
+00:01:25.960 --> 00:01:29.907
+Its Connect interface integrates
+with hundreds of event sources
+
+3a8ba948-48df-4c9b-8bd5-1308257fb0a5-1
+00:01:29.907 --> 00:01:33.669
+which create events and syncs
+where event data is ultimately
+
+3a8ba948-48df-4c9b-8bd5-1308257fb0a5-2
+00:01:33.669 --> 00:01:35.520
+stored for long term analysis.
+
+2c75640f-3450-47a9-b53f-fb2ffef7f329-0
+00:01:37.280 --> 00:01:41.294
+Events are received by Kafka and
+published onto different message
+
+2c75640f-3450-47a9-b53f-fb2ffef7f329-1
+00:01:41.294 --> 00:01:41.720
+topics.
+
+b4b082d6-94e7-47ec-a249-dcefb92eab29-0
+00:01:42.720 --> 00:01:46.570
+Consumers subscribe to these
+topics, receive message events
+
+b4b082d6-94e7-47ec-a249-dcefb92eab29-1
+00:01:46.570 --> 00:01:48.560
+and perform processing on them.
+
+6b9a8a52-44fe-4c93-839b-f03466fbe711-0
+00:01:49.960 --> 00:01:53.680
+This processing may be performed
+by other specialised frameworks.
+
+580b1086-a1fb-47f2-9873-3a206b92fbfa-0
+00:01:53.800 --> 00:01:59.181
+For example, here Apache Flink.
+Event data can be inserted into
+
+580b1086-a1fb-47f2-9873-3a206b92fbfa-1
+00:01:59.181 --> 00:02:04.648
+CrateDB using the Kafka Connect
+JDBC driver via Flink or other
+
+580b1086-a1fb-47f2-9873-3a206b92fbfa-2
+00:02:04.648 --> 00:02:07.040
+logic in your consumer code.
+
+60cfe498-f56f-4b3e-8ef1-a674dd3bf9f8-0
+00:02:08.120 --> 00:02:12.473
+CrateDB is excellent in certain
+indexing performance means that
+
+60cfe498-f56f-4b3e-8ef1-a674dd3bf9f8-1
+00:02:12.473 --> 00:02:16.425
+this time critical data is
+available to query in near real
+
+60cfe498-f56f-4b3e-8ef1-a674dd3bf9f8-2
+00:02:16.425 --> 00:02:16.760
+time.
+
+ee38c95d-e0ef-4f99-8a58-4e8ec471b025-0
+00:02:17.440 --> 00:02:20.528
+This is critical to gaining
+insights and making timely
+
+ee38c95d-e0ef-4f99-8a58-4e8ec471b025-1
+00:02:20.528 --> 00:02:23.280
+decisions when working with this
+sort of system.
+
+a52ebfa7-ced2-4dc3-a68f-883450a8440f-0
+00:02:25.440 --> 00:02:29.357
+From here you can use the power
+of CrateDB's scalable SQL
+
+a52ebfa7-ced2-4dc3-a68f-883450a8440f-1
+00:02:29.357 --> 00:02:33.022
+engine to aggregate and analyse
+the data, combine it with
+
+a52ebfa7-ced2-4dc3-a68f-883450a8440f-2
+00:02:33.022 --> 00:02:35.360
+metadata or data from other
+sources.
+
+ede6e561-f214-44af-bc1f-eb2c7f690710-0
+00:02:37.480 --> 00:02:41.155
+Dashboards and alerting
+mechanisms can be built using
+
+ede6e561-f214-44af-bc1f-eb2c7f690710-1
+00:02:41.155 --> 00:02:45.240
+standard tools and these can
+provide a continuous near real
+
+ede6e561-f214-44af-bc1f-eb2c7f690710-2
+00:02:45.240 --> 00:02:49.052
+time feedback loop enabling
+adjustments to be made that
+
+ede6e561-f214-44af-bc1f-eb2c7f690710-3
+00:02:49.052 --> 00:02:52.320
+affect or influence the incoming
+event streams.
+
+7091b7ea-6411-4125-aacf-d1c3f6134052-0
+00:02:54.160 --> 00:02:58.092
+Foreign Data Wrappers are a way
+of handling access to remote
+
+7091b7ea-6411-4125-aacf-d1c3f6134052-1
+00:02:58.092 --> 00:02:59.640
+data from SQL databases.
+
+f6941c77-037d-45bc-a261-83e5762617d7-0
+00:03:00.400 --> 00:03:03.682
+They are part of the SQL
+Management of External Data
+
+f6941c77-037d-45bc-a261-83e5762617d7-1
+00:03:03.682 --> 00:03:04.240
+standard.
+
+24a6232c-eb6b-4333-ae58-4f92e9061578-0
+00:03:05.280 --> 00:03:09.501
+They allow you to write queries
+that combine data stored in
+
+24a6232c-eb6b-4333-ae58-4f92e9061578-1
+00:03:09.501 --> 00:03:13.864
+CrateDB with data in external
+databases without the need for
+
+24a6232c-eb6b-4333-ae58-4f92e9061578-2
+00:03:13.864 --> 00:03:14.920
+ETL processors.
+
+cd2f18b9-da82-4007-b338-68b99651baf6-0
+00:03:16.600 --> 00:03:20.875
+CrateDB's foreign data wrapper
+implementation uses JDBC and
+
+cd2f18b9-da82-4007-b338-68b99651baf6-1
+00:03:20.875 --> 00:03:24.520
+allows you to connect to remote
+Postgres databases.
+
+45024d64-4d73-4055-93a9-2e5a146877d9-0
+00:03:25.840 --> 00:03:30.363
+When querying data in a foreign
+database, clauses such as GROUP BY
+
+45024d64-4d73-4055-93a9-2e5a146877d9-1
+00:03:30.363 --> 00:03:33.120
+and LIMIT are executed in CrateDB.
+
+720ad6af-7ec8-4d83-a157-6ad095b4152a-0
+00:03:33.880 --> 00:03:35.880
+Let's see how this works in
+practice.
+
+ea9ffa6a-4d04-4647-a61b-b566730d973f-0
+00:03:37.680 --> 00:03:41.448
+Here I've set up a Postgres
+instance on Neon's platform
+
+ea9ffa6a-4d04-4647-a61b-b566730d973f-1
+00:03:41.448 --> 00:03:41.920
+online.
+
+0894afb5-5696-43bf-ad22-9902d0967b1b-0
+00:03:42.520 --> 00:03:46.169
+I've created a new table called
+taxi_drivers and populated it
+
+0894afb5-5696-43bf-ad22-9902d0967b1b-1
+00:03:46.169 --> 00:03:48.760
+with the sample data you see on
+the screen.
+
+354ca740-fc96-4dda-9109-53908d826fcc-0
+00:03:49.520 --> 00:03:53.320
+I've also created a user named
+crate to access this data.
+
+4a13fef0-9ca4-437d-9e1d-be77c20b0064-0
+00:03:54.400 --> 00:03:58.616
+Let's connect to this database
+from CrateDB and query it using
+
+4a13fef0-9ca4-437d-9e1d-be77c20b0064-1
+00:03:58.616 --> 00:04:02.240
+the foreign data wrapper.
+Switching over to CrateDB,
+
+adf54199-17fc-405e-8747-e81e6100dbbe-0
+00:04:02.560 --> 00:04:05.880
+the first step in configuring a
+foreign data wrapper is to
+
+adf54199-17fc-405e-8747-e81e6100dbbe-1
+00:04:05.880 --> 00:04:07.400
+create a server definition.
+
+74ba2910-a206-437b-a0d5-46109a4102d5-0
+00:04:08.280 --> 00:04:11.806
+Here I'm providing the
+connection URL for the foreign
+
+74ba2910-a206-437b-a0d5-46109a4102d5-1
+00:04:11.806 --> 00:04:15.660
+Postgres instance and naming it
+pg_server using the CREATE
+
+74ba2910-a206-437b-a0d5-46109a4102d5-2
+00:04:15.660 --> 00:04:16.640
+SERVER command.
+
+cff53024-9118-4065-a94a-ee12ecc0febe-0
+00:04:18.480 --> 00:04:22.390
+The next step is to map a user
+in CrateDB to a user in the
+
+cff53024-9118-4065-a94a-ee12ecc0febe-1
+00:04:22.390 --> 00:04:23.480
+foreign database.
+
+d1e86a76-369f-499d-a66d-07d4f925d4bc-0
+00:04:24.760 --> 00:04:29.587
+Create USER MAPPING tells CrateDB
+that for the server pg_server
+
+d1e86a76-369f-499d-a66d-07d4f925d4bc-1
+00:04:29.587 --> 00:04:32.440
+the user crate has the given
+password.
+
+0ac837b9-7f6f-4e3a-8232-f9ea35ce8adb-0
+00:04:34.400 --> 00:04:38.040
+Now we have to create a foreign
+table definition in CrateDB.
+
+d7514613-4d78-4434-9331-480090fccff9-0
+00:04:38.920 --> 00:04:42.737
+The schema of this table must
+match the schema of the table we
+
+d7514613-4d78-4434-9331-480090fccff9-1
+00:04:42.737 --> 00:04:45.040
+want to query in the remote
+instance.
+
+b3ba2d5c-b18a-4408-bfee-c8c9f7adbe1c-0
+00:04:45.960 --> 00:04:49.895
+And we also tell CrateDB which
+server to find this table on and
+
+b3ba2d5c-b18a-4408-bfee-c8c9f7adbe1c-1
+00:04:49.895 --> 00:04:52.560
+the name of the schema
+containing it there.
+
+d0ff246b-15ac-4c4f-9dea-8e959e609bc9-0
+00:04:54.680 --> 00:04:57.913
+We're ready to start querying
+data in the remote Postgres
+
+d0ff246b-15ac-4c4f-9dea-8e959e609bc9-1
+00:04:57.913 --> 00:05:00.200
+instance using the foreign data
+wrapper.
+
+09af57cd-fafb-4dc6-b4b6-8c71761e0fde-0
+00:05:01.160 --> 00:05:05.076
+This straightforward SELECT
+query does just that, and here
+
+09af57cd-fafb-4dc6-b4b6-8c71761e0fde-1
+00:05:05.076 --> 00:05:07.200
+are the results of executing it.
+
+3d5b6044-3e41-4cf5-83f8-7efe7148b229-0
+00:05:08.000 --> 00:05:12.120
+Remember, the data here resides
+in the remote post res instance.
+
+dc80edc7-50e2-4e66-9416-f216d5950750-0
+00:05:12.240 --> 00:05:15.760
+It hasn't been duplicated into a
+table in CrateDB.
+
+6e4570d0-4bf9-4715-a261-2bde6bffc5c9-0
+00:05:17.880 --> 00:05:21.530
+The foreign data wrapper is
+great for aggregating data from
+
+6e4570d0-4bf9-4715-a261-2bde6bffc5c9-1
+00:05:21.530 --> 00:05:25.120
+other databases into CrateDB
+for analytics and reporting.
+
+3fe08293-0376-4b5d-b61f-bc1b1b67fd7f-0
+00:05:26.200 --> 00:05:30.095
+You can of course join data in
+foreign tables with data in
+
+3fe08293-0376-4b5d-b61f-bc1b1b67fd7f-1
+00:05:30.095 --> 00:05:33.859
+tables that reside in CrateDB
+performing cross database
+
+3fe08293-0376-4b5d-b61f-bc1b1b67fd7f-2
+00:05:33.859 --> 00:05:37.622
+joints, and you can access
+foreign data without the time
+
+3fe08293-0376-4b5d-b61f-bc1b1b67fd7f-3
+00:05:37.622 --> 00:05:41.319
+and storage requirements
+associated with ETL processes.
+
+3658d931-f4ba-44cf-9e61-eb2617918aaa-0
+00:05:42.720 --> 00:05:46.325
+Finally, you could use the
+foreign data wrapper as part of
+
+3658d931-f4ba-44cf-9e61-eb2617918aaa-1
+00:05:46.325 --> 00:05:49.320
+a migration from another
+database into CrateDB.
+
+d0afb940-6050-409f-9ae6-92ad4bb4c09e-0
+00:05:50.680 --> 00:05:54.471
+You should now have a high level
+understanding of how streaming
+
+d0afb940-6050-409f-9ae6-92ad4bb4c09e-1
+00:05:54.471 --> 00:05:57.965
+data can be brought into CrateDB
+and how data residing in
+
+d0afb940-6050-409f-9ae6-92ad4bb4c09e-2
+00:05:57.965 --> 00:06:01.520
+other databases can be used in
+queries without duplication.
+
+a4cff6af-e445-4752-aa52-ce02ded5d355-0
+00:06:02.280 --> 00:06:05.612
+To learn more about these
+topics, consult the resources
+
+a4cff6af-e445-4752-aa52-ce02ded5d355-1
+00:06:05.612 --> 00:06:08.646
+associated with this video and
+the online CrateDB
+
+a4cff6af-e445-4752-aa52-ce02ded5d355-2
+00:06:08.646 --> 00:06:09.480
+documentation.

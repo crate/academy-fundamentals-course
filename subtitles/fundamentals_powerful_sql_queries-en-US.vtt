@@ -1,0 +1,782 @@
+WEBVTT
+
+75f45a78-fd00-4f8d-8ec4-39801ea6c446-0
+00:00:05.000 --> 00:00:07.520
+CrateDB is a multi-model
+database.
+
+f9b18ca2-bce9-4c90-9e8c-cb3243fc646f-0
+00:00:07.960 --> 00:00:11.175
+Its strength lies in the
+efficient handling of multiple
+
+f9b18ca2-bce9-4c90-9e8c-cb3243fc646f-1
+00:00:11.175 --> 00:00:14.448
+data models within the same
+database and even within the
+
+f9b18ca2-bce9-4c90-9e8c-cb3243fc646f-2
+00:00:14.448 --> 00:00:15.080
+same table.
+
+ec6cc92e-e53c-406a-99e1-a8cebd525654-0
+00:00:15.800 --> 00:00:20.558
+This includes structured data
+such as tables, time series and
+
+ec6cc92e-e53c-406a-99e1-a8cebd525654-1
+00:00:20.558 --> 00:00:25.547
+geospatial; semi structured data,
+for example JSON documents; and
+
+ec6cc92e-e53c-406a-99e1-a8cebd525654-2
+00:00:25.547 --> 00:00:30.075
+unstructured data including
+text, binaries, images, videos
+
+ec6cc92e-e53c-406a-99e1-a8cebd525654-3
+00:00:30.075 --> 00:00:30.920
+or vectors.
+
+a25a6df8-3b82-4550-a6ff-11d45d746251-0
+00:00:31.920 --> 00:00:35.473
+All of these data models can be
+combined in the same record and
+
+a25a6df8-3b82-4550-a6ff-11d45d746251-1
+00:00:35.473 --> 00:00:36.640
+accessed by SQL.
+
+dd378357-626e-4611-912d-58779828620c-0
+00:00:37.360 --> 00:00:40.765
+This allows for complex queries
+and searches over all of your
+
+dd378357-626e-4611-912d-58779828620c-1
+00:00:40.765 --> 00:00:41.040
+data.
+
+df1f348d-4dad-4a18-91af-605973c6328e-0
+00:00:41.960 --> 00:00:45.171
+In this video, we'll explore some
+multi-model queries and
+
+df1f348d-4dad-4a18-91af-605973c6328e-1
+00:00:45.171 --> 00:00:47.200
+introduce a couple of new
+concepts.
+
+c12b2524-f0f0-4974-bcd1-30212167cdcf-0
+00:00:47.720 --> 00:00:48.760
+Let's get started.
+
+50b65020-ea6d-4aa7-a55a-073483f48e79-0
+00:00:50.360 --> 00:00:54.240
+Here's a multi-model query using
+the community areas data set.
+
+430cdf37-1474-4094-b192-bfd84ed388c8-0
+00:00:55.480 --> 00:00:58.560
+And here's the table schema for
+the community_areas table.
+
+c23bb540-8087-4838-a3e9-118617f75a56-0
+00:01:00.000 --> 00:01:03.637
+The details field is an object
+with a defined schema of its
+
+c23bb540-8087-4838-a3e9-118617f75a56-1
+00:01:03.637 --> 00:01:03.880
+own.
+
+536f3a9c-b237-4e43-af47-e31c1c8d39d7-0
+00:01:04.640 --> 00:01:08.020
+Recall that CrateDB also
+supports dynamic schemas for
+
+536f3a9c-b237-4e43-af47-e31c1c8d39d7-1
+00:01:08.020 --> 00:01:11.893
+objects and that all fields will
+be indexed, ensuring the best
+
+536f3a9c-b237-4e43-af47-e31c1c8d39d7-2
+00:01:11.893 --> 00:01:13.000
+query performance.
+
+7ec86666-1c58-49d3-94e2-72ee94525712-0
+00:01:14.200 --> 00:01:18.505
+Inside the details object, the
+description field is stored as
+
+7ec86666-1c58-49d3-94e2-72ee94525712-1
+00:01:18.505 --> 00:01:20.520
+text with full-text indexing.
+
+4e885271-3afa-4059-bb5a-6917801457b1-0
+00:01:21.360 --> 00:01:25.604
+Don't forget that vector and
+hybrid searches are also
+
+4e885271-3afa-4059-bb5a-6917801457b1-1
+00:01:25.604 --> 00:01:29.848
+possible with CrateDB. 
+boundaries is defined as a GEO_
+
+4e885271-3afa-4059-bb5a-6917801457b1-2
+00:01:29.848 --> 00:01:30.319
+SHAPE.
+
+b903c353-c373-43de-b2f8-83dcec8e8bb7-0
+00:01:31.000 --> 00:01:35.025
+Shapes can be specified as
+GeoJSON or in Well Known Text
+
+b903c353-c373-43de-b2f8-83dcec8e8bb7-1
+00:01:35.025 --> 00:01:35.520
+format.
+
+75c0fc4e-5844-4c8b-a7ae-17e091849919-0
+00:01:37.040 --> 00:01:41.457
+This query returns the community
+area name and population for
+
+75c0fc4e-5844-4c8b-a7ae-17e091849919-1
+00:01:41.457 --> 00:01:46.160
+community areas whose boundaries
+intersect a line that represents
+
+75c0fc4e-5844-4c8b-a7ae-17e091849919-2
+00:01:46.160 --> 00:01:50.577
+the path of a flight between
+Chicago's O'Hare Airport and the
+
+75c0fc4e-5844-4c8b-a7ae-17e091849919-3
+00:01:50.577 --> 00:01:54.781
+smaller Midway Airport, and
+whose description text matches
+
+75c0fc4e-5844-4c8b-a7ae-17e091849919-4
+00:01:54.781 --> 00:01:58.842
+the term historic, and which
+have a population exceeding
+
+75c0fc4e-5844-4c8b-a7ae-17e091849919-5
+00:01:58.842 --> 00:01:59.840
+30,000 people.
+
+695f9d9f-cee1-4ab0-9366-88cbbeb4ba05-0
+00:02:01.160 --> 00:02:05.008
+We're returning the results in
+descending order of population,
+
+695f9d9f-cee1-4ab0-9366-88cbbeb4ba05-1
+00:02:05.008 --> 00:02:08.612
+and we can see that the flight
+passes over three community
+
+695f9d9f-cee1-4ab0-9366-88cbbeb4ba05-2
+00:02:08.612 --> 00:02:12.216
+areas that are thought to be of
+historic interest and have
+
+695f9d9f-cee1-4ab0-9366-88cbbeb4ba05-3
+00:02:12.216 --> 00:02:13.560
+sufficient population.
+
+b82671cd-8453-4129-b471-1ce0d07d105f-0
+00:02:15.440 --> 00:02:18.788
+Here's a second query that
+demonstrates some of the other
+
+b82671cd-8453-4129-b471-1ce0d07d105f-1
+00:02:18.788 --> 00:02:20.520
+powerful features of CrateDB.
+
+8f280c32-fbab-45a1-a9aa-214bd3ab97c0-0
+00:02:21.560 --> 00:02:25.024
+I'm using our taxi_rides and
+taxis tables to find
+
+8f280c32-fbab-45a1-a9aa-214bd3ab97c0-1
+00:02:25.024 --> 00:02:28.929
+details of which cars earn the
+most money, what their biggest
+
+8f280c32-fbab-45a1-a9aa-214bd3ab97c0-2
+00:02:28.929 --> 00:02:32.582
+single fare was, and when the
+ride that yielded that took
+
+8f280c32-fbab-45a1-a9aa-214bd3ab97c0-3
+00:02:32.582 --> 00:02:32.960
+place.
+
+6599c63f-5eaa-4de9-a931-cb4f09922be6-0
+00:02:33.840 --> 00:02:35.520
+Let's look at a couple of
+details.
+
+f5304bbe-8ed3-42f5-a8b2-b9f84c622942-0
+00:02:37.360 --> 00:02:39.760
+Firstly, we're joining 2 tables.
+
+849a51fe-7e40-445e-990e-2fc26177f28c-0
+00:02:40.320 --> 00:02:44.237
+The vehicle details come from
+the taxis table and the metrics
+
+849a51fe-7e40-445e-990e-2fc26177f28c-1
+00:02:44.237 --> 00:02:47.080
+from aggregations over the
+taxi_rides table.
+
+6c3d7612-0459-428f-84a5-e6966879a2e0-0
+00:02:48.560 --> 00:02:53.206
+Remember that while CrateDB is
+a distributed database, it does
+
+6c3d7612-0459-428f-84a5-e6966879a2e0-1
+00:02:53.206 --> 00:02:55.240
+support joins. With CrateDB
+
+5e935fe9-0b55-4458-a7c7-5a4801ec1dda-0
+00:02:55.240 --> 00:02:59.264
+this sort of query is extremely
+fast due to the use of columnar
+
+5e935fe9-0b55-4458-a7c7-5a4801ec1dda-1
+00:02:59.264 --> 00:02:59.760
+storage.
+
+c305d540-b80f-40ab-8d9b-006c00eaef24-0
+00:03:00.520 --> 00:03:03.240
+Aggregation operations are fast
+and efficient.
+
+6c003fe8-bba2-4086-8e7d-f8ddd8b36b24-0
+00:03:04.480 --> 00:03:07.800
+Let's run the query and find out
+which taxis are the big earners.
+
+d91a67ac-8dbf-4513-8f6d-212e844bbcc2-0
+00:03:09.760 --> 00:03:13.000
+It seems that Toyota vehicles
+generate the most revenue.
+
+1296bdc4-0a3a-4807-abe6-b1b7bb8a934d-0
+00:03:14.120 --> 00:03:17.616
+Next, I'll introduce two more
+features that will help you
+
+1296bdc4-0a3a-4807-abe6-b1b7bb8a934d-1
+00:03:17.616 --> 00:03:20.750
+structure complex queries in
+CrateDB: Common Table Expressions
+
+1296bdc4-0a3a-4807-abe6-b1b7bb8a934d-2
+00:03:20.750 --> 00:03:22.799
+and Window Functions.
+
+1251910d-7642-48bf-8ea2-c597941d4970-0
+00:03:25.080 --> 00:03:28.985
+In SQL, a common table
+expression, or CTE, specifies a
+
+1251910d-7642-48bf-8ea2-c597941d4970-1
+00:03:28.985 --> 00:03:33.316
+temporarily named result set for
+use within the context of a
+
+1251910d-7642-48bf-8ea2-c597941d4970-2
+00:03:33.316 --> 00:03:34.240
+larger query.
+
+1be01fda-91ae-4d19-aaee-11cda9e3b6d5-0
+00:03:34.800 --> 00:03:37.882
+Think of common table
+expressions as a way to more
+
+1be01fda-91ae-4d19-aaee-11cda9e3b6d5-1
+00:03:37.882 --> 00:03:41.448
+easily write and maintain
+complex queries, especially when
+
+1be01fda-91ae-4d19-aaee-11cda9e3b6d5-2
+00:03:41.448 --> 00:03:45.317
+there is a need to reference or
+join the same data set multiple
+
+1be01fda-91ae-4d19-aaee-11cda9e3b6d5-3
+00:03:45.317 --> 00:03:45.680
+times.
+
+ad89f8e2-a804-43d6-9bb2-7ce36a313cd2-0
+00:03:46.920 --> 00:03:50.941
+Let's demonstrate by revisiting
+an example with taxi and
+
+ad89f8e2-a804-43d6-9bb2-7ce36a313cd2-1
+00:03:50.941 --> 00:03:51.720
+taxi_rides data.
+
+095835fc-4294-40a1-9cbf-aaddfb707d42-0
+00:03:53.800 --> 00:03:57.864
+Imagine we want to combine some
+summary data from our taxi rides
+
+095835fc-4294-40a1-9cbf-aaddfb707d42-1
+00:03:57.864 --> 00:04:00.240
+table with data from the taxis
+table.
+
+c558bfe8-be9d-4dac-adcf-d34fde695d2c-0
+00:04:01.160 --> 00:04:05.136
+This query tells us the number
+of rides each taxi performed and
+
+c558bfe8-be9d-4dac-adcf-d34fde695d2c-1
+00:04:05.136 --> 00:04:07.000
+the average distance it drove.
+
+21f1a013-7e70-4180-9e68-508163b8d34f-0
+00:04:08.360 --> 00:04:12.053
+And this query tells us the
+vehicleid, make, and model of
+
+21f1a013-7e70-4180-9e68-508163b8d34f-1
+00:04:12.053 --> 00:04:12.680
+each taxi.
+
+2faf454c-21a9-45fc-8511-0ba0742161a8-0
+00:04:13.520 --> 00:04:17.155
+Let's use a common table
+expression to combine these. With
+
+2faf454c-21a9-45fc-8511-0ba0742161a8-1
+00:04:17.155 --> 00:04:20.790
+the data from the taxi_rides
+table as our temporary named
+
+2faf454c-21a9-45fc-8511-0ba0742161a8-2
+00:04:20.790 --> 00:04:21.480
+result set.
+
+b7021c32-e86c-47b6-9af3-3c3beace23e7-0
+00:04:23.560 --> 00:04:26.880
+CTEs are introduced using the
+WITH keyword.
+
+70e91e66-2017-48a4-bf48-bdbf98bc7502-0
+00:04:28.080 --> 00:04:32.313
+Here I'm defining a CTE called
+ride_info containing the results
+
+70e91e66-2017-48a4-bf48-bdbf98bc7502-1
+00:04:32.313 --> 00:04:36.282
+of running that first query that
+we looked at, and here I'm
+
+70e91e66-2017-48a4-bf48-bdbf98bc7502-2
+00:04:36.282 --> 00:04:40.250
+referring to it in the SELECT
+query that also includes data
+
+70e91e66-2017-48a4-bf48-bdbf98bc7502-3
+00:04:40.250 --> 00:04:41.640
+from the taxis table.
+
+3ede1a3b-59f6-4a10-b325-ff8c04648cf0-0
+00:04:43.360 --> 00:04:46.680
+Running this query shows us some
+more details about the vehicles
+
+3ede1a3b-59f6-4a10-b325-ff8c04648cf0-1
+00:04:46.680 --> 00:04:48.520
+that have performed the most
+trips.
+
+e62c38b4-df6a-4c7f-97b0-49f814d46788-0
+00:04:49.280 --> 00:04:52.561
+It looks like Toyota taxis are
+always out on the road earning a
+
+e62c38b4-df6a-4c7f-97b0-49f814d46788-1
+00:04:52.561 --> 00:04:52.920
+living.
+
+d10a140b-14f1-433e-9c03-5dc9dfe14950-0
+00:04:55.000 --> 00:04:58.160
+We can also reference CTEs in
+WHERE clauses.
+
+edad8997-eafc-4b54-8887-64e3526a720c-0
+00:04:58.800 --> 00:05:03.108
+This query only considers those
+taxis whose average ride length
+
+edad8997-eafc-4b54-8887-64e3526a720c-1
+00:05:03.108 --> 00:05:04.320
+was over 30 miles.
+
+9cda4c01-a926-4423-b8f3-f8d2dc95d30d-0
+00:05:05.600 --> 00:05:10.102
+It does this by using average
+miles declared in the CTE in the
+
+9cda4c01-a926-4423-b8f3-f8d2dc95d30d-1
+00:05:10.102 --> 00:05:10.960
+WHERE clause.
+
+cf023c6c-e650-4a6d-8403-6a32f3d51760-0
+00:05:12.360 --> 00:05:16.114
+A window function performs a
+calculation across a set of rows
+
+cf023c6c-e650-4a6d-8403-6a32f3d51760-1
+00:05:16.114 --> 00:05:18.840
+that are somehow related to the
+current row.
+
+1956cedf-c7b9-4a6e-a2c9-23f456098a01-0
+00:05:20.000 --> 00:05:23.760
+The window in window functions
+refers to that set of rows.
+
+3b662255-44be-46f0-a311-e3aeff3823f0-0
+00:05:24.840 --> 00:05:28.380
+Window functions are similar to
+aggregations, but unlike
+
+3b662255-44be-46f0-a311-e3aeff3823f0-1
+00:05:28.380 --> 00:05:32.044
+aggregate functions, which
+reduce the output into a single
+
+3b662255-44be-46f0-a311-e3aeff3823f0-2
+00:05:32.044 --> 00:05:35.956
+row per group, window functions
+return a value for each row in
+
+3b662255-44be-46f0-a311-e3aeff3823f0-3
+00:05:35.956 --> 00:05:36.640
+the output.
+
+7fccfd61-1d40-4097-980f-7db69b3b39fb-0
+00:05:39.000 --> 00:05:42.518
+In SQL, window functions are
+introduced with the OVER
+
+7fccfd61-1d40-4097-980f-7db69b3b39fb-1
+00:05:42.518 --> 00:05:43.040
+keyword.
+
+b1792e75-dc2c-4df7-8513-32c3b9b039f7-0
+00:05:44.160 --> 00:05:48.598
+Here is an example query that returns
+the start time and number of
+
+b1792e75-dc2c-4df7-8513-32c3b9b039f7-1
+00:05:48.598 --> 00:05:53.252
+miles driven for each trip made
+by one of the taxis on April the
+
+b1792e75-dc2c-4df7-8513-32c3b9b039f7-2
+00:05:53.252 --> 00:05:54.040
+29th, 2024.
+
+ca2df143-e0ef-4562-8e61-d871dc8bfd15-0
+00:05:56.200 --> 00:05:59.924
+We're using a window function to
+calculate a running total of the
+
+ca2df143-e0ef-4562-8e61-d871dc8bfd15-1
+00:05:59.924 --> 00:06:02.520
+number of miles the taxi has
+driven that day.
+
+2478108b-3154-4b4f-833d-f3cf5bd63c34-0
+00:06:03.640 --> 00:06:06.240
+The running total is created by
+this clause.
+
+26b7f143-f5a1-4caf-b80e-6a281c3e125a-0
+00:06:07.240 --> 00:06:11.080
+Here, for each matching ride,
+sum is provided with the value
+
+26b7f143-f5a1-4caf-b80e-6a281c3e125a-1
+00:06:11.080 --> 00:06:15.234
+of miles for that ride, plus all
+the rides for this cab that came
+
+26b7f143-f5a1-4caf-b80e-6a281c3e125a-2
+00:06:15.234 --> 00:06:18.760
+before it in the day achieved
+with the ORDER BY clause.
+
+dec6a453-3a38-4253-9aa5-0a6ca5fd8704-0
+00:06:19.840 --> 00:06:24.718
+Let's run the query and see what
+it produces. We see each of
+
+dec6a453-3a38-4253-9aa5-0a6ca5fd8704-1
+00:06:24.718 --> 00:06:29.147
+Taxi 5955's 8 trips for the
+day in order with a running
+
+dec6a453-3a38-4253-9aa5-0a6ca5fd8704-2
+00:06:29.147 --> 00:06:32.600
+total of the number of miles
+driven that day after each ride.
+
+4ae23671-0d12-4062-a5e3-6c92ec65bd39-0
+00:06:32.600 --> 00:06:37.647
+We can use multiple 
+window functions in a
+
+4ae23671-0d12-4062-a5e3-6c92ec65bd39-1
+00:06:37.647 --> 00:06:38.760
+single query.
+
+b3fad867-0e52-4a0f-b12b-7d83bb4927e3-0
+00:06:39.720 --> 00:06:43.892
+Consider this query, which again
+shows the cumulative miles
+
+b3fad867-0e52-4a0f-b12b-7d83bb4927e3-1
+00:06:43.892 --> 00:06:48.133
+driven by Taxi 5955 in a day,
+but now also ranks those trips
+
+b3fad867-0e52-4a0f-b12b-7d83bb4927e3-2
+00:06:48.133 --> 00:06:51.680
+by distance, with a rank of one
+being the longest.
+
+2d0d4448-0e8a-4aad-8b09-f9f4e14b290b-0
+00:06:53.080 --> 00:06:55.360
+Here we use two window
+functions.
+
+e5c1cbb3-a41a-42af-84aa-83fb29963a30-0
+00:06:56.000 --> 00:06:59.763
+The first window function uses
+dense_rank to rank the results
+
+e5c1cbb3-a41a-42af-84aa-83fb29963a30-1
+00:06:59.763 --> 00:07:02.919
+in descending order of miles
+driven, and the second
+
+e5c1cbb3-a41a-42af-84aa-83fb29963a30-2
+00:07:02.919 --> 00:07:06.440
+calculates our running total of
+miles driven for the day as before.
+
+d60581cf-0df7-47be-99f5-9f5ba988c0ec-0
+00:07:06.480 --> 00:07:11.600
+When we run this query,
+here's what's returned:
+
+ff886c31-1a2c-4205-a5b3-9d9415a15660-0
+00:07:14.360 --> 00:07:18.020
+What if we wanted to run reports
+like this for more than one
+
+ff886c31-1a2c-4205-a5b3-9d9415a15660-1
+00:07:18.020 --> 00:07:18.320
+taxi?
+
+8cb46065-78c1-46b4-a071-f6098b9d1e45-0
+00:07:19.400 --> 00:07:23.238
+Partitioning allows us to group
+the records in a window rather
+
+8cb46065-78c1-46b4-a071-f6098b9d1e45-1
+00:07:23.238 --> 00:07:24.640
+like a GROUP BY clause.
+
+fcdedd53-691f-439e-8a51-58e163dad2cf-0
+00:07:25.480 --> 00:07:29.040
+Window function is then only
+applied to the matching subset.
+
+4bfaaa9a-b18e-4aa9-8cab-0efc9a635f7b-0
+00:07:31.040 --> 00:07:34.777
+This query returns a report
+containing the cost of each ride
+
+4bfaaa9a-b18e-4aa9-8cab-0efc9a635f7b-1
+00:07:34.777 --> 00:07:38.638
+that a taxi performed and the
+cumulative amount earned by that
+
+4bfaaa9a-b18e-4aa9-8cab-0efc9a635f7b-2
+00:07:38.638 --> 00:07:39.679
+taxi for the day at the
+
+f95b1171-5416-4d5c-8d79-a0d7b869ca4c-0
+00:07:39.840 --> 00:07:41.080
+end of each ride.
+
+03d4a405-7f25-4008-b707-e948cb8c6e20-0
+00:07:42.080 --> 00:07:47.206
+We're running it for two taxis,
+5635 and 3523. The now running window
+
+03d4a405-7f25-4008-b707-e948cb8c6e20-1
+00:07:47.206 --> 00:07:51.919
+function to calculate the
+running cumulative earnings is
+
+03d4a405-7f25-4008-b707-e948cb8c6e20-2
+00:07:51.919 --> 00:07:54.400
+partitioned by the vehicleid.
+
+11a3be42-7809-4250-8b0a-c275d4553192-0
+00:07:55.120 --> 00:07:59.058
+Ensuring that only the records
+for the right cab are used in
+
+11a3be42-7809-4250-8b0a-c275d4553192-1
+00:07:59.058 --> 00:08:02.480
+the calculation. Here is the result of
+running this query.
+
+bc10515c-0672-43ca-8b03-f914dcc7d3e3-0
+00:08:03.800 --> 00:08:07.608
+We can see that each cab has a
+separate running total for it's
+
+bc10515c-0672-43ca-8b03-f914dcc7d3e3-1
+00:08:07.608 --> 00:08:09.120
+earnings so far that day.
+
+f60b393c-aaa5-4280-8b80-d9c63401da6a-0
+00:08:11.960 --> 00:08:15.639
+Here we have a query that
+combines some of the ideas we've
+
+f60b393c-aaa5-4280-8b80-d9c63401da6a-1
+00:08:15.639 --> 00:08:17.760
+been looking at for a given
+taxi.
+
+de2b39bc-11cb-4b88-abd9-91148c701137-0
+00:08:17.880 --> 00:08:21.585
+This query generates a report
+showing the length of each trip
+
+de2b39bc-11cb-4b88-abd9-91148c701137-1
+00:08:21.585 --> 00:08:25.230
+the taxi performed on a given
+day, as well as running totals
+
+de2b39bc-11cb-4b88-abd9-91148c701137-2
+00:08:25.230 --> 00:08:27.800
+for dollars earned and time
+spent driving.
+
+fb0aa344-88d0-48fd-8993-7a3e88493fbc-0
+00:08:28.960 --> 00:08:33.061
+We've also included columns that
+show whether a given trip was
+
+fb0aa344-88d0-48fd-8993-7a3e88493fbc-1
+00:08:33.061 --> 00:08:37.228
+the taxi 2nd, 3rd, 4th, etc.
+of the day and the trip's rank
+
+fb0aa344-88d0-48fd-8993-7a3e88493fbc-2
+00:08:37.228 --> 00:08:38.400
+based on distance.
+
+c98c7420-4a1b-4f7c-a0e9-a1862cae84d2-0
+00:08:39.040 --> 00:08:43.314
+Let's run the query now. 
+We start to get a picture of what
+
+c98c7420-4a1b-4f7c-a0e9-a1862cae84d2-1
+00:08:43.314 --> 00:08:45.520
+the taxi drivers day looks like.
+
+d13769d3-1a9b-47ec-8084-f845f22cd301-0
+00:08:46.480 --> 00:08:49.418
+This sort of information is
+useful for planning things like
+
+d13769d3-1a9b-47ec-8084-f845f22cd301-1
+00:08:49.418 --> 00:08:52.259
+break times, fuel stops, and
+when the driver should think
+
+d13769d3-1a9b-47ec-8084-f845f22cd301-2
+00:08:52.259 --> 00:08:53.680
+about returning to the depot.
+
+868abc1d-6926-48b1-9c57-60a69b117894-0
+00:08:55.360 --> 00:08:59.164
+This query uses multiple window
+functions with some degree of
+
+868abc1d-6926-48b1-9c57-60a69b117894-1
+00:08:59.164 --> 00:08:59.840
+repetition.
+
+356feae6-db1e-49bb-922f-7ebbd3e67ade-0
+00:09:01.400 --> 00:09:04.560
+Here we see we're using the same
+window three times.
+
+323d672d-d75a-4178-a3e3-8a1790b5b624-0
+00:09:05.600 --> 00:09:08.720
+We can factor this out by using
+a named window.
+
+4846f950-ac86-4f77-9746-84f8ef6f49a9-0
+00:09:10.120 --> 00:09:14.156
+This version of the query
+introduces a named window w and
+
+4846f950-ac86-4f77-9746-84f8ef6f49a9-1
+00:09:14.156 --> 00:09:17.080
+refers to it by name whenever we
+need it.
+
+66b3f609-36c8-4893-9f3e-e4880ab5852c-0
+00:09:19.320 --> 00:09:22.543
+Running this query yields the
+same results as the previous
+
+66b3f609-36c8-4893-9f3e-e4880ab5852c-1
+00:09:22.543 --> 00:09:25.440
+version, but our SQL is a bit
+more maintainable now.
+
+2b7a7883-a2f4-41a0-a870-2d3e72b52d36-0
+00:09:28.840 --> 00:09:32.640
+In this video we demonstrated
+the power of querying a 
+
+2b7a7883-a2f4-41a0-a870-2d3e72b52d36-1
+00:09:32.640 --> 00:09:34.160
+multi-model database with SQL.
+
+7d9e2419-3c42-4a47-9f22-135380b6b743-0
+00:09:34.440 --> 00:09:38.235
+We also introduced the concepts
+of window functions and common
+
+7d9e2419-3c42-4a47-9f22-135380b6b743-1
+00:09:38.235 --> 00:09:39.320
+table expressions.
+
+10f2641d-aa0e-43cf-8419-176f1e3633a8-0
+00:09:39.920 --> 00:09:43.012
+I would encourage you to
+experiment with these concepts
+
+10f2641d-aa0e-43cf-8419-176f1e3633a8-1
+00:09:43.012 --> 00:09:46.160
+using the sample data set in
+your own CrateDB cluster.

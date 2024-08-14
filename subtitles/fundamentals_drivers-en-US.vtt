@@ -1,0 +1,265 @@
+WEBVTT
+
+65c88418-eaa8-42f1-ae2a-7992003dc3f6-0
+00:00:05.280 --> 00:00:09.066
+In this video, I'll show you how
+to connect to CrateDB and work
+
+65c88418-eaa8-42f1-ae2a-7992003dc3f6-1
+00:00:09.066 --> 00:00:12.737
+with data using drivers for a
+selection of popular programming
+
+65c88418-eaa8-42f1-ae2a-7992003dc3f6-2
+00:00:12.737 --> 00:00:13.320
+languages.
+
+9eb6fb98-9e93-45c2-b994-c065c29f838f-0
+00:00:14.240 --> 00:00:17.260
+CrateDB's support for the
+PostgreSQL Wire Protocol means that
+
+9eb6fb98-9e93-45c2-b994-c065c29f838f-1
+00:00:17.260 --> 00:00:20.280
+many of these drivers may
+already be familiar to you.
+
+34eb647d-c122-4b6d-a107-d3401b9c46b1-0
+00:00:21.320 --> 00:00:24.284
+You'll often have a choice of
+driver for your preferred
+
+34eb647d-c122-4b6d-a107-d3401b9c46b1-1
+00:00:24.284 --> 00:00:27.620
+programming language, allowing
+you to pick one that best suits
+
+34eb647d-c122-4b6d-a107-d3401b9c46b1-2
+00:00:27.620 --> 00:00:30.320
+your coding style and chosen
+level of abstraction.
+
+d1713c77-c82c-4392-a993-ee98f833ba2d-0
+00:00:31.240 --> 00:00:36.280
+I'll show you some code in
+Python, Node.js, Java and .NET.
+
+6a0d837d-1c97-4d4f-b3a3-f6405a7528be-0
+00:00:36.880 --> 00:00:39.360
+If you're using another
+language, don't worry.
+
+b3a0f99c-2130-4152-b1e8-b475d2e056b0-0
+00:00:39.680 --> 00:00:43.534
+A full list of available drivers
+for many more languages,
+
+b3a0f99c-2130-4152-b1e8-b475d2e056b0-1
+00:00:43.534 --> 00:00:47.389
+including Go, PHP, and others,
+can be found in the online
+
+b3a0f99c-2130-4152-b1e8-b475d2e056b0-2
+00:00:47.389 --> 00:00:48.319
+documentation.
+
+6da7cd57-e78f-418d-9e8a-1582e6433a4a-0
+00:00:50.880 --> 00:00:54.507
+We'll begin with a short summary
+of popular driver options for
+
+6da7cd57-e78f-418d-9e8a-1582e6433a4a-1
+00:00:54.507 --> 00:00:56.120
+major programming languages.
+
+5e7b8dc1-c940-42ed-86ff-08238552368f-0
+00:00:57.080 --> 00:01:00.600
+For Python, we provide our own
+driver, crate-python.
+
+f0ed48bc-a7ba-4c7b-b11e-99aa036b2501-0
+00:01:01.080 --> 00:01:03.944
+If you prefer to work with
+SQL, Alchemy, or Pandas,
+
+f0ed48bc-a7ba-4c7b-b11e-99aa036b2501-1
+00:01:03.944 --> 00:01:06.080
+there are drivers for each of
+those too.
+
+2b6154c4-7223-4009-9867-1c9c5c2fa503-0
+00:01:06.720 --> 00:01:09.160
+You'll see some example code for
+these shortly.
+
+af5428db-bb20-4b38-afd7-cde3ed0167fb-0
+00:01:10.520 --> 00:01:14.240
+Node.js developers can use the
+regular Postgres driver.
+
+c10b411a-0083-4f67-ba2f-efeca6593170-0
+00:01:14.760 --> 00:01:18.694
+There's also the option to use a
+CrateDB specific driver that
+
+c10b411a-0083-4f67-ba2f-efeca6593170-1
+00:01:18.694 --> 00:01:21.880
+connects to the cluster using
+the HTTP endpoint.
+
+b60a3f99-4943-4391-a6e4-6a66c8ea6414-0
+00:01:23.520 --> 00:01:28.037
+When working in Java you can use
+our JDBC driver or a
+
+b60a3f99-4943-4391-a6e4-6a66c8ea6414-1
+00:01:28.037 --> 00:01:32.890
+Postgres compatible one. The .NET
+framework is supported through
+
+b60a3f99-4943-4391-a6e4-6a66c8ea6414-2
+00:01:32.890 --> 00:01:35.400
+the use of the Npgsql driver.
+
+59aeda57-340c-4cd5-9898-5ef09801426b-0
+00:01:36.960 --> 00:01:39.160
+For Go Lang use pgx.
+
+8aba682d-1bc6-4e65-8a29-35543cd87b0f-0
+00:01:40.440 --> 00:01:43.720
+And finally, here are some
+options for PHP developers.
+
+812440b9-27cd-4d5b-a8e9-95ba6f9b9495-0
+00:01:46.960 --> 00:01:50.720
+Here's some example code using
+the crate driver for Python.
+
+eafffac3-5525-4d3b-845c-b960591f5c8c-0
+00:01:51.200 --> 00:01:54.729
+It connects to the
+HTTP endpoint and I'm running
+
+eafffac3-5525-4d3b-845c-b960591f5c8c-1
+00:01:54.729 --> 00:01:58.120
+a simple SELECT query and
+displaying the result.
+
+21295999-b191-4bec-889f-5265170d3614-0
+00:01:59.720 --> 00:02:04.128
+This code runs the same query
+but uses SQL Alchemy and as
+
+21295999-b191-4bec-889f-5265170d3614-1
+00:02:04.128 --> 00:02:07.320
+you'd expect, it yields the same
+results.
+
+96e58fd2-758a-4b57-8d48-52ab6e68eb1d-0
+00:02:09.200 --> 00:02:12.905
+The code here should be familiar
+to Node.js developers already
+
+96e58fd2-758a-4b57-8d48-52ab6e68eb1d-1
+00:02:12.905 --> 00:02:14.200
+working with Postgres.
+
+2885cb92-2fb9-48b9-ac52-492f21255796-0
+00:02:14.920 --> 00:02:18.898
+Using the standard Node Postgres
+package, we're again creating a
+
+2885cb92-2fb9-48b9-ac52-492f21255796-1
+00:02:18.898 --> 00:02:22.510
+connection, running a simple
+select query, and logging the
+
+2885cb92-2fb9-48b9-ac52-492f21255796-2
+00:02:22.510 --> 00:02:23.000
+results.
+
+a2786259-c578-49bb-9967-320d6e458c97-0
+00:02:24.400 --> 00:02:27.280
+Here we're showing 2 fields from
+the result object.
+
+8ab64ce4-38a9-41cf-ac33-a1e223454296-0
+00:02:27.880 --> 00:02:31.984
+rowcount tells us how many rows
+were returned, and rows is an
+
+8ab64ce4-38a9-41cf-ac33-a1e223454296-1
+00:02:31.984 --> 00:02:34.720
+array of objects, each
+containing values.
+
+f29a1b34-65b5-4b43-80f8-c6d7249ee1d8-0
+00:02:36.440 --> 00:02:40.176
+Java developers will likely
+already be familiar with the
+
+f29a1b34-65b5-4b43-80f8-c6d7249ee1d8-1
+00:02:40.176 --> 00:02:41.160
+JDBC interface.
+
+79dbf21b-c69e-4586-8177-8b3817bb87e5-0
+00:02:41.840 --> 00:02:46.119
+This code uses Crate's JDBC
+driver to run the same select
+
+79dbf21b-c69e-4586-8177-8b3817bb87e5-1
+00:02:46.119 --> 00:02:51.073
+query that we've seen before and
+as you'd expect, we get the same
+
+79dbf21b-c69e-4586-8177-8b3817bb87e5-2
+00:02:51.073 --> 00:02:52.200
+sort of output.
+
+2b6ba05c-2076-4a40-bbce-8bf4e5d7c503-0
+00:02:52.200 --> 00:02:57.040
+As we saw from the other
+languages.
+
+8e8ca431-f1f7-40b2-b8c5-f99878fd8e10-0
+00:02:57.040 --> 00:03:01.066
+.NET developers can use the standard
+Npgsql package that you may
+
+8e8ca431-f1f7-40b2-b8c5-f99878fd8e10-1
+00:03:01.066 --> 00:03:02.640
+already be familiar with.
+
+47784ff2-f230-4b90-86c2-7bf18fbd8993-0
+00:03:04.440 --> 00:03:07.080
+Once again, we see the same sort
+of output.
+
+a28392c9-d615-4c87-bc42-e3af04e3380a-0
+00:03:09.480 --> 00:03:12.988
+Hopefully you now have an idea
+of how easy it is to connect
+
+a28392c9-d615-4c87-bc42-e3af04e3380a-1
+00:03:12.988 --> 00:03:16.439
+CrateDB and work with data in
+your application, no matter
+
+a28392c9-d615-4c87-bc42-e3af04e3380a-2
+00:03:16.439 --> 00:03:19.480
+which language or languages
+you're developing with.
+
+b00ca584-9f91-4a3f-b89c-045393bc60d8-0
+00:03:20.640 --> 00:03:23.947
+To find out more about which
+drivers and integrations are
+
+b00ca584-9f91-4a3f-b89c-045393bc60d8-1
+00:03:23.947 --> 00:03:27.368
+available for each programming
+language, consult the online
+
+b00ca584-9f91-4a3f-b89c-045393bc60d8-2
+00:03:27.368 --> 00:03:28.680
+CrateDB documentation.

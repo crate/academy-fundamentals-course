@@ -1,0 +1,262 @@
+WEBVTT
+
+27c170df-ec1a-4b15-a15f-6b27c422cb18-0
+00:00:04.680 --> 00:00:08.399
+User Defined Functions allow you
+to extend the capabilities of
+
+27c170df-ec1a-4b15-a15f-6b27c422cb18-1
+00:00:08.399 --> 00:00:12.000
+CrateDB by adding reusable
+functions written in JavaScript.
+
+71d7abbd-296e-4b2d-9ff3-3dfdefe915f4-0
+00:00:12.520 --> 00:00:15.774
+In this video, I'll demonstrate
+how to use a user defined
+
+71d7abbd-296e-4b2d-9ff3-3dfdefe915f4-1
+00:00:15.774 --> 00:00:19.029
+function to solve an issue with
+our Chicago Beach Weather
+
+71d7abbd-296e-4b2d-9ff3-3dfdefe915f4-2
+00:00:19.029 --> 00:00:20.040
+Stations data set.
+
+5f406104-c4c9-48f8-b0ed-ef6abccc073d-0
+00:00:23.080 --> 00:00:26.503
+Here are some example rows from
+a Chicago Beach weather data
+
+5f406104-c4c9-48f8-b0ed-ef6abccc073d-1
+00:00:26.503 --> 00:00:26.840
+table.
+
+8a9eb4fd-0f1b-4de2-89f0-513f6f710d29-0
+00:00:27.440 --> 00:00:30.775
+What's unusual about this data
+is that temperatures are in
+
+8a9eb4fd-0f1b-4de2-89f0-513f6f710d29-1
+00:00:30.775 --> 00:00:31.680
+degrees Celsius.
+
+89f4e532-3937-4339-b9c9-e5fc1683917b-0
+00:00:32.200 --> 00:00:35.520
+In the United States, it's more
+common to express temperatures
+
+89f4e532-3937-4339-b9c9-e5fc1683917b-1
+00:00:35.520 --> 00:00:36.680
+as degrees Fahrenheit.
+
+f4d85bc2-f20d-436d-bbbb-1e38034ed089-0
+00:00:37.520 --> 00:00:41.160
+Let's solve this by adding a
+user defined function that takes
+
+f4d85bc2-f20d-436d-bbbb-1e38034ed089-1
+00:00:41.160 --> 00:00:43.920
+a Celsius value and converts it
+to Fahrenheit.
+
+16856add-482e-498c-853d-9e67c65f7f21-0
+00:00:46.280 --> 00:00:49.840
+It's a JavaScript function that
+converts Celsius to Fahrenheit.
+
+9d9a8f8f-f9ce-4a35-a154-b4ef788a0364-0
+00:00:50.240 --> 00:00:53.619
+It uses a standard formula to do
+this, then manipulates the
+
+9d9a8f8f-f9ce-4a35-a154-b4ef788a0364-1
+00:00:53.619 --> 00:00:56.885
+result to return a floating
+point number with two decimal
+
+9d9a8f8f-f9ce-4a35-a154-b4ef788a0364-2
+00:00:56.885 --> 00:00:57.280
+places.
+
+14052cf0-aa51-4911-9439-b575f73edbff-0
+00:00:58.160 --> 00:01:02.872
+When called with the input 22.5,
+it returns 72.5 which is the
+
+14052cf0-aa51-4911-9439-b575f73edbff-1
+00:01:02.872 --> 00:01:05.760
+equivalent temperature in
+Fahrenheit.
+
+06bb2907-f213-4109-9a26-8835d56a23af-0
+00:01:07.480 --> 00:01:11.174
+This is the same function
+wrapped up in a CrateDB CREATE
+
+06bb2907-f213-4109-9a26-8835d56a23af-1
+00:01:11.174 --> 00:01:12.640
+FUNCTION SQL statement.
+
+fa372b0e-3b43-47e6-894a-c48a0753c110-0
+00:01:13.560 --> 00:01:16.848
+Here we're specifying that the
+function expects a double
+
+fa372b0e-3b43-47e6-894a-c48a0753c110-1
+00:01:16.848 --> 00:01:20.425
+precision value from CrateDB
+as its only parameter and that
+
+fa372b0e-3b43-47e6-894a-c48a0753c110-2
+00:01:20.425 --> 00:01:22.560
+it returns a double precision
+value.
+
+024f9b41-6fe1-4bb5-8e90-c0ae9388d56c-0
+00:01:23.960 --> 00:01:27.380
+The LANGUAGE JAVASCRIPT clause
+tells CrateDB to expect the
+
+024f9b41-6fe1-4bb5-8e90-c0ae9388d56c-1
+00:01:27.380 --> 00:01:30.240
+source code for this function to
+be in JavaScript.
+
+5c151e86-49d2-448d-a66d-023ea7cdc528-0
+00:01:31.160 --> 00:01:34.711
+At the moment only JavaScript is
+supported when writing user
+
+5c151e86-49d2-448d-a66d-023ea7cdc528-1
+00:01:34.711 --> 00:01:35.760
+defined functions.
+
+b89783f4-a07d-4078-bbf3-fc66b3e12e50-0
+00:01:39.560 --> 00:01:42.993
+Let's run the CREATE statement,
+adding the function to
+
+b89783f4-a07d-4078-bbf3-fc66b3e12e50-1
+00:01:42.993 --> 00:01:43.160
+CrateDB.
+
+3fc5f7e5-1b8b-48e9-b081-ab82dd79ce0c-0
+00:01:44.280 --> 00:01:47.560
+Now we can test it with a simple
+SELECT statement.
+
+fcd92cd0-7820-402c-a22f-a9b6fc0c50fb-0
+00:01:47.800 --> 00:01:52.849
+We'll select c_to_f the function
+name, pass in 22.5 as a Celsius
+
+fcd92cd0-7820-402c-a22f-a9b6fc0c50fb-1
+00:01:52.849 --> 00:01:56.840
+value and expect to get a
+Fahrenheit value back.
+
+abb732b4-7f1b-4a2f-acf2-ed7070bea670-0
+00:01:58.000 --> 00:02:05.272
+As we see here, the Fahrenheit
+value for 22.5 Celsius is 72.5
+
+abb732b4-7f1b-4a2f-acf2-ed7070bea670-1
+00:02:05.272 --> 00:02:06.680
+as a double.
+
+9a490694-62e1-436e-80bd-fffb95cfe4ac-0
+00:02:06.680 --> 00:02:11.168
+Next, I'll use our user defined
+function to produce a column in
+
+9a490694-62e1-436e-80bd-fffb95cfe4ac-1
+00:02:11.168 --> 00:02:12.080
+a result set.
+
+024c7e8e-09e5-4b94-9955-7e2b9eb74ab6-0
+00:02:12.080 --> 00:02:16.543
+Here we're calling the function
+and renaming the value returned
+
+024c7e8e-09e5-4b94-9955-7e2b9eb74ab6-1
+00:02:16.543 --> 00:02:19.960
+as airtemp_f, or air
+temperature in Fahrenheit.
+
+1cba72a6-e756-4785-a20c-2243b97becdf-0
+00:02:20.680 --> 00:02:23.600
+When we run this query, we can
+see the results here.
+
+7ddd0cbf-2b87-45cd-bff1-12bef2b3a688-0
+00:02:23.600 --> 00:02:27.320
+So airtemp on the left is the
+original Celsius value.
+
+4b16a885-5543-4e63-92d7-9022e32c16a1-0
+00:02:27.800 --> 00:02:31.636
+airtemp_f on the right has been
+calculated to be the equivalent
+
+4b16a885-5543-4e63-92d7-9022e32c16a1-1
+00:02:31.636 --> 00:02:32.640
+Fahrenheit value.
+
+2c526d4c-04cf-44b2-aebd-5cd9c9429ed0-0
+00:02:34.520 --> 00:02:37.987
+One important thing to bear in
+mind when writing user defined
+
+2c526d4c-04cf-44b2-aebd-5cd9c9429ed0-1
+00:02:37.987 --> 00:02:40.560
+functions is that they must be
+deterministic.
+
+183c1032-a1e1-44d4-a195-64db674a44f9-0
+00:02:41.360 --> 00:02:43.400
+What do we mean by
+deterministic?
+
+37fb6edc-4b95-4907-aa31-1aa2084f7cd7-0
+00:02:44.120 --> 00:02:48.012
+When given the same inputs, your
+function must always produce the
+
+37fb6edc-4b95-4907-aa31-1aa2084f7cd7-1
+00:02:48.012 --> 00:02:48.720
+same output.
+
+d7a4fa76-a855-450e-973d-4c47657bf89f-0
+00:02:49.200 --> 00:02:52.646
+This is necessary as CrateDB
+may cache the output of your
+
+d7a4fa76-a855-450e-973d-4c47657bf89f-1
+00:02:52.646 --> 00:02:54.600
+function for performance
+reasons.
+
+929bc92a-98ef-462d-bc53-d9fb5adedfc8-0
+00:02:54.840 --> 00:02:58.420
+In this video you learnt what
+user defined functions are in
+
+929bc92a-98ef-462d-bc53-d9fb5adedfc8-1
+00:02:58.420 --> 00:03:01.763
+CrateDB, how to create one and
+how to use it in a SQL
+
+929bc92a-98ef-462d-bc53-d9fb5adedfc8-2
+00:03:01.763 --> 00:03:02.360
+statement.
+
+dc9f31e2-1e5f-4799-886c-3f598efdde7c-0
+00:03:03.280 --> 00:03:06.785
+For more information about user
+defined functions, check out the
+
+dc9f31e2-1e5f-4799-886c-3f598efdde7c-1
+00:03:06.785 --> 00:03:08.080
+CrateDB documentation.
