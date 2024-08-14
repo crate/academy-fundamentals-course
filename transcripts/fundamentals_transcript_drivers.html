@@ -1,0 +1,17 @@
+<p>In this video, I'll show you how to connect to CrateDB and work with data using drivers for a selection of popular programming languages.</p>
+<p>CrateDB's support for the PostgreSQL Wire Protocol means that many of these drivers may already be familiar to you. You'll often have a choice of driver for your preferred programming language, allowing you to pick one that best suits your coding style and chosen level of abstraction. I'll show you some code in Python, Node.js, Java and .NET. If you're using another language, don't worry. A full list of available drivers for many more languages, including Go, PHP, and others, can be found in the <a href="https://cratedb.com/docs/crate/clients-tools/en/latest/connect/index.html" rel="noopener" target="_blank">online documentation</a>.</p>
+<p>We'll begin with a short summary of popular driver options for major programming languages.</p>
+<ul>
+<li>For Python, we provide our own driver, crate-python. If you prefer to work with SQL, Alchemy, or Pandas, there are drivers for each of those too. You'll see some example code for these shortly.</li>
+<li>Node.js developers can use the regular Postgres driver. There's also the option to use a CrateDB specific driver that connects to the cluster using the HTTP endpoint.</li>
+<li>When working in Java you can use our JDBC driver or a Postgres compatible one.</li>
+<li>The .NET framework is supported through the use of the Npgsql driver.</li>
+<li>For Go Lang use pgx.</li>
+<li>And finally, here are some options for PHP developers.</li>
+</ul>
+<p>Here's some example code using the crate driver for Python. It connects to the HTTP endpoint and I'm running a simple <span style="font-family: terminal, monospace;">SELECT</span> query and displaying the result. This code runs the same query but uses SQL Alchemy and as you'd expect, it yields the same results.</p>
+<p>The code here should be familiar to Node.js developers already working with Postgres. Using the standard Node Postgres package, we're again creating a connection, running a simple <span style="font-family: terminal, monospace;">SELECT</span> query, and logging the results.&nbsp;</p>
+<p>Here we're showing 2 fields from the <span style="font-family: terminal, monospace;">result</span> object. <span style="font-family: terminal, monospace;">rowcount</span> tells us how many rows were returned, and <span style="font-family: terminal, monospace;">rows</span> is an array of objects, each containing values.</p>
+<p>Java developers will likely already be familiar with the JDBC interface. This code uses Crate's JDBC driver to run the same <span style="font-family: terminal, monospace;">SELECT</span> query that we've seen before and as you'd expect, we get the same sort of output.</p>
+<p>As we saw from the other languages. .NET developers can use the standard Npgsql package that you may already be familiar with. Once again, we see the same sort of output.</p>
+<p>Hopefully you now have an idea of how easy it is to connect CrateDB and work with data in your application, no matter which language or languages you're developing with. To find out more about which drivers and integrations are available for each programming language, consult the online CrateDB documentation.</p>
