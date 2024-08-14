@@ -1,2 +1,3 @@
-# academy-fundamentals-course
-This is the GitHub repository that accompanies the CrateDB Fundamentals Course at the CrateDB Academy.
+# CrateDB Fundamentals Course
+
+This is the GitHub repository that accompanies the [CrateDB Fundamentals Course](https://learn.cratedb.com/course-overview) at the CrateDB Academy.
