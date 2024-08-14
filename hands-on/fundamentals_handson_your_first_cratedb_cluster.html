@@ -1,0 +1,62 @@
+<p>It’s time to get up and running with your first CrateDB Cluster and to load the dataset for this course into your database.</p>
+<p>You’ll need to choose between running your cluster in the cloud, or locally with Docker. The cloud is the preferred option for this course. Instructions for both options are provided below.</p>
+<p>Once you have a cluster up and running, enter the commands in the “Loading the Course Dataset” section to create the tables and load the data that you’ll need for the course.</p>
+<p>If you need help, don’t forget that you can reach out to us by posting in the <a href="https://community.cratedb.com/c/cratedb-academy/44">Academy forum</a> at the online CrateDB Community.</p>
+<h2>Option 1: Create a Cluster in the Cloud</h2>
+<p>To create a cluster in the cloud, navigate to <a href="https://console.cratedb.cloud/">https://console.cratedb.cloud/</a> and follow these instructions:</p>
+<ul>
+<li>Create a new account on CrateDB cloud. You can use your existing Google, Microsoft or GitHub IDs, or choose your own username and password.</li>
+<li>Having logged in, you’ll be asked to provide a name for your organization.</li>
+<li>The next step is to deploy a cluster. Choose a cloud provider and region then select the <strong>CRFREE</strong> option.</li>
+<li>Give your cluster a name and press “Deploy”.</li>
+<li>Make sure to note down or download your connection details: the username, password, host and port. Don’t share these!</li>
+<li>A green icon appears on screen when your cluster is fully deployed.</li>
+<li>Once you see this, click “Console” from the menu to the left of the screen to launch the console. You’ll need this to load the dataset for the course.</li>
+</ul>
+<h2>Option 2: Create a Cluster with Docker</h2>
+<p>To create a cluster locally with Docker, you’ll need to first install <a href="https://www.docker.com/products/docker-desktop/">Docker Desktop</a>. Once Docker is running on your machine, you can pull the CrateDB container and start a cluster with the following command:</p>
+<pre>docker run --publish 4200:4200 --publish 5432:5432 crate -Cdiscovery.type=single-node</pre>
+<ul>
+<li>Verify that your cluster is running by pointing your browser at <a href="http://localhost:4200">http://localhost:4200</a>.</li>
+<li>You should see the CrateDB Admin User Interface.</li>
+<li>Click on the console icon in the menu on the left to launch the console. You’ll need this to load the dataset for the course.</li>
+</ul>
+<h2>Loading the Dataset</h2>
+<p>The data for this course is derived from open data about the City of Chicago. To participate in the hands-on segments of the course and to be successful in the final exam, you’ll need to load the data into your cluster and run queries against it.</p>
+<p>You’ll create a table in CrateDB to store data from each file in the dataset, then load the data into it. This process is the same whether your CrateDB cluster is in the cloud or running locally with Docker.</p>
+<h3>Community Areas</h3>
+<p>The <span style="font-family: terminal, monospace;">community_areas </span>table stores data about the 77 community areas that make up Chicago. Paste this SQL command into the CrateDB console to create the table:</p>
+<pre>CREATE TABLE community_areas (<br>&nbsp;&nbsp; areanumber INTEGER PRIMARY KEY,<br>&nbsp;&nbsp; name TEXT,<br>&nbsp;&nbsp; details OBJECT(STRICT) AS (<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; description TEXT INDEX USING fulltext,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; population BIGINT<br> &nbsp; ),<br> &nbsp; boundaries GEO_SHAPE INDEX USING geohash WITH (PRECISION='1m', DISTANCE_ERROR_PCT=0.025)<br>);</pre>
+<p>When you submit (execute) the query, CrateDB should respond with <span style="font-family: terminal, monospace;">CREATE TABLE OK</span>.</p>
+<p>Now, load the data into the table by pasting this SQL command into the console and running it:</p>
+<pre>COPY community_areas <br>FROM 'https://github.com/crate/cratedb-datasets/raw/main/academy/chicago-data/chicago_community_areas.json' <br>RETURN SUMMARY;</pre>
+<p>Check the output of the command to ensure that 77 records were loaded with 0 errors.</p>
+<h3>Weather Data</h3>
+<p>The <span style="font-family: terminal, monospace;">beach_weather</span> table stores data from Chicago lake shore weather stations. Create the table with this SQL command:</p>
+<pre>CREATE TABLE beach_weather (<br>&nbsp;&nbsp; measurementid TEXT PRIMARY KEY,<br>&nbsp;&nbsp; station TEXT,<br>&nbsp;&nbsp; ts TIMESTAMP WITHOUT TIME ZONE,<br>&nbsp;&nbsp; airtemp DOUBLE PRECISION,<br>&nbsp;&nbsp; wetbulbtemp DOUBLE PRECISION,<br>&nbsp;&nbsp; humidity SMALLINT,<br>&nbsp;&nbsp; rainintensity DOUBLE PRECISION,<br>&nbsp;&nbsp; intervalrain DOUBLE PRECISION,<br>&nbsp;&nbsp; totalrain DOUBLE PRECISION,<br>&nbsp;&nbsp; precipitationtype SMALLINT,<br>&nbsp;&nbsp; winddirection SMALLINT,<br>&nbsp;&nbsp; windspeed DOUBLE PRECISION,<br>&nbsp;&nbsp; maxwindspeed DOUBLE PRECISION,<br>&nbsp;&nbsp; pressure DOUBLE PRECISION,<br>&nbsp;&nbsp; solarradiation SMALLINT,<br> &nbsp; batterylife DOUBLE PRECISION<br>);</pre>
+<p>Then load the data like this:</p>
+<pre>COPY beach_weather <br>FROM 'https://media.githubusercontent.com/media/crate/cratedb-datasets/main/academy/chicago-data/beach_weather_station_data.csv' <br>WITH (empty_string_as_null=true) <br>RETURN SUMMARY;</pre>
+<p>Check the output of the command to verify that 174098 records were loaded with 0 errors.</p>
+<h2>311 Call Data</h2>
+<p>The <span style="font-family: terminal, monospace;">three_eleven_calls</span> table stores details about service requests placed with the Chicago 311 non-emergency issue reporting service.</p>
+<p>Create the table for this data using this SQL command:</p>
+<pre>CREATE TABLE three_eleven_calls (<br>&nbsp;&nbsp; srnumber TEXT,<br>&nbsp;&nbsp; srtype TEXT,<br>&nbsp;&nbsp; srshortcode TEXT,<br>&nbsp;&nbsp; createddept TEXT,<br>&nbsp;&nbsp; ownerdept TEXT,<br>&nbsp;&nbsp; status TEXT,<br>&nbsp;&nbsp; origin TEXT,<br>&nbsp;&nbsp; createddate TIMESTAMP,<br>&nbsp;&nbsp; lastmodifieddate TIMESTAMP,<br>&nbsp;&nbsp; closeddate TIMESTAMP,<br>&nbsp;&nbsp; week GENERATED ALWAYS AS date_trunc('week', createddate),<br>&nbsp;&nbsp; isduplicate BOOLEAN,<br>&nbsp;&nbsp; createdhour SMALLINT,<br>&nbsp;&nbsp; createddayofweek SMALLINT,<br>&nbsp;&nbsp; createdmonth SMALLINT,<br>&nbsp;&nbsp; locationdetails OBJECT(DYNAMIC) AS (<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; streetaddress TEXT,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; city TEXT,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; state TEXT,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; zipcode TEXT,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; streetnumber TEXT,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; streetdirection TEXT,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; streetname TEXT,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; streettype TEXT,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; communityarea SMALLINT,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ward SMALLINT,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; policesector SMALLINT,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; policedistrict SMALLINT,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; policebeat SMALLINT,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; precinct SMALLINT,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; latitude DOUBLE PRECISION,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; longitude DOUBLE PRECISION,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; location GEO_POINT<br>&nbsp;&nbsp; )<br>) PARTITIONED BY (week);</pre>
+<p>Then load the data like this:</p>
+<pre>COPY three_eleven_calls <br>FROM 'https://github.com/crate/cratedb-datasets/raw/main/academy/chicago-data/311_records_apr_2024.json.gz' <br>WITH (compression='gzip') <br>RETURN SUMMARY;</pre>
+<p>Check the output of the command to verify that 174092 records were loaded with 0 errors.</p>
+<h2>Taxi Fleet Data</h2>
+<p>The taxis table stores details of the vehicles that make up Chicago’s taxi fleet. Create the table with this SQL command:</p>
+<pre>CREATE TABLE taxis (<br>&nbsp;&nbsp; vehicleid INTEGER,<br>&nbsp;&nbsp; status TEXT,<br>&nbsp;&nbsp; make TEXT,<br>&nbsp;&nbsp; model TEXT,<br>&nbsp;&nbsp; modelyear INTEGER,<br>&nbsp;&nbsp; color TEXT,<br>&nbsp;&nbsp; fuel TEXT,<br>&nbsp;&nbsp; wheelchairaccessible BOOLEAN,<br>&nbsp;&nbsp; operator TEXT,<br>&nbsp;&nbsp; zipcode TEXT,<br>&nbsp;&nbsp; affiliation TEXT,<br>&nbsp;&nbsp; medallion TEXT<br>);</pre>
+<p>Then populate it with:</p>
+<pre>COPY taxis <br>FROM 'https://media.githubusercontent.com/media/crate/cratedb-datasets/main/academy/chicago-data/taxi_details.csv' <br>RETURN SUMMARY;</pre>
+<p>Check the output of the command to verify that 2655 records were loaded with 0 errors.</p>
+<h2>Taxi Rides Data</h2>
+<p>The <span style="font-family: terminal, monospace;">taxi_rides</span> table stores details of taxi trips taken within Chicago in April 2024. Create the table like this:</p>
+<pre>CREATE TABLE taxi_rides (<br>&nbsp;&nbsp; tripid TEXT,<br>&nbsp;&nbsp; vehicleid INTEGER,<br>&nbsp;&nbsp; starttime TIMESTAMP,<br>&nbsp;&nbsp; endtime TIMESTAMP,<br>&nbsp;&nbsp; duration INTEGER,<br>&nbsp;&nbsp; miles DOUBLE PRECISION,<br>&nbsp;&nbsp; pickupcommunityarea SMALLINT,<br>&nbsp;&nbsp; dropoffcommunityarea SMALLINT,<br>&nbsp;&nbsp; fare DOUBLE PRECISION,<br>&nbsp;&nbsp; tips DOUBLE PRECISION,<br>&nbsp;&nbsp; tolls DOUBLE PRECISION,<br>&nbsp;&nbsp; extras DOUBLE PRECISION,<br>&nbsp;&nbsp; totalcost DOUBLE PRECISION,<br>&nbsp;&nbsp; paymenttype TEXT,<br>&nbsp;&nbsp; company TEXT,<br>&nbsp;&nbsp; pickupcentroidlatitude DOUBLE PRECISION,<br>&nbsp;&nbsp; pickupcentroidlongitude DOUBLE PRECISION,<br>&nbsp;&nbsp; pickupcentroidlocation GEO_POINT,<br>&nbsp;&nbsp; dropoffcentroidlatitude DOUBLE PRECISION,<br>&nbsp;&nbsp; dropoffcentroidlongitude DOUBLE PRECISION,<br>&nbsp;&nbsp; dropoffcentroidlocation GEO_POINT<br>);</pre>
+<p>Then populate it with:</p>
+<pre>COPY taxi_rides <br>FROM 'https://github.com/crate/cratedb-datasets/raw/main/academy/chicago-data/taxi_rides_apr_2024.json.gz' <br>WITH (compression='gzip') <br>RETURN SUMMARY;</pre>
+<p>Check the output of the command to verify that 245117 records were loaded with 0 errors.</p>
+<h2>Optional: Install the Crash CLI</h2>
+<p>The Crash CLI runs on your local machine. It provides another way to connect to your CrateDB cluster and run SQL commands. You don’t need to use it for this course, but if you’d like to try it out then follow the installation instructions <a href="https://cratedb.com/docs/crate/crash/en/latest/index.html">here</a>.</p>
+<h2>You’re Ready!</h2>
+<p>Congratulations! You’ve created your own CrateDB cluster and loaded the course dataset. You’re ready to learn more about CrateDB.</p>

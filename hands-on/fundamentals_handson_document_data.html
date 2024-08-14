@@ -1,0 +1,35 @@
+<p>This exercise requires a CrateDB cluster with the course dataset loaded.&nbsp; If you didn't create your cluster earlier in the course, complete <a href="/cratedb-fundamentals?lesson=handson-your-first-cratedb-cluster" rel="noopener" target="_blank">these steps</a> before going further.</p>
+<hr>
+<p>In this hands-on, you’ll add a new table to your CrateDB cluster, import some data into it and try out some queries that return data from objects and arrays.</p>
+<h2>Load Library Data</h2>
+<p>We’re going to add data about Chicago’s public libraries. First, open your cluster’s console and run the following SQL statement that creates a new table:</p>
+<pre>CREATE TABLE libraries (<br>&nbsp;&nbsp; name TEXT,<br>&nbsp;&nbsp; location OBJECT(DYNAMIC) AS (<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; address TEXT,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; zipcode TEXT,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; communityarea INTEGER,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; position GEO_POINT<br>&nbsp;&nbsp; ),<br>&nbsp;&nbsp; hours ARRAY(TEXT),<br>&nbsp;&nbsp; phone TEXT,<br>&nbsp;&nbsp; website TEXT<br>);</pre>
+<p>Now, load the data by executing this SQL statement:</p>
+<pre>COPY libraries <br>FROM 'https://github.com/crate/cratedb-datasets/raw/main/academy/chicago-data/chicago_libraries.json'<br>RETURN SUMMARY;</pre>
+<p>Check that CrateDB loaded 81 records with 0 errors.</p>
+<h2>Querying the Data - Objects</h2>
+<p>The West Town community area is area number 24 in our dataset. Run the following query to see the details of libraries located in this community:</p>
+<pre>SELECT * FROM libraries WHERE location['communityarea'] = 24;</pre>
+<p>CrateDB should return 3 results. Explore the results in the console, expanding the location and hours fields to view their contents.</p>
+<p>When creating the table, we chose a dynamic object for the location column. This means that we can add further fields or nested objects inside location, and CrateDB will update the schema and index the values accordingly. You’ll learn more about this in the indexing module later in this course.</p>
+<p>Let’s try adding an object inside location for one of the libraries. We’ll store details of some of the amenities provided.</p>
+<p>Run the following query to update one of the libraries:</p>
+<pre>UPDATE libraries SET location['amenities'] = '{<br>&nbsp;&nbsp; "wifi": true,<br>&nbsp;&nbsp; "photocopier": true,<br>&nbsp;&nbsp; "computers": 6,<br>&nbsp;&nbsp; "meetingrooms": 3,<br>&nbsp;&nbsp; "cafe": false,<br>&nbsp;&nbsp; "restrooms": true,<br>&nbsp;&nbsp; "accessible": true<br>}'::object where name = 'Walker';</pre>
+<p>Now, retrieve the updated record for Walker:</p>
+<pre>SELECT * FROM libraries WHERE name='Walker';</pre>
+<p>Explore the query result to see that Walker now contains a nested object inside <span style="font-family: terminal, monospace;">location</span>.</p>
+<p>How do we select values from nested objects? This query returns the number of meeting rooms at Walker:</p>
+<pre>SELECT location['amenities']['meetingrooms'] as num_rooms <br>FROM libraries <br>WHERE name='Walker';</pre>
+<p>Only Walker has this extra data… so, what happens if we ask CrateDB to retrieve this value for other libraries? Try this query:</p>
+<pre>SELECT name, location['amenities']['meetingrooms'] as num_rooms <br>FROM libraries <br>WHERE name in ('Austin', 'Beverly', 'Walker');</pre>
+<p>CrateDB returns <span style="font-family: terminal, monospace;">null</span> values for those rows that don’t have the extra data.</p>
+<h2>Querying the Data - Arrays</h2>
+<p>The <span style="font-family: terminal, monospace;">hours</span> column contains an array of text values, with the first entry representing the library opening hours for Monday and the last one representing the hours for Sunday.</p>
+<p>Try this query, which returns the opening hours for Avalon library:</p>
+<pre>SELECT hours FROM libraries WHERE name='Avalon';</pre>
+<p>Arrays are 1 indexed. To return just the hours for Tuesday, run this query:</p>
+<pre>SELECT hours[2] AS tuesday_hours FROM libraries WHERE name='Avalon';</pre>
+<p>You’ll see that Avalon is open between 10 and 5 on Tuesday.</p>
+<p>Finally, try this query which returns all libraries that close at least one day of the week:</p>
+<pre>SELECT name, hours FROM libraries WHERE 'CLOSED' IN (hours);</pre>
+<p>&nbsp;</p>

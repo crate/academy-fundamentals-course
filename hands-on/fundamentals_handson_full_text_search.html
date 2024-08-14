@@ -1,0 +1,25 @@
+<p>This exercise requires a CrateDB cluster with the course dataset loaded.&nbsp; If you didn't create your cluster earlier in the course, complete <a href="/cratedb-fundamentals?lesson=handson-your-first-cratedb-cluster" rel="noopener" target="_blank">these steps</a> before going further.</p>
+<hr>
+<p>It’s your turn to try out CrateDB’s full-text search capabilities using the Chicago community areas data.</p>
+<h2>Full-Text Queries</h2>
+<p>Each community area has a text field containing a few paragraphs of text describing the area’s features and history. In our schema, this field is named “description” and it’s inside the “details” object.</p>
+<p>Try running the following query to view the description for each area:</p>
+<pre>SELECT name, details['description'] AS description from community_areas;</pre>
+<p>When the <span style="font-family: terminal, monospace;">community_areas</span> table was created, we told CrateDB to perform full-text indexing on it:</p>
+<pre>…<br>details OBJECT(STRICT) AS (<br>&nbsp;&nbsp; description TEXT INDEX USING fulltext WITH (analyzer='english'),<br>&nbsp;&nbsp; population BIGINT<br>), …</pre>
+<p>Let’s use the <span style="font-family: terminal, monospace;">MATCH</span> predicate to try some queries against the index that was created. Recall that, when using <span style="font-family: terminal, monospace;">MATCH</span>, we can select <span style="font-family: terminal, monospace;">_score</span> to retrieve a score for each result. This score is a measure of the quality of the match compared to other matching rows.</p>
+<p>Execute this query to search for community areas containing either the term “railroad” or the term “tracks”:</p>
+<p><span style="font-family: terminal, monospace;">SELECT name, _score, details['description'] AS description </span><br><span style="font-family: terminal, monospace;">FROM community_areas </span><br><span style="font-family: terminal, monospace;">WHERE MATCH(details['description'], 'railroad tracks') </span><br><span style="font-family: terminal, monospace;">ORDER BY _score DESC;</span></p>
+<p>Take a moment to look at the results returned by this query. Note that Greater Grand Crossing and Burnside are the community areas with the highest scores.</p>
+<p>What if we wanted to search for the specific phrase “railroad tracks”, rather than either of the terms “railroad” or “track”? Try this modified query which does just that:</p>
+<pre>SELECT name, _score, details['description'] AS description <br>FROM community_areas <br>WHERE MATCH(details['description'], 'railroad tracks') <strong>USING phrase</strong><br>ORDER BY _score DESC;</pre>
+<p>Examine the results returned by this query. How do they differ from those returned by the previous query?</p>
+<p>Before moving on, scroll down through the results to find the result for Greater Grand Crossing. The description for this community area contains the phrase “railroad company’s tracks”. Let’s try a third version of this query that considers this a match for the phrase “railroad tracks”.</p>
+<pre>SELECT name, _score, details['description'] AS description <br>FROM community_areas <br>WHERE MATCH(details['description'], 'railroad tracks') USING phrase WITH (slop=1)<br>ORDER BY _score DESC;</pre>
+<p>Adding a “slop” of 1 boosts Greater Grand Crossing’s score. Slop is a measure of proximity when searching for phrases. Specifying a slop of 1 tells CrateDB that another word can exist between “railroad” and “tracks”, and that this should still be considered a phrase match.</p>
+<h2>Mixing Full-Text Queries with Other Data Types</h2>
+<p>Because full text queries are written as SQL queries in CrateDB, we can mix in data stored in other formats in other columns in the table, perform aggregations and even joins with other tables.</p>
+<p>Try executing this query which returns information about community areas whose descriptions match both of the terms “railroad” and “historic” in any order, and which have a population of over 50,000 people:</p>
+<pre>SELECT name, _score, details['population'] AS population, details['description'] AS description <br>FROM community_areas <br>WHERE MATCH(details['description'], 'railroad historic') using best_fields with (operator='and')<br>AND details['population'] &gt; 50000<br>ORDER BY _score DESC;</pre>
+<h2>Try Your Own Queries</h2>
+<p>Take a moment to try some queries of your own. Refer to the <a href="https://cratedb.com/docs/crate/reference/en/latest/general/dql/fulltext.html#match-predicate">documentation for the MATCH predicate</a> to understand the full range of options available.</p>

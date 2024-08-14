@@ -1,0 +1,19 @@
+<p>This exercise requires a CrateDB cluster with the course dataset loaded.&nbsp; If you didn't create your cluster earlier in the course, complete <a href="/cratedb-fundamentals?lesson=handson-your-first-cratedb-cluster" rel="noopener" target="_blank">these steps</a> before going further.</p>
+<hr>
+<p>Now you’ve seen how aggregations and grouping work in CrateDB, here’s an opportunity to put that learning into practice…</p>
+<h2>Basic Aggregations</h2>
+<p>We’ll begin with some basic aggregations using the 311 call data. This query returns the number of calls relating to graffiti removal in Englewood (community area 68):</p>
+<pre>SELECT count(*) AS num_graffiti_complaints<br>FROM three_eleven_calls<br>WHERE srtype = 'Graffiti Removal Request' <br>AND locationdetails['communityarea'] = 68;</pre>
+<p>This query returns the average time taken to complete a Graffiti Removal Request in Englewood:</p>
+<pre>SELECT avg(age(closeddate, createddate)) AS avg_duration <br>FROM three_eleven_calls<br>WHERE status = 'Completed' <br>AND srtype='Graffiti Removal Request'<br>AND isduplicate=false <br>AND locationdetails['communityarea'] = 68;</pre>
+<p>Finally, let’s switch to our taxis data. The column <span style="font-family: terminal, monospace;">modelyear</span> stores the model year of each taxi in the fleet. The Ford Crown Victoria is a classic American taxi cab. Run this query to find the model year for the oldest Crown Victoria in the fleet:</p>
+<pre>SELECT MIN(modelyear) FROM taxis <br>WHERE make='FORD' AND model='CROWN VICTORIA';</pre>
+<h2>Aggregations with Grouping</h2>
+<p>Now let’s try some queries using <span style="font-family: terminal, monospace;">GROUP BY</span> clauses. This query summarizes the data in the 311 calls table, returning the number of calls made for each type of issue:</p>
+<pre>SELECT srtype, count(*) AS num_calls<br>FROM three_eleven_calls <br>GROUP BY srtype <br>ORDER BY num_calls DESC;</pre>
+<p>Run this query to discover the most common issues affecting citizens of Chicago.</p>
+<p>We can also include other clauses in these queries. Here, we’re asking for a breakdown of Chicago’s taxi fleet minus all the Toyota vehicles:</p>
+<pre>SELECT make, model, count(*) as how_many <br>FROM taxis WHERE make != 'TOYOTA' <br>GROUP BY make, model ORDER BY how_many DESC;</pre>
+<h2>Try Some Queries of Your Own</h2>
+<p>Take some time to try out some queries of your own using any of the tables in the data set. For example, you might want to calculate the average population for Chicago’s community areas, or look at which hour of the day most 311 calls are placed.</p>
+<p>You should reference the CrateDB documentation for <a href="https://cratedb.com/docs/crate/reference/en/latest/general/builtins/aggregation.html#aggregate-functions">aggregate functions</a> and <a href="https://cratedb.com/docs/guide/performance/selects.html#aggregations-and-group-by">aggregations and grouping</a> when writing your own queries.</p>
