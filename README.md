@@ -1,6 +1,6 @@
 # CrateDB Fundamentals Course
 
-This GitHub repository contains files used to build the [CrateDB Fundamentals Course](https://learn.cratedb.com/course-overview) at the CrateDB Academy.
+This GitHub repository contains files used to build the [CrateDB Fundamentals Course](https://learn.cratedb.com/course-overview) at the CrateDB Academy, plus some additional exercises presented as Jupyter notebooks.
 
 If you discover any errors or typos in the video subtitles, quiz questions, exam or hands-on content while taking the course please either:
 
@@ -8,6 +8,10 @@ If you discover any errors or typos in the video subtitles, quiz questions, exam
 * Send us a [pull request](https://github.com/crate/academy-fundamentals-course/pulls) with your suggestions.
 
 Thanks!
+
+## Notebooks
+
+The `notebooks` folder contains Jupyter notebooks used as additional resources for the course.  These can be run in Google Colab.
 
 ## Subtitles
 
