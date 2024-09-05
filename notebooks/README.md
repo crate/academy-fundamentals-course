@@ -1,3 +1,7 @@
+# Jupyter Notebooks
+
+Here are a few Jupyter notebooks that contain supporting exercises for the [CrateDB Fundamentals](https://learn.cratedb.com) course.
+
 ## Time Series Data
 
 Time Series example with Chicago beach weather stations.
