@@ -2,7 +2,7 @@
 
 00:00:04.640 --> 00:00:08.314
 In this video, you'll see how
-CreateDB's container data
+CrateDB's container data
 
 00:00:08.314 --> 00:00:12.179
 types, objects, and array make
@@ -17,7 +17,7 @@ We'll look at the different ways
 that an object schema can be
 
 00:00:19.983 --> 00:00:24.095
-specified in CreateDB, touch on
+specified in CrateDB, touch on
 how CrateDB indexes objects,
 
 00:00:24.095 --> 00:00:26.280
