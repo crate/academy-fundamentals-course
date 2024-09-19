@@ -2,6 +2,8 @@
 
 Here are a few Jupyter notebooks that contain supporting exercises for the [CrateDB Fundamentals](https://learn.cratedb.com) course.
 
+Each notebook requires you to provide connection details for a CrateDB cluster.  Get a free cluster running in the cloud by signing up at [console.cratedb.cloud](https://console.cratedb.cloud/) and choosing the "CRFREE" plan.
+
 ## Time Series Data
 
 Time Series example with Chicago beach weather stations.
