@@ -1,0 +1,2 @@
+cratedb-toolkit
+pueblo[develop,notebook,testing]>=0.0.10
