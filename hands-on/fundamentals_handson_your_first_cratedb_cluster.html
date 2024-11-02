@@ -35,7 +35,7 @@
 <p>The <span style="font-family: terminal, monospace;">beach_weather</span> table stores data from Chicago lake shore weather stations. Create the table with this SQL command:</p>
 <pre>CREATE TABLE beach_weather (<br>&nbsp;&nbsp; measurementid TEXT PRIMARY KEY,<br>&nbsp;&nbsp; station TEXT,<br>&nbsp;&nbsp; ts TIMESTAMP WITHOUT TIME ZONE,<br>&nbsp;&nbsp; airtemp DOUBLE PRECISION,<br>&nbsp;&nbsp; wetbulbtemp DOUBLE PRECISION,<br>&nbsp;&nbsp; humidity SMALLINT,<br>&nbsp;&nbsp; rainintensity DOUBLE PRECISION,<br>&nbsp;&nbsp; intervalrain DOUBLE PRECISION,<br>&nbsp;&nbsp; totalrain DOUBLE PRECISION,<br>&nbsp;&nbsp; precipitationtype SMALLINT,<br>&nbsp;&nbsp; winddirection SMALLINT,<br>&nbsp;&nbsp; windspeed DOUBLE PRECISION,<br>&nbsp;&nbsp; maxwindspeed DOUBLE PRECISION,<br>&nbsp;&nbsp; pressure DOUBLE PRECISION,<br>&nbsp;&nbsp; solarradiation SMALLINT,<br> &nbsp; batterylife DOUBLE PRECISION<br>);</pre>
 <p>Then load the data like this:</p>
-<pre>COPY beach_weather <br>FROM 'https://media.githubusercontent.com/media/crate/cratedb-datasets/main/academy/chicago-data/beach_weather_station_data.csv' <br>WITH (empty_string_as_null=true) <br>RETURN SUMMARY;</pre>
+<pre>COPY beach_weather <br>FROM 'https://github.com/crate/cratedb-datasets/raw/refs/heads/main/academy/chicago-data/beach_weather_station_data.csv' <br>WITH (empty_string_as_null=true) <br>RETURN SUMMARY;</pre>
 <p>Check the output of the command to verify that 174098 records were loaded with 0 errors.</p>
 <h2>311 Call Data</h2>
 <p>The <span style="font-family: terminal, monospace;">three_eleven_calls</span> table stores details about service requests placed with the Chicago 311 non-emergency issue reporting service.</p>
@@ -48,7 +48,7 @@
 <p>The taxis table stores details of the vehicles that make up Chicago’s taxi fleet. Create the table with this SQL command:</p>
 <pre>CREATE TABLE taxis (<br>&nbsp;&nbsp; vehicleid INTEGER,<br>&nbsp;&nbsp; status TEXT,<br>&nbsp;&nbsp; make TEXT,<br>&nbsp;&nbsp; model TEXT,<br>&nbsp;&nbsp; modelyear INTEGER,<br>&nbsp;&nbsp; color TEXT,<br>&nbsp;&nbsp; fuel TEXT,<br>&nbsp;&nbsp; wheelchairaccessible BOOLEAN,<br>&nbsp;&nbsp; operator TEXT,<br>&nbsp;&nbsp; zipcode TEXT,<br>&nbsp;&nbsp; affiliation TEXT,<br>&nbsp;&nbsp; medallion TEXT<br>);</pre>
 <p>Then populate it with:</p>
-<pre>COPY taxis <br>FROM 'https://media.githubusercontent.com/media/crate/cratedb-datasets/main/academy/chicago-data/taxi_details.csv' <br>RETURN SUMMARY;</pre>
+<pre>COPY taxis <br>FROM 'https://github.com/crate/cratedb-datasets/raw/refs/heads/main/academy/chicago-data/taxi_details.csv' <br>RETURN SUMMARY;</pre>
 <p>Check the output of the command to verify that 2655 records were loaded with 0 errors.</p>
 <h2>Taxi Rides Data</h2>
 <p>The <span style="font-family: terminal, monospace;">taxi_rides</span> table stores details of taxi trips taken within Chicago in April 2024. Create the table like this:</p>
