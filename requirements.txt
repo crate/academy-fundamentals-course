@@ -1,0 +1,10 @@
+cratedb-toolkit[datasets]==0.0.21
+ipyleaflet<0.20
+kaleido<0.3
+pandas<2.1
+plotly<5.25
+pycaret<3.4
+pydantic<3
+refinitiv-data<1.7
+sqlalchemy<2.1
+sqlalchemy-cratedb==0.38.0

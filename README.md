@@ -1,5 +1,10 @@
 # CrateDB Fundamentals Course
 
+[![Tests](https://github.com/crate/academy-fundamentals-course/actions/workflows/tests.yml/badge.svg)](https://github.com/crate/academy-fundamentals-course/actions/workflows/tests.yml)
+[![Status](https://img.shields.io/badge/Status-stable-success.svg)](https://github.com/crate/academy-fundamentals-course)
+[![License](https://img.shields.io/badge/License-MIT-green.svg)](https://github.com/crate/academy-fundamentals-course/blob/main/LICENSE)
+[![Python Version](https://img.shields.io/badge/Python-3.10%20|%203.11%20|%203.12-blue.svg)](https://github.com/crate/academy-fundamentals-course)
+
 This GitHub repository contains files used to build the [CrateDB Fundamentals Course](https://learn.cratedb.com/course-overview) at the CrateDB Academy, plus some additional exercises presented as Jupyter notebooks.
 
 If you discover any errors or typos in the video subtitles, quiz questions, exam or hands-on content while taking the course please either:
@@ -28,3 +33,7 @@ The `hands-on` folder contains the HTML fragments used for each hands-on exercis
 ## Text Segments
 
 The `text-segments` folder contains the HTML fragments used for each text segment in the course.
+
+## Development
+
+See [Development Sandbox](DEVELOP.md).
