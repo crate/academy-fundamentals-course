@@ -1,4 +1,4 @@
-cratedb-toolkit[datasets]==0.0.21
+cratedb-toolkit[datasets]==0.0.29
 ipyleaflet<0.20
 kaleido<0.3
 pandas<2.1
