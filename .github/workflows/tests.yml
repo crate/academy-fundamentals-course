@@ -79,7 +79,7 @@ jobs:
             requirements-dev.txt
 
       - name: Set up uv
-        uses: astral-sh/setup-uv@v3
+        uses: astral-sh/setup-uv@v4
 
       - name: Set up project
         run: |
