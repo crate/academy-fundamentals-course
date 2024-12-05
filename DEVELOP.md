@@ -15,7 +15,7 @@ Install Python package and project manager [uv].
 Set up Python environment and install requirements.
 ```shell
 uv venv --python=python3.12
-uv pip install --prerelease=allow --upgrade -r requirements.txt -r requirements-dev.txt
+uv pip install --upgrade -r requirements.txt -r requirements-dev.txt
 ```
 
 Invoke linters and software tests.
