@@ -84,7 +84,7 @@ jobs:
       - name: Set up project
         run: |
           # Install runtime and development requirements.
-          uv pip install --system --upgrade -r requirements.txt -r requirements-dev.txt
+          uv pip install --verbose --system -r requirements.txt -r requirements-dev.txt
 
       - name: Run linter and software tests
         run: |
