@@ -78,13 +78,10 @@ jobs:
             requirements.txt
             requirements-dev.txt
 
-      - name: Set up uv
-        uses: astral-sh/setup-uv@v4
-
       - name: Set up project
         run: |
           # Install runtime and development requirements.
-          uv pip install --system --upgrade -r requirements.txt -r requirements-dev.txt
+          pip install --upgrade -r requirements.txt -r requirements-dev.txt
 
       - name: Run linter and software tests
         run: |
