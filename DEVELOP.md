@@ -7,15 +7,11 @@ docker run --rm -it --name=cratedb \
   --env=CRATE_HEAP_SIZE=2g crate:latest -Cdiscovery.type=single-node
 ```
 
-Install Python package and project manager [uv].
-```shell
-{apt,brew,pip,zypper} install uv
-```
-
 Set up Python environment and install requirements.
 ```shell
-uv venv --python=python3.12
-uv pip install --upgrade -r requirements.txt -r requirements-dev.txt
+python3 -m venv .venv
+source .venv/bin/activate
+pip install --upgrade -r requirements.txt -r requirements-dev.txt
 ```
 
 Invoke linters and software tests.
