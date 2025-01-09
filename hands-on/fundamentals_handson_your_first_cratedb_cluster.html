@@ -49,7 +49,7 @@
 <p>The taxis table stores details of the vehicles that make up Chicago’s taxi fleet. Create the table with this SQL command:</p>
 <pre>CREATE TABLE taxis (<br>&nbsp;&nbsp; vehicleid INTEGER,<br>&nbsp;&nbsp; status TEXT,<br>&nbsp;&nbsp; make TEXT,<br>&nbsp;&nbsp; model TEXT,<br>&nbsp;&nbsp; modelyear INTEGER,<br>&nbsp;&nbsp; color TEXT,<br>&nbsp;&nbsp; fuel TEXT,<br>&nbsp;&nbsp; wheelchairaccessible BOOLEAN,<br>&nbsp;&nbsp; operator TEXT,<br>&nbsp;&nbsp; zipcode TEXT,<br>&nbsp;&nbsp; affiliation TEXT,<br>&nbsp;&nbsp; medallion TEXT<br>);</pre>
 <p>Then populate it with:</p>
-<pre>COPY taxis <br>FROM 'https://cdn.crate.io/downloads/datasets/cratedb-datasets/chicago-data/taxi_details.csv' <br>RETURN SUMMARY;</pre>
+<pre>COPY taxis <br>FROM 'https://cdn.crate.io/downloads/datasets/cratedb-datasets/academy/chicago-data/taxi_details.csv' <br>RETURN SUMMARY;</pre>
 <p>Check the output of the command to verify that 2655 records were loaded with 0 errors.</p>
 <h2>Taxi Rides Data</h2>
 <p>The <span style="font-family: terminal, monospace;">taxi_rides</span> table stores details of taxi trips taken within Chicago in April 2024. Create the table like this:</p>
