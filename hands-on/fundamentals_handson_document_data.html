@@ -5,7 +5,7 @@
 <p>We’re going to add data about Chicago’s public libraries. First, open your cluster’s console and run the following SQL statement that creates a new table:</p>
 <pre>CREATE TABLE libraries (<br>&nbsp;&nbsp; name TEXT,<br>&nbsp;&nbsp; location OBJECT(DYNAMIC) AS (<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; address TEXT,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; zipcode TEXT,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; communityarea INTEGER,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; position GEO_POINT<br>&nbsp;&nbsp; ),<br>&nbsp;&nbsp; hours ARRAY(TEXT),<br>&nbsp;&nbsp; phone TEXT,<br>&nbsp;&nbsp; website TEXT<br>);</pre>
 <p>Now, load the data by executing this SQL statement:</p>
-<pre>COPY libraries <br>FROM 'https://github.com/crate/cratedb-datasets/raw/main/academy/chicago-data/chicago_libraries.json'<br>RETURN SUMMARY;</pre>
+<pre>COPY libraries <br>FROM 'https://cdn.crate.io/downloads/datasets/cratedb-datasets/academy/chicago-data/chicago_libraries.json'<br>RETURN SUMMARY;</pre>
 <p>Check that CrateDB loaded 81 records with 0 errors.</p>
 <h2>Querying the Data - Objects</h2>
 <p>The West Town community area is area number 24 in our dataset. Run the following query to see the details of libraries located in this community:</p>
