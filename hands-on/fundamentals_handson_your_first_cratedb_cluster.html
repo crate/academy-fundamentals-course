@@ -27,7 +27,7 @@
 <p>Note: the URLs used in the <span style="font-family: terminal, monospace;">COPY FROM</span> commands that follow differ from those shown in the video.  Be sure to use the URLs below when loading data.</p>
 <h3>Community Areas</h3>
 <p>The <span style="font-family: terminal, monospace;">community_areas </span>table stores data about the 77 community areas that make up Chicago. Paste this SQL command into the CrateDB console to create the table:</p>
-<pre>CREATE TABLE community_areas (<br>&nbsp;&nbsp; areanumber INTEGER PRIMARY KEY,<br>&nbsp;&nbsp; name TEXT,<br>&nbsp;&nbsp; details OBJECT(STRICT) AS (<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; description TEXT INDEX USING fulltext,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; population BIGINT<br> &nbsp; ),<br> &nbsp; boundaries GEO_SHAPE INDEX USING geohash WITH (PRECISION='1m', DISTANCE_ERROR_PCT=0.025)<br>);</pre>
+<pre>CREATE TABLE community_areas (<br>&nbsp;&nbsp; areanumber INTEGER PRIMARY KEY,<br>&nbsp;&nbsp; name TEXT,<br>&nbsp;&nbsp; details OBJECT(STRICT) AS (<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; description TEXT INDEX USING fulltext WITH (analyzer='english'),<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; population BIGINT<br> &nbsp; ),<br> &nbsp; boundaries GEO_SHAPE INDEX USING geohash WITH (PRECISION='1m', DISTANCE_ERROR_PCT=0.025)<br>);</pre>
 <p>When you submit (execute) the query, CrateDB should respond with <span style="font-family: terminal, monospace;">CREATE TABLE OK</span>.</p>
 <p>Now, load the data into the table by pasting this SQL command into the console and running it:</p>
 <pre>COPY community_areas <br>FROM 'https://cdn.crate.io/downloads/datasets/cratedb-datasets/academy/chicago-data/chicago_community_areas.json' <br>RETURN SUMMARY;</pre>
