@@ -27,3 +27,11 @@ This notebook demonstrates full-text and vector similarity search using data abo
 <a target="_blank" href="https://colab.research.google.com/github/crate/academy-fundamentals-course/blob/main/notebooks/search/full_text_and_vector_search.ipynb">
   <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
+
+## Taxi Data
+
+This notebook demonstrates some queries using the taxi data. It also re-uses a few geospatial queries from the Multi-Model Data notebook.
+
+<a target="_blank" href="https://colab.research.google.com/github/crate/academy-fundamentals-course/blob/main/notebooks/taxi_data/taxi_data.ipynb">
+  <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
+</a>
