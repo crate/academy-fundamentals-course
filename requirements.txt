@@ -1,11 +1,5 @@
-cratedb-toolkit[datasets]==0.0.31
-ipyleaflet<0.20
-kaleido<0.3
-llvmlite>=0.40
-pandas<2.3
 plotly<5.25
-pycaret>=3,<3.4
-pydantic<3
-refinitiv-data<1.7
+# not imported explicitly, but used by plotly to render PNGs
+kaleido<0.3
 sqlalchemy<2.1
 sqlalchemy-cratedb==0.41.0
