@@ -1,5 +1,5 @@
-plotly<6.1
-# not imported explicitly, but used by plotly to render PNGs
+# Kaleido is not imported directly, but it is needed for Plotly to render PNGs.
 kaleido<0.3
-sqlalchemy<2.1
+pandas<2.1
+plotly<6.1
 sqlalchemy-cratedb==0.41.0
