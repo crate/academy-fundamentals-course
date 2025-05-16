@@ -1,7 +1,7 @@
 import time
 
 import pytest
-from cratedb_toolkit.util import DatabaseAdapter
+from cratedb_toolkit.util.database import DatabaseAdapter
 
 
 @pytest.fixture()
