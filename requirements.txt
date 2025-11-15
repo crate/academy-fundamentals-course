@@ -1,6 +1,6 @@
 # Kaleido is not imported directly, but it is needed for Plotly to render PNGs.
 kaleido<0.3
-numpy<2
+numpy<3
 pandas<2.3
 plotly<6.1
 sqlalchemy-cratedb==0.41.0
