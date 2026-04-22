@@ -1,2 +1,2 @@
-cratedb-toolkit>=0.0.35
+cratedb-toolkit>=0.0.46
 pueblo[develop,notebook,testing]>=0.0.18
